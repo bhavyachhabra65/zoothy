@@ -2,10 +2,125 @@
 
 {% block title %}Print Cheque{% endblock %}
 
+{% block styles %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/cheque.css') }}">
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/cheque.js') }}"></script>
+{% endblock %}
+
 {% block content %}
 
-<h1>Zoothy</h1>
+<div class="z-page-header">
 
-<h2>Print Cheque</h2>
+    <h1 class="z-title">
+
+        Print Cheque
+
+    </h1>
+
+</div>
+
+<form class="z-form">
+
+    <div class="z-row">
+
+        <div class="z-form-group z-col-2">
+
+            <label class="z-label">
+
+                Bank
+
+            </label>
+
+            <select class="z-input">
+
+                <option>Select Bank</option>
+
+            </select>
+
+        </div>
+
+        <div class="z-form-group z-col-1">
+
+            <label class="z-label">
+
+                Date
+
+            </label>
+
+            <input
+                type="date"
+                class="z-input">
+
+        </div>
+
+    </div>
+
+    <div class="z-form-group z-field-full">
+
+        <label class="z-label">
+            Pay To
+        </label>
+
+        <input
+            type="text"
+            class="z-input"
+            autocomplete="off">
+
+    </div>
+
+    <div class="z-row z-row-bottom">
+
+    <div class="z-form-group z-field-medium">
+
+        <label class="z-label">
+            Amount
+        </label>
+
+        <input
+            type="text"
+            id="amount"
+            class="z-input"
+            inputmode="numeric"
+            autocomplete="off">
+
+    </div>
+
+    <div class="z-form-group">
+
+        <label class="z-label">
+            &nbsp;
+        </label>
+
+        <label class="z-checkbox">
+
+            <input
+                type="checkbox"
+                id="acPayee">
+
+            <span>A/C Payee Only</span>
+
+        </label>
+
+    </div>
+
+</div>
+
+    <div class="z-actions">
+
+        <button
+            type="submit"
+            class="z-button">
+
+            Print
+
+        </button>
+
+    </div>
+
+</form>
 
 {% endblock %}
