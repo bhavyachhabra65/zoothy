@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Print</title>
+
+    <style>
+
+        body{
+
+            font-family:Arial,sans-serif;
+
+            margin:40px;
+
+        }
+
+        table{
+
+            border-collapse:collapse;
+
+        }
+
+        td{
+
+            padding:10px 16px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<table>
+
+<tr>
+
+<td><strong>Bank</strong></td>
+
+<td>{{ cheque.bank }}</td>
+
+</tr>
+
+<tr>
+
+<td><strong>Date</strong></td>
+
+<td>{{ cheque.cheque_date }}</td>
+
+</tr>
+
+<tr>
+
+<td><strong>Pay To</strong></td>
+
+<td>{{ cheque.pay_to }}</td>
+
+</tr>
+
+<tr>
+
+<td><strong>Amount</strong></td>
+
+<td>{{ cheque.amount }}</td>
+
+</tr>
+
+<tr>
+
+<td><strong>Amount In Words</strong></td>
+
+<td>{{ cheque.amount_in_words }}</td>
+
+</tr>
+
+<tr>
+
+<td><strong>A/C Payee</strong></td>
+
+<td>{{ "Yes" if cheque.ac_payee_only else "No" }}</td>
+
+</tr>
+
+</table>
+
+<script>
+
+window.onload = function(){
+
+    window.print();
+
+};
+
+</script>
+
+</body>
+
+</html>

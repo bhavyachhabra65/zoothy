@@ -19,6 +19,6 @@ def create_app():
 
     @app.route("/")
     def home():
-        return redirect(url_for("cheque.print_cheque"))
+        return redirect(url_for("cheque.index"))
 
     return app

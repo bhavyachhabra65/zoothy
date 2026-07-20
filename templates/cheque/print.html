@@ -23,7 +23,7 @@
 
 </div>
 
-<form class="z-form">
+<form class="z-form" method="POST" action="{{ url_for('cheque.print_cheque') }}">
 
     <div class="z-row">
 
@@ -35,7 +35,7 @@
 
             </label>
 
-            <select class="z-input">
+            <select class="z-input" name="bank" required>
 
                 <option>Select Bank</option>
 
@@ -53,7 +53,9 @@
 
             <input
                 type="date"
-                class="z-input">
+                class="z-input"
+                name="date"
+                required>
 
         </div>
 
@@ -68,7 +70,9 @@
         <input
             type="text"
             class="z-input"
-            autocomplete="off">
+            name="pay_to"
+            autocomplete="off"
+            required>
 
     </div>
 
@@ -84,7 +88,8 @@
             type="text"
             id="amount"
             class="z-input"
-            inputmode="numeric"
+            name="amount"
+            inputmode="decimal"
             autocomplete="off">
 
     </div>
@@ -99,7 +104,8 @@
 
             <input
                 type="checkbox"
-                id="acPayee">
+                id="acPayee"
+                name="ac_payee_only">
 
             <span>A/C Payee Only</span>
 
