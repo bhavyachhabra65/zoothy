@@ -1,0 +1,57 @@
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    background:white;
+
+    font-family:Arial,sans-serif;
+
+}
+
+.cheque{
+
+    position:relative;
+
+    width:190mm;
+
+    height:80mm;
+
+    margin:auto;
+
+}
+
+.field{
+
+    position:absolute;
+
+    white-space:nowrap;
+
+    font-size:12pt;
+
+}
+
+.amount{
+
+    font-weight:bold;
+
+}
+
+@page{
+
+    margin:0;
+
+}
+
+@media print{
+
+    body{
+
+        margin:0;
+
+    }
+
+}

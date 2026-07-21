@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request
+from apps.cheque.layouts import default
 
 from .services import build_cheque_data
 from .validators import validate_cheque
@@ -22,5 +23,6 @@ def print_cheque():
 
     return render_template(
         "cheque/cheque_sheet.html",
-        cheque=cheque
+        cheque=cheque,
+        layout=default,
     )
