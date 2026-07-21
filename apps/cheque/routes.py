@@ -17,9 +17,15 @@ def index():
 @cheque_bp.post("/print")
 def print_cheque():
 
-    cheque = build_cheque_data(request.form)
-
-    validate_cheque(cheque)
+    try:
+        cheque = build_cheque_data(request.form)
+        validate_cheque(cheque)
+    except ValidationError as e:
+        return render_template(
+            "print.html",
+            error=str(e),
+            form=request.form
+        )
 
     return render_template(
         "cheque/cheque_sheet.html",

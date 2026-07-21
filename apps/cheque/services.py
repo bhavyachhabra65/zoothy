@@ -7,6 +7,19 @@ from .schemas import ChequeData
 
 def build_cheque_data(form):
 
+    try:
+        cheque_date = datetime.strptime(
+            form["date"],
+            "%Y-%m-%d"
+        ).date()
+    except ValueError:
+        raise ValidationError("Please enter a valid cheque date.")
+
+    try:
+        amount = Decimal(form["amount"])
+    except InvalidOperation:
+        raise ValidationError("Please enter a valid amount.")
+
     return ChequeData(
 
         bank=form["bank"],

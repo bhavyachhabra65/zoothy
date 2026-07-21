@@ -6,8 +6,8 @@
 .z-container {
     max-width: 860px;
     margin: 0 auto;
-    padding: var(--z-space-8);
-    padding-bottom: calc(var(--z-space-8) * 2);
+    padding: var(--z-space-5) var(--z-space-8) calc(var(--z-space-8) * 2);
+
 }
 
 .z-row {

@@ -55,3 +55,33 @@ body{
     }
 
 }
+
+@media (max-width: 460px) {
+
+    .z-container {
+        padding: var(--z-space-4);
+    }
+
+    .z-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--z-space-4);
+    }
+
+    .z-col-1,
+    .z-col-2,
+    .z-col-3,
+    .z-field-small,
+    .z-field-medium,
+    .z-field-large,
+    .z-field-full {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+    }
+
+    .z-actions .z-button {
+        width: 100%;
+    }
+
+}

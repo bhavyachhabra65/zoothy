@@ -15,3 +15,6 @@ def validate_cheque(data):
 
     if data.amount <= Decimal("0"):
         raise ValidationError("Amount must be greater than zero.")
+
+    if data.amount.as_tuple().exponent < -2:
+        raise ValidationError("Amount can have at most 2 decimal places.")
