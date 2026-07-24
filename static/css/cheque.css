@@ -46,6 +46,18 @@ body{
 
 }
 
+.ac-payee-box {
+    width: 25mm;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.ac-payee-box .line {
+    border-top: 1px solid #000;
+    margin: 2px 0;
+}
+
 @media print{
 
     body{

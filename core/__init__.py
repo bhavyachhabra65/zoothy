@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for
 from pathlib import Path
 
-from core.config import Config
+from core.settings import Config
 from apps.cheque.routes import cheque_bp
 
 

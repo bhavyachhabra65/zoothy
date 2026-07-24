@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from apps.cheque.layouts import default
+from apps.cheque.layouts import ausmallfinance, axis, bandhan, bob, boi, fb, hdfc, icici, indusind, kotak, pnb, sbi, ub
 
 from .services import build_cheque_data
 from .validators import validate_cheque
@@ -9,6 +9,22 @@ cheque_bp = Blueprint(
     __name__,
     url_prefix="/cheque"
 )
+
+LAYOUTS = {
+    "sbi": sbi,
+    "hdfc": hdfc,
+    "icici": icici,
+    "ausmallfinance": ausmallfinance,
+    "axis": axis,
+    "bandhan": bandhan,
+    "bob": bob,
+    "boi": boi,
+    "fb": fb,
+    "indusind": indusind,
+    "kotak": kotak,
+    "pnb": pnb,
+    "ub": ub 
+}
 
 @cheque_bp.route("/")
 def index():
@@ -30,5 +46,5 @@ def print_cheque():
     return render_template(
         "cheque/cheque_sheet.html",
         cheque=cheque,
-        layout=default,
+        layout = LAYOUTS[cheque.bank],
     )

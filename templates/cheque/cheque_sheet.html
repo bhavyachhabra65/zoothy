@@ -31,11 +31,11 @@
     <div
         class="field"
         style="
-            top:{{ layout.PAYEE.top }}mm;
-            left:{{ layout.PAYEE.left }}mm;
+            top:{{ layout.PAY_TO.top }}mm;
+            left:{{ layout.PAY_TO.left }}mm;
         "
     >
-        {{ cheque.pay_to }}
+        ** {{ cheque.pay_to }} **
     </div>
 
     <div
@@ -45,7 +45,7 @@
             left:{{ layout.AMOUNT.left }}mm;
         "
     >
-        ₹{{ "%.2f"|format(cheque.amount) }}
+        {{ "%.2f"|format(cheque.amount) }}/-
     </div>
 
     <div
@@ -55,19 +55,21 @@
             left:{{ layout.AMOUNT_WORDS.left }}mm;
         "
     >
-        {{ cheque.amount_in_words }}
+        **{{ cheque.amount_in_words }}**
     </div>
 
     {% if cheque.ac_payee_only %}
 
     <div
-        class="field"
+        class="field ac-payee-box"
         style="
-            top:{{ layout.AC_PAYEE.top }}mm;
-            left:{{ layout.AC_PAYEE.left }}mm;
+            top:{{ layout.AC_PAYEE_ONLY.top }}mm;
+            left:{{ layout.AC_PAYEE_ONLY.left }}mm;
         "
     >
-        ✓ A/C PAYEE ONLY
+        <div class="line"></div>
+        A/C PAYEE ONLY
+        <div class="line"></div>
     </div>
 
     {% endif %}
