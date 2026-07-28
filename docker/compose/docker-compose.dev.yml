@@ -3,7 +3,7 @@ services:
     build:
       context: ../..
 
-    container_name: zoothy-web
+    container_name: zoothy-dev-web
 
     expose:
       - "8000"
@@ -19,7 +19,7 @@ services:
   nginx:
     image: nginx:latest
 
-    container_name: zoothy-nginx
+    container_name: zoothy-dev-nginx
 
     ports:
       - "5000:80"
