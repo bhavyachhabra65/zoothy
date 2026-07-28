@@ -1,18 +1,46 @@
-.venv/
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Environment Variables
 .env
 
-.vscode/
-
-.idea/
-
-*.db
-
+# Flask
 instance/
 
+# IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker
+*.pid
+
+# Pytest
 .pytest_cache/
 
+# Coverage
 .coverage
+htmlcov/
 
-.env.*
+# Build
+dist/
+build/
+
+# Git
+*.swp
