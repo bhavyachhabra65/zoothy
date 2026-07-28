@@ -1,0 +1,241 @@
+/* =========================================================
+   Zoothy Base Styles
+   ---------------------------------------------------------
+   Responsibilities:
+   - CSS Reset
+   - Global Typography
+   - Body
+   - Images
+   - Links
+   - Scrollbar
+   - Text Selection
+   - Focus Ring
+========================================================= */
+
+
+/* ---------- Reset ---------- */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ---------- HTML ---------- */
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+
+/* ---------- Body ---------- */
+
+body {
+    font-family: var(--z-font-family);
+    font-size: var(--z-font-md);
+    line-height: 1.5;
+
+    background: var(--z-background);
+    color: var(--z-text);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    text-rendering: optimizeLegibility;
+}
+
+
+/* ---------- Typography ---------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+    color: var(--z-text);
+
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: var(--z-font-xl);
+}
+
+h2 {
+    font-size: var(--z-font-lg);
+}
+
+p {
+    color: var(--z-text-secondary);
+}
+
+
+/* ---------- Links ---------- */
+
+a {
+
+    color: inherit;
+
+    text-decoration: none;
+
+    transition: color var(--z-transition);
+
+}
+
+a:hover {
+
+    color: var(--z-primary);
+
+}
+
+
+/* ---------- Lists ---------- */
+
+ul,
+ol {
+
+    list-style: none;
+
+}
+
+
+/* ---------- Images ---------- */
+
+img {
+
+    display: block;
+
+    max-width: 100%;
+
+}
+
+
+/* ---------- Buttons ---------- */
+
+button {
+
+    font: inherit;
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+}
+
+
+/* ---------- Inputs ---------- */
+
+input,
+textarea,
+select,
+button {
+
+    font: inherit;
+
+}
+
+
+/* ---------- Focus Ring ---------- */
+
+:focus-visible {
+
+    outline: 3px solid rgba(37, 99, 235, .18);
+
+    outline-offset: 2px;
+
+    border-radius: var(--z-radius-sm);
+
+}
+
+
+/* ---------- Text Selection ---------- */
+
+::selection {
+
+    background: rgba(37, 99, 235, .18);
+
+    color: var(--z-text);
+
+}
+
+
+/* ---------- Scrollbar ---------- */
+
+::-webkit-scrollbar {
+
+    width: 10px;
+
+}
+
+::-webkit-scrollbar-track {
+
+    background: transparent;
+
+}
+
+::-webkit-scrollbar-thumb {
+
+    background: #D1D5DB;
+
+    border-radius: 999px;
+
+    border: 2px solid transparent;
+
+    background-clip: padding-box;
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+
+    background: #9CA3AF;
+
+}
+
+
+/* ---------- Form Controls ---------- */
+
+input,
+textarea,
+select {
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+}
+
+
+/* ---------- Table ---------- */
+
+table {
+
+    border-collapse: collapse;
+
+    width: 100%;
+
+}
+
+.z-footer {
+
+    margin-top: var(--z-space-9);
+    padding: var(--z-space-5) 0;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    color: var(--z-text-secondary);
+
+    border-top: 1px solid var(--z-border);
+
+}

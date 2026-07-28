@@ -1,0 +1,208 @@
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.z-page-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+
+    margin-bottom:36px;
+
+}
+
+.z-page-header::before{
+
+    content:"";
+
+    width:4px;
+
+    height:48px;
+
+    background:var(--z-primary);
+
+    border-radius:999px;
+
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.z-title {
+
+    font-size: var(--z-font-title-size);
+
+    font-weight: var(--z-font-title-weight);
+
+    line-height: var(--z-line-height-title);
+
+    margin-bottom:36px;
+
+}
+
+
+/* ==========================================================
+   FORM
+========================================================== */
+
+.z-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--z-field-gap);
+
+}
+
+
+/* ==========================================================
+   FORM GROUP
+========================================================== */
+
+.z-form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--z-label-gap);
+
+}
+
+
+/* ==========================================================
+   LABEL
+========================================================== */
+
+.z-label {
+
+    font-size: var(--z-font-label-size);
+
+    font-weight: var(--z-font-label-weight);
+
+}
+
+
+/* ==========================================================
+   INPUT
+========================================================== */
+
+.z-input {
+
+    width: 100%;
+
+    height: var(--z-input-height);
+
+    padding: 0 var(--z-space-3);
+
+    border: var(--z-border-width) solid var(--z-border);
+
+    border-radius: var(--z-radius-md);
+
+    background: var(--z-surface);
+
+    font-size: var(--z-font-body-size);
+
+    transition: var(--z-transition);
+
+}
+
+.z-input:hover {
+
+    border-color: #D1D5DB;
+
+}
+
+.z-input:focus {
+
+    border-color: var(--z-primary);
+
+}
+
+
+/* ==========================================================
+   CHECKBOX
+========================================================== */
+
+.z-checkbox {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: var(--z-space-2);
+
+    cursor: pointer;
+
+    width: fit-content;
+
+}
+
+.z-checkbox input[type="checkbox"] {
+    appearance: auto;
+    -webkit-appearance: checkbox;
+
+
+    width: 18px;
+    height: 18px;
+
+    accent-color: var(--z-primary);
+
+    cursor: pointer;
+
+}
+
+.z-checkbox-label {
+
+    font-size: var(--z-font-body-size);
+
+    user-select: none;
+
+}
+
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+.z-button {
+
+    min-width: 190px;
+
+    height: var(--z-button-height);
+
+    padding: 0 var(--z-space-5);
+
+    background: var(--z-primary);
+
+    color: white;
+
+    border-radius: var(--z-radius-md);
+
+    transition: var(--z-transition);
+
+
+}
+
+.z-button:hover {
+
+    background: var(--z-primary-hover);
+
+}
+
+
+/* ==========================================================
+   ACTIONS
+========================================================== */
+
+.z-actions {
+
+    margin-top:var(--z-space-4);
+
+}
