@@ -1,46 +1,33 @@
-const amount = document.getElementById("amount");
+document.addEventListener("DOMContentLoaded", () => {
 
-amount.addEventListener("input", () => {
+    const dateInput = document.getElementById("date");
 
-    const amt = amount.amt;
+    if (dateInput && !dateInput.value) {
+        dateInput.value = new Date().toISOString().split("T")[0];
+    }    
 
-    if (amt.includes(".")) {
+    const form = document.getElementById("chequeForm");
 
-        const decimals = amt.split(".")[1];
-        
-
-        if (decimals.length > 2) {
-            const rounded = Number(amt).toFixed(2);
-            amount.setCustomValidity(
-                `Please enter up to 2 decimal places. The nearest valid value is ${rounded}`
-            );
-        } else {
-            amount.setCustomValidity("");
-        }
-
-    } else {
-        amount.setCustomValidity("");
-    }
-
-});
-
-const chequeDate = document.getElementById("cheque_date");
-
-chequeDate.addEventListener("input", () => {
-
-    if (!chequeDate.value) {
-        chequeDate.setCustomValidity("");
+    if (!form) {
         return;
     }
 
-    const year = Number(chequeDate.value.split("-")[0]);
 
-    if (year < 1900 || year > 2099) {
-        chequeDate.setCustomValidity(
-            "Please enter a valid year between 1900 and 2099."
-        );
-    } else {
-        chequeDate.setCustomValidity("");
-    }
+    form.addEventListener("submit", async (e) => {
+
+        e.preventDefault();
+
+        try {
+
+            await PrintService.print(form);
+
+        } catch (error) {
+
+            alert(error.message);
+
+        }
+
+    });
 
 });
+

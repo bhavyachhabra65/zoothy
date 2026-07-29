@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, jsonify
 from apps.cheque.layouts import ausmallfinance, axis, bandhan, bob, boi, fb, hdfc, icici, indusind, kotak, pnb, sbi, ub
 
 from .services import build_cheque_data
-from .validators import validate_cheque
+from .validators import validate_cheque, ValidationError
 
 cheque_bp = Blueprint(
     "cheque",
@@ -37,11 +37,10 @@ def print_cheque():
         cheque = build_cheque_data(request.form)
         validate_cheque(cheque)
     except ValidationError as e:
-        return render_template(
-            "print.html",
-            error=str(e),
-            form=request.form
-        )
+        return jsonify({
+            "success": False,
+            "message": str(e)
+        }), 400
 
     return render_template(
         "cheque/cheque_sheet.html",

@@ -11,10 +11,12 @@
         rel="stylesheet"
         href="{{ url_for('static', filename='css/cheque.css') }}"
     >
+    <script src="{{ url_for('static', filename='js/print-service.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cheque-print.js') }}"></script>
 
 </head>
 
-<body onload="window.print()">
+<body>
 
 <div class="cheque">
 
@@ -50,6 +52,7 @@
 
     <div
         class="field"
+        id="amountWords"
         style="
             top:{{ layout.AMOUNT_WORDS.top }}mm;
             left:{{ layout.AMOUNT_WORDS.left }}mm;

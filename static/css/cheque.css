@@ -58,12 +58,31 @@ body{
     margin: 2px 0;
 }
 
+
+
 @media print{
 
     body{
 
         margin:0;
 
+    }
+
+}
+
+.amount-words {
+    line-height: 1.2;
+}
+
+.amount-words > div {
+    white-space: nowrap;
+}
+
+@media (min-width: 460px) {
+    .z-checkbox-group {
+    margin-bottom: 13px;
+    display: flex;
+    flex-direction: column;
     }
 
 }
