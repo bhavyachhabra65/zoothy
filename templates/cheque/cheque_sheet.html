@@ -27,7 +27,7 @@
             left:{{ layout.DATE.left }}mm;
         "
     >
-        {{ cheque.formatted_date }}
+        {{ cheque.formatted_date | safe }}
     </div>
 
     <div

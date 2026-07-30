@@ -3,7 +3,7 @@ services:
     build:
       context: ../..
 
-    container_name: zoothy-dev-web
+    container_name: zoothy-web
 
     expose:
       - "8000"
@@ -16,10 +16,10 @@ services:
   nginx:
     image: nginx:latest
 
-    container_name: zoothy-dev-nginx
+    container_name: zoothy-nginx
 
     ports:
-      - "8080:80"
+      - "80:80"
 
     volumes:
       - ../nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro

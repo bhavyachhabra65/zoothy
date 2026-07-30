@@ -70,12 +70,10 @@ body{
 
 }
 
-.amount-words {
-    line-height: 1.2;
-}
 
-.amount-words > div {
-    white-space: nowrap;
+#amountWords > div + div {
+    margin-top: 3mm;
+    margin-left: -17mm;
 }
 
 @media (min-width: 460px) {
