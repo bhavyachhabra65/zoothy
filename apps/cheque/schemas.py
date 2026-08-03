@@ -13,4 +13,4 @@ class ChequeData:
 
     @property
     def formatted_date(self) -> str:
-        return self.cheque_date.strftime("%d-%m-%Y")
+        return "\u00A0\u00A0".join(self.cheque_date.strftime("%d%m%Y"))

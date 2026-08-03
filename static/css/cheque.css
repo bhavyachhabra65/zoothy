@@ -58,12 +58,29 @@ body{
     margin: 2px 0;
 }
 
+
+
 @media print{
 
     body{
 
         margin:0;
 
+    }
+
+}
+
+
+#amountWords > div + div {
+    margin-top: 3mm;
+    margin-left: -17mm;
+}
+
+@media (min-width: 460px) {
+    .z-checkbox-group {
+    margin-bottom: 13px;
+    display: flex;
+    flex-direction: column;
     }
 
 }
