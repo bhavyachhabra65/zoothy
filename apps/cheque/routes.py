@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
-from apps.cheque.layouts import ausmallfinance, axis, bandhan, bob, boi, fb, hdfc, icici, indusind, kotak, pnb, sbi, ub, uco
+from apps.cheque.layouts import ausmallfinance, axis, bandhan, bob, boi, fb, hdfc, icici, indusind, kotak, pnb, sbi, union, uco
 
 from .services import build_cheque_data
 from .validators import validate_cheque, ValidationError
@@ -23,7 +23,7 @@ LAYOUTS = {
     "indusind": indusind,
     "kotak": kotak,
     "pnb": pnb,
-    "ub": ub, 
+    "union": union, 
     "uco": uco
 }
 
