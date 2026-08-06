@@ -2,42 +2,61 @@
 
 set -e
 
-echo ""
-echo "=================================="
-echo "     Deploying Zoothy"
-echo "=================================="
-echo ""
+ENVIRONMENT=$1
 
-echo "Fetching latest code..."
+if [ -z "$ENVIRONMENT" ]; then
+    echo "Usage:"
+    echo "bash scripts/deploy.sh production"
+    echo "bash scripts/deploy.sh development"
+    exit 1
+fi
+
+echo ""
+echo "======================================"
+echo "Deploying Zoothy ($ENVIRONMENT)"
+echo "======================================"
+
+if [ "$ENVIRONMENT" = "production" ]; then
+
+    BRANCH="main"
+    COMPOSE_FILE="docker/compose/docker-compose.prod.yml"
+
+elif [ "$ENVIRONMENT" = "development" ]; then
+
+    BRANCH="develop"
+    COMPOSE_FILE="docker/compose/docker-compose.dev.yml"
+
+else
+
+    echo "Invalid environment."
+
+    exit 1
+
+fi
+
+echo ""
+echo "Checking out $BRANCH..."
+
 git fetch origin
 
-echo "Checking out main branch..."
-git checkout main
+git checkout $BRANCH
 
-echo "Resetting to origin/main..."
-git reset --hard origin/main
+git reset --hard origin/$BRANCH
 
 echo ""
-echo "Building Docker images..."
-docker compose -f docker/compose/docker-compose.prod.yml build
+echo "Building Docker Images..."
+
+docker compose -f $COMPOSE_FILE build
 
 echo ""
-echo "Starting containers..."
-docker compose -f docker/compose/docker-compose.prod.yml up -d
+echo "Restarting Containers..."
+
+docker compose -f $COMPOSE_FILE up -d
 
 echo ""
-echo "Cleaning unused Docker images..."
+echo "Cleaning unused images..."
+
 docker image prune -f
 
 echo ""
-echo "Waiting for application..."
-sleep 5
-
-# echo "Performing health check..."
-# curl -f https://zoothy.com/health
-
-echo ""
-echo "=================================="
-echo " Deployment Successful ✅"
-echo "=================================="
-echo ""
+echo "Deployment completed successfully."
