@@ -29,3 +29,4 @@ jobs:
             cd ~/apps/zoothy-dev
 
             bash scripts/deploy.sh development
+            
