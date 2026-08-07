@@ -18,12 +18,10 @@ echo "======================================"
 
 if [ "$ENVIRONMENT" = "production" ]; then
 
-    BRANCH="main"
     COMPOSE_FILE="docker/compose/docker-compose.prod.yml"
 
 elif [ "$ENVIRONMENT" = "development" ]; then
 
-    BRANCH="develop"
     COMPOSE_FILE="docker/compose/docker-compose.dev.yml"
 
 else
@@ -35,13 +33,13 @@ else
 fi
 
 echo ""
-echo "Checking out $BRANCH..."
+CURRENT_BRANCH=$(git branch --show-current)
+
+echo "Current branch: $CURRENT_BRANCH"
 
 git fetch origin
 
-git checkout $BRANCH
-
-git reset --hard origin/$BRANCH
+git reset --hard origin/$CURRENT_BRANCH
 
 echo ""
 echo "Building Docker Images..."
