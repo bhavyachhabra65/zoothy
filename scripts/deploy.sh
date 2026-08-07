@@ -18,16 +18,17 @@ echo "======================================"
 
 if [ "$ENVIRONMENT" = "production" ]; then
 
+    PROJECT_NAME="zoothy-prod"
     COMPOSE_FILE="docker/compose/docker-compose.prod.yml"
 
 elif [ "$ENVIRONMENT" = "development" ]; then
 
+    PROJECT_NAME="zoothy-dev"
     COMPOSE_FILE="docker/compose/docker-compose.dev.yml"
 
 else
 
     echo "Invalid environment."
-
     exit 1
 
 fi
@@ -44,12 +45,26 @@ git reset --hard origin/$CURRENT_BRANCH
 echo ""
 echo "Building Docker Images..."
 
-docker compose -f $COMPOSE_FILE build
+docker compose \
+    --project-name "$PROJECT_NAME" \
+    -f "$COMPOSE_FILE" \
+    build
 
 echo ""
 echo "Restarting Containers..."
 
-docker compose -f $COMPOSE_FILE up -d
+docker compose \
+    --project-name "$PROJECT_NAME" \
+    -f "$COMPOSE_FILE" \
+    up -d
+
+echo ""
+echo "Running Containers..."
+
+docker compose \
+    --project-name "$PROJECT_NAME" \
+    -f "$COMPOSE_FILE" \
+    ps
 
 echo ""
 echo "Cleaning unused images..."
