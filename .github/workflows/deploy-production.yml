@@ -1,4 +1,4 @@
-name: Deploy Zoothy
+name: zoothy-prod
 
 on:
   push:
@@ -30,4 +30,4 @@ jobs:
 
             cd ~/apps/zoothy
 
-            bash scripts/deploy.sh
+            bash scripts/deploy.sh production

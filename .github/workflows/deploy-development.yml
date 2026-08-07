@@ -1,0 +1,31 @@
+name: zoothy-dev
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Deploy Development
+
+        uses: appleboy/ssh-action@v1.2.2
+
+        with:
+
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+
+          script: |
+
+            cd ~/apps/zoothy-dev
+
+            bash scripts/deploy.sh development
