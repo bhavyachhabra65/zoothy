@@ -1,4 +1,4 @@
-name: Deploy Development
+name: zoothy-dev
 
 on:
   push:
