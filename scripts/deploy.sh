@@ -20,11 +20,15 @@ if [ "$ENVIRONMENT" = "production" ]; then
 
     PROJECT_NAME="zoothy-prod"
     COMPOSE_FILE="docker/compose/docker-compose.prod.yml"
+    HEALTH_URL="https://localhost/health"
+    CURL_OPTIONS="-k"
 
 elif [ "$ENVIRONMENT" = "development" ]; then
 
     PROJECT_NAME="zoothy-dev"
     COMPOSE_FILE="docker/compose/docker-compose.dev.yml"
+    HEALTH_URL="http://localhost:5000/health"
+    CURL_OPTIONS=""
 
 else
 
@@ -57,6 +61,39 @@ docker compose \
     --project-name "$PROJECT_NAME" \
     -f "$COMPOSE_FILE" \
     up -d
+
+echo ""
+echo "Waiting for application to become healthy..."
+
+MAX_RETRIES=30
+RETRY=1
+
+until curl $CURL_OPTIONS -fs "$HEALTH_URL" >/dev/null; do
+
+    if [ $RETRY -ge $MAX_RETRIES ]; then
+
+        echo ""
+        echo "Health check failed."
+        echo ""
+
+        docker compose \
+            --project-name "$PROJECT_NAME" \
+            -f "$COMPOSE_FILE" \
+            ps
+
+        exit 1
+
+    fi
+
+    echo "Waiting... ($RETRY/$MAX_RETRIES)"
+
+    RETRY=$((RETRY + 1))
+
+    sleep 2
+
+done
+
+echo "Application is healthy."
 
 echo ""
 echo "Running Containers..."
