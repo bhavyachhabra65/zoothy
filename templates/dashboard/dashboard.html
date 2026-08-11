@@ -1,0 +1,410 @@
+{% extends "base.html" %}
+
+{% block title %}
+Zoothy
+{% endblock %}
+
+{% block main_class %}
+z-dashboard-main-container
+{% endblock %}
+
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="z-dashboard-page">
+
+    <div class="z-dashboard-container">
+
+        <div class="z-page-header">
+
+            <div class="z-page-header-content">
+
+            <a href="{{ url_for('dashboard.index') }}"
+            class="z-page-header-brand">
+                Zoothy
+            </a>
+
+                <p class="z-page-header-subtitle">
+                    Run your business, simply.
+                </p>
+
+            </div>
+
+            <nav class="z-page-header-nav" aria-label="Main navigation">
+
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+                <a href="#">Donate</a>
+                <a href="#">Join us</a>
+
+            </nav>
+
+        </div>        
+        <main class="z-dashboard-main">
+
+            <!-- Money -->
+            <section class="z-dashboard-section">
+
+                <h2 class="z-dashboard-section-title">
+                    Money
+                </h2>
+
+                <div class="z-module-grid">
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Sales"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="trending-up"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Sales
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Expenses"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="wallet"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Expenses
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Payments"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="indian-rupee"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Payments
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Bills"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="receipt"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Bills
+                        </span>
+                    </a>
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Cash"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="banknote"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Cash
+                        </span>
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- Business -->
+            <section class="z-dashboard-section">
+
+                <h2 class="z-dashboard-section-title">
+                    Business
+                </h2>
+
+                <div class="z-module-grid">
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Customers"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="users"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Customers
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Suppliers"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="truck"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Suppliers
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Products"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="package"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Products
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Inventory"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="boxes"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Inventory
+                        </span>
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- Documents -->
+            <section class="z-dashboard-section">
+
+                <h2 class="z-dashboard-section-title">
+                    Documents
+                </h2>
+
+                <div class="z-module-grid">
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Invoices"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="file-text"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Invoices
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="{{ url_for('cheque.index') }}"
+                        class="z-module-card"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="square-pen"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Cheques
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Receipts"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="badge-indian-rupee"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Receipts
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Delivery Notes"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="truck"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Delivery Notes
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Purchase Orders"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="clipboard-list"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Purchase Orders
+                        </span>
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- Insights -->
+            <section class="z-dashboard-section">
+
+                <h2 class="z-dashboard-section-title">
+                    Insights
+                </h2>
+
+                <div class="z-module-grid">
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Business Reports"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="chart-no-axes-column"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Business Reports
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Tax"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="landmark"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Tax
+                        </span>
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- Settings -->
+            <section class="z-dashboard-section z-dashboard-settings">
+
+                <div class="z-module-grid">
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Settings"
+                    >
+                        <span class="z-module-icon">
+                            <i data-lucide="settings"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Settings
+                        </span>
+                    </a>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<div
+    class="z-dialog-backdrop"
+    id="comingSoonDialog"
+    hidden
+>
+    <div
+        class="z-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="comingSoonTitle"
+    >
+
+        <h2 id="comingSoonTitle">
+            Coming soon
+        </h2>
+
+        <p id="comingSoonMessage">
+            This feature is under development.
+        </p>
+
+        <button
+            type="button"
+            class="z-button"
+            id="comingSoonClose"
+        >
+            OK
+        </button>
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+{% endblock %}

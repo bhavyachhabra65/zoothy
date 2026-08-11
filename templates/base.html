@@ -51,13 +51,12 @@
 
 <div class="z-page">
 
-    <main class="z-container">
+      <main class="z-container {% block main_class %}{% endblock %}">
 
-        {% block content %}
-        {% endblock %}
+      {% block content %}
+      {% endblock %}
 
-    </main>
-
+      </main>
 </div>
 
 <footer class="z-footer">

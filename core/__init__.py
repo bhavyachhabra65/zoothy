@@ -2,6 +2,8 @@ from flask import Flask, redirect, url_for
 from pathlib import Path
 
 from core.settings import Config
+
+from apps.dashboard.routes import dashboard_bp
 from apps.cheque.routes import cheque_bp
 from core.routes.health import health_bp
 
@@ -16,12 +18,14 @@ def create_app():
     )
     app.config.from_object(Config)
 
+    app.register_blueprint(dashboard_bp)
+
     app.register_blueprint(cheque_bp)
 
     app.register_blueprint(health_bp)
 
     @app.route("/")
     def home():
-        return redirect(url_for("cheque.index"))
+        return redirect(url_for("dashboard.index"))
 
     return app

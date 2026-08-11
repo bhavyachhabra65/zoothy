@@ -1,0 +1,340 @@
+/* ==========================================================
+   DASHBOARD MAIN CONTAINER
+========================================================== */
+
+.z-container.z-dashboard-main-container {
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+    padding: 0;
+}
+/* ==========================================================
+   DASHBOARD
+========================================================== */
+
+.z-dashboard-page {
+    min-height: 100vh;
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.z-dashboard-container {
+    width: 100%;
+    max-width: 1280px;
+
+    margin: 0 auto;
+
+    padding:
+        var(--z-space-7)
+        var(--z-space-5);
+
+    box-sizing: border-box;
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.z-dashboard-header {
+    display: flex;
+    align-items: stretch;
+    gap: var(--z-space-4);
+
+    margin-bottom: var(--z-space-7);
+}
+
+.z-dashboard-header::before {
+    content: "";
+
+    width: 6px;
+    flex: 0 0 6px;
+
+    background: var(--z-primary);
+
+    border-radius: 999px;
+}
+
+.z-dashboard-header-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.z-dashboard-brand {
+    display: inline-block;
+
+    color: var(--z-text);
+
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.1;
+
+    text-decoration: none;
+}
+
+.z-dashboard-brand:hover {
+    color: var(--z-primary);
+}
+
+.z-dashboard-tagline {
+    margin-top: var(--z-space-2);
+
+    font-size: 18px;
+    line-height: 1.4;
+
+    color: var(--z-text-secondary);
+}
+
+/* ==========================================================
+   MAIN
+========================================================== */
+
+.z-dashboard-main {
+    display: block;
+
+    width: 100%;
+}
+
+
+/* ==========================================================
+   DASHBOARD SECTION
+========================================================== */
+
+.z-dashboard-section {
+    display: block;
+
+    width: 100%;
+    max-width: none;
+
+    margin-bottom: var(--z-space-6);
+}
+
+
+/* ==========================================================
+   SECTION TITLE
+========================================================== */
+
+.z-dashboard-section-title {
+    display: block;
+
+    margin-bottom: var(--z-space-4);
+
+    font-size: var(--z-font-lg);
+    font-weight: 600;
+
+    color: var(--z-text);
+    
+}
+
+
+/* ==========================================================
+   MODULE GRID
+========================================================== */
+
+.z-dashboard-section .z-module-grid {
+    width: 100%;
+    max-width: none;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    align-items: stretch;
+    justify-content: flex-start;
+
+    gap: var(--z-space-4);
+}
+
+
+
+/* ==========================================================
+   MODULE CARD
+========================================================== */
+
+/*
+   The module card is intentionally fixed-size.
+
+   flex: 0 0 220px prevents Flexbox from shrinking
+   the card when the available width becomes smaller.
+*/
+
+.z-dashboard-section .z-module-card {
+    width: 220px;
+    height: 180px;
+
+    flex: 0 0 220px;
+}
+
+
+/* ==========================================================
+   SETTINGS
+========================================================== */
+
+.z-dashboard-settings {
+    margin-top: var(--z-space-9);
+}
+
+
+/* ==========================================================
+   COMING SOON DIALOG
+========================================================== */
+
+.z-dialog-backdrop {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: var(--z-space-5);
+
+    background: rgba(17, 24, 39, 0.24);
+
+    z-index: 1000;
+}
+
+
+/*
+   The HTML dialog starts with the hidden attribute.
+
+   This rule prevents the display:flex above from
+   overriding that attribute.
+*/
+
+.z-dialog-backdrop[hidden] {
+    display: none;
+}
+
+
+.z-dialog {
+    width: 100%;
+    max-width: var(--z-field-medium);
+
+    padding: var(--z-space-6);
+
+    background: var(--z-surface);
+
+    border-radius: var(--z-radius-lg);
+
+    box-shadow: var(--z-shadow-md);
+}
+
+
+.z-dialog h2 {
+    margin-bottom: var(--z-space-2);
+}
+
+
+.z-dialog p {
+    margin-bottom: var(--z-space-5);
+}
+
+
+/* ==========================================================
+   RESPONSIVE — TABLET / SMALL DESKTOP
+========================================================== */
+
+@media (max-width: 1200px) {
+
+    .z-dashboard-container {
+        padding:
+            var(--z-space-6)
+            var(--z-space-6);
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE — TABLET
+========================================================== */
+
+@media (max-width: 900px) {
+
+    .z-dashboard-container {
+        padding:
+            var(--z-space-6)
+            var(--z-space-5);
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE — SMALL TABLET / LARGE MOBILE
+========================================================== */
+
+@media (max-width: 680px) {
+
+    .z-dashboard-container {
+        padding:
+            var(--z-space-5)
+            var(--z-space-4);
+    }
+
+    .z-dashboard-section .z-module-grid {
+        gap: var(--z-space-4);
+    }
+
+    .z-page-header {
+        align-items: flex-start;
+    }
+
+    .z-page-header-nav {
+        gap: var(--z-space-4);
+    }
+
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+========================================================== */
+
+@media (max-width: 520px) {
+
+    .z-dashboard-section .z-module-grid {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .z-dashboard-section .z-module-card {
+        width: 100%;
+        height: 160px;
+
+        flex: 0 0 auto;
+    }
+
+    .z-page-header {
+        flex-direction: column;
+        gap: var(--z-space-4);
+    }
+
+    .z-page-header-nav {
+        margin-left: 0;
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE — SMALL MOBILE
+========================================================== */
+
+@media (max-width: 440px) {
+
+    .z-dashboard-container {
+        padding:
+            var(--z-space-5)
+            var(--z-space-3);
+    }
+
+}
