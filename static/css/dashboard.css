@@ -94,7 +94,7 @@
 
 .z-dashboard-main {
     display: block;
-
+    margin-top: 100px;
     width: 100%;
 }
 
@@ -262,6 +262,15 @@
             var(--z-space-6)
             var(--z-space-5);
     }
+
+    .z-page-header {
+        align-items: flex-start;
+    }
+
+    .z-page-header-nav {
+        gap: var(--z-space-4);
+    }
+
 
 }
 
