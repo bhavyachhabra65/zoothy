@@ -40,7 +40,8 @@ Upcoming Modules
  ├── Sales
  ├── Expenses
  ├── Payments
- └── Bills
+ ├── Bills
+ └── Cash
 
  Business
  ├── Customers
