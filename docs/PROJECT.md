@@ -24,43 +24,51 @@ Current Version
 v1.0.0
 
 
-
-Current Modules
+Completed Modules
 ---------------
+✔ Dashboard
 ✔ Cheque Printing
 
-Upcoming Modules
+
+All Modules
 ----------------
-                   Zoothy
 
-             Run your business, simply.
+Money
+├── Sales
+├── Expenses
+├── Receive Money
+└── Pay Money
 
 
- Money
- ├── Sales
- ├── Expenses
- ├── Payments
- ├── Bills
- └── Cash
+Business
+├── Customers
+├── Suppliers
+├── Products
+└── Inventory
 
- Business
- ├── Customers
- ├── Suppliers
- ├── Products
- └── Inventory
 
- Documents
- ├── Invoices
- ├── Cheques
- ├── Receipts
- ├── Delivery Notes
- └── Purchase Orders
+Documents
+├── Invoices
+├── Bills
+├── Receipts
+├── Cheques
+├── Delivery Notes
+└── Purchase Orders
 
- Insights
- ├── Business Reports
- └── Tax
 
- Settings
+Reports
+├── Overview
+├── Sales
+├── Expenses
+├── Money
+├── Customers
+├── Suppliers
+├── Inventory
+├── Tax
+└── Accounting
+
+
+Settings
 
 Technology Stack
 ----------------

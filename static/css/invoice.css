@@ -1,0 +1,212 @@
+/* ==========================================================
+   INVOICE SCREEN
+   ========================================================== */
+
+.z-invoice-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-space-4);
+    margin-top: var(--z-space-7);
+}
+
+
+.z-section-title {
+    margin: 0 0 var(--z-space-2);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--z-text);
+}
+
+
+/* ==========================================================
+   TEXTAREA
+   ========================================================== */
+
+.z-textarea {
+    height: auto;
+    min-height: 96px;
+    padding-top: var(--z-space-3);
+    padding-bottom: var(--z-space-3);
+    resize: vertical;
+}
+
+
+/* ==========================================================
+   ITEMS
+   ========================================================== */
+
+.z-invoice-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-space-3);
+}
+
+
+.z-invoice-item-header,
+.z-invoice-item {
+    display: grid;
+    grid-template-columns:
+        minmax(280px, 1fr)
+        100px
+        160px
+        150px
+        40px;
+
+    gap: var(--z-space-3);
+    align-items: center;
+}
+
+
+.z-invoice-item-header {
+    padding: 0 var(--z-space-2);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--z-text-secondary);
+}
+
+
+.z-invoice-item-amount {
+    font-size: var(--z-font-body-size);
+    font-weight: 500;
+    color: var(--z-text);
+    white-space: nowrap;
+}
+
+
+.z-item-remove {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+
+    border: 0;
+    border-radius: var(--z-radius-sm);
+
+    background: transparent;
+    color: var(--z-text-secondary);
+
+    font-size: 22px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+.z-item-remove:hover:not(:disabled) {
+    color: var(--z-danger);
+    background: var(--z-background);
+}
+
+
+.z-item-remove:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+
+/* ==========================================================
+   SECONDARY BUTTON
+   ========================================================== */
+
+.z-button-secondary {
+    width: fit-content;
+    min-width: 120px;
+
+    background: var(--z-surface);
+    color: var(--z-primary);
+    border: var(--z-border-width) solid var(--z-primary);
+}
+
+
+.z-button-secondary:hover {
+    background: var(--z-surface);
+    color: var(--z-primary-hover);
+    border-color: var(--z-primary-hover);
+}
+
+
+/* ==========================================================
+   TOTALS
+   ========================================================== */
+
+.z-invoice-total-section {
+    width: 420px;
+    max-width: 100%;
+    margin-top: var(--z-space-7);
+    margin-left: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-space-3);
+}
+
+
+.z-invoice-total-row {
+    display: grid;
+    grid-template-columns: 1fr 160px;
+    align-items: center;
+    gap: var(--z-space-4);
+
+    font-size: var(--z-font-body-size);
+}
+
+
+.z-invoice-total-row > strong {
+    text-align: right;
+}
+
+
+.z-total-input {
+    width: 160px;
+    margin-left: auto;
+}
+
+
+.z-invoice-total-final {
+    padding-top: var(--z-space-3);
+    border-top: var(--z-border-width) solid var(--z-border);
+
+    font-size: 18px;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+    .z-invoice-item-header {
+        display: none;
+    }
+
+    .z-invoice-item {
+        grid-template-columns:
+            minmax(180px, 1fr)
+            90px
+            140px
+            130px
+            40px;
+    }
+
+}
+
+
+@media (max-width: 680px) {
+
+    .z-invoice-item {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .z-invoice-item .item-name {
+        grid-column: 1 / -1;
+    }
+
+    .z-invoice-item-amount {
+        padding-left: var(--z-space-3);
+    }
+
+    .z-invoice-total-section {
+        width: 100%;
+    }
+
+}
