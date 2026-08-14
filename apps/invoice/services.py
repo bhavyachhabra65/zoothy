@@ -66,21 +66,17 @@ class InvoiceService:
             "customer_gstin", ""
         ).strip().upper()
 
-        vehicle_number = data.get(
-            "vehicle_number", ""
+        shipping_name = data.get(
+            "shipping_name", ""
         ).strip()
 
-        driver_name = data.get(
-            "driver_name", ""
+        shipping_address = data.get(
+            "shipping_address", ""
         ).strip()
 
-        route = data.get(
-            "route", ""
-        ).strip()
-
-        travel_date = data.get(
-            "travel_date", ""
-        ).strip()
+        shipping_gstin = data.get(
+            "shipping_gstin", ""
+        ).strip().upper()
 
         supplier_state_code = (
             InvoiceService.extract_state_code(
@@ -257,10 +253,9 @@ class InvoiceService:
 
             customer_gstin=customer_gstin,
 
-            vehicle_number=vehicle_number,
-            driver_name=driver_name,
-            route=route,
-            travel_date=travel_date,
+            shipping_name=shipping_name,
+            shipping_address=shipping_address,
+            shipping_gstin=shipping_gstin,
 
             supplier_state_code=supplier_state_code,
 

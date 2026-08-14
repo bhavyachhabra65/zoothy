@@ -28,10 +28,9 @@ class Invoice:
     customer_address: str
     customer_gstin: str
 
-    vehicle_number: str
-    driver_name: str
-    route: str
-    travel_date: str
+    shipping_name: str
+    shipping_address: str
+    shipping_gstin: str
 
     supplier_state_code: str
     customer_state_code: str

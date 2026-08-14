@@ -4,16 +4,19 @@
 
 {% block styles %}
 <link rel="stylesheet"
-      href="{{ url_for('static', filename='css/invoice.css') }}">
+      href="{{ url_for('static', filename='css/invoice.css') }}?v=3">
 {% endblock %}
 
 {% block content %}
 
 <div class="z-page-heading">
+
     <h1 class="z-page-heading-title">
-        Invoice
+        Print Invoice
     </h1>
+
 </div>
+
 
 <form
     class="z-form"
@@ -184,108 +187,102 @@
 
     </div>
 
-    <!-- Vehicle / Travel Details -->
+    <!-- Shipping Details -->
+    <div class="z-invoice-section">
 
-        <div class="z-invoice-section">
+        <h2 class="z-section-title">
+            Shipping Details
+        </h2>
 
-            <h2 class="z-section-title">
-                Vehicle / Travel Details
-            </h2>
+        <div class="z-checkbox-row">
 
-            <div class="z-row">
+            <input
+                type="checkbox"
+                id="shippingSameAsBilling"
+                name="shipping_same_as_billing"
+                class="z-checkbox"
+            >
 
-                <div class="z-form-group z-col-1">
+            <label
+                for="shippingSameAsBilling"
+                class="z-checkbox-label"
+            >
+                Shipping address same as Bill To address
+            </label>
 
-                    <label
-                        class="z-label"
-                        for="vehicleNumber"
-                    >
-                        Vehicle No.
-                    </label>
+        </div>
 
-                    <input
-                        type="text"
-                        id="vehicleNumber"
-                        name="vehicle_number"
-                        class="z-input"
-                        maxlength="30"
-                        placeholder="Vehicle number"
-                        autocomplete="off"
-                    >
+        <div class="z-row">
 
-                </div>
+            <div class="z-form-group z-col-1">
 
+                <label
+                    class="z-label"
+                    for="shippingName"
+                >
+                    Ship To
+                </label>
 
-                <div class="z-form-group z-col-1">
-
-                    <label
-                        class="z-label"
-                        for="driverName"
-                    >
-                        Driver
-                    </label>
-
-                    <input
-                        type="text"
-                        id="driverName"
-                        name="driver_name"
-                        class="z-input"
-                        maxlength="150"
-                        placeholder="Driver name"
-                        autocomplete="name"
-                    >
-
-                </div>
+                <input
+                    type="text"
+                    id="shippingName"
+                    name="shipping_name"
+                    class="z-input"
+                    maxlength="150"
+                    autocomplete="organization"
+                >
 
             </div>
 
 
-            <div class="z-row">
+            <div class="z-form-group z-col-1">
 
-                <div class="z-form-group z-col-2">
+                <label
+                    class="z-label"
+                    for="shippingGstin"
+                >
+                    Ship To GSTIN
+                </label>
 
-                    <label
-                        class="z-label"
-                        for="route"
-                    >
-                        Route
-                    </label>
-
-                    <input
-                        type="text"
-                        id="route"
-                        name="route"
-                        class="z-input"
-                        maxlength="200"
-                        placeholder="e.g. Delhi → Jaipur"
-                        autocomplete="off"
-                    >
-
-                </div>
-
-
-                <div class="z-form-group z-col-1">
-
-                    <label
-                        class="z-label"
-                        for="travelDate"
-                    >
-                        Travel Date
-                    </label>
-
-                    <input
-                        type="date"
-                        id="travelDate"
-                        name="travel_date"
-                        class="z-input"
-                    >
-
-                </div>
+                <input
+                    type="text"
+                    id="shippingGstin"
+                    name="shipping_gstin"
+                    class="z-input"
+                    maxlength="15"
+                    autocomplete="off"
+                >
 
             </div>
 
         </div>
 
+
+        <div class="z-row">
+
+            <div class="z-form-group z-col-2">
+
+                <label
+                    class="z-label"
+                    for="shippingAddress"
+                >
+                    Shipping Address
+                </label>
+
+                <textarea
+                    id="shippingAddress"
+                    name="shipping_address"
+                    class="z-input"
+                    rows="3"
+                    maxlength="500"
+                    autocomplete="street-address"
+                ></textarea>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <!-- Items -->
 
@@ -361,7 +358,6 @@
                                 type="text"
                                 class="z-input item-hsn"
                                 name="items[0][hsn_code]"
-                                placeholder="HSN / SAC"
                                 maxlength="20"
                                 autocomplete="off"
                                 required

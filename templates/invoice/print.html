@@ -11,7 +11,7 @@
 
     <link
         rel="stylesheet"
-        href="{{ url_for('static', filename='css/invoice-print.css') }}?v=3"
+        href="{{ url_for('static', filename='css/invoice-print.css') }}?v=4"
     >
 
 </head>
@@ -68,14 +68,14 @@
 
                     <div>
                         <span>Date</span>
-                        {{ invoice.invoice_date }}
+                        {{ invoice.invoice_date | invoice_date }}
                     </div>
 
                     {% if invoice.due_date %}
 
                     <div>
                         <span>Due</span>
-                        {{ invoice.due_date }}
+                        {{ invoice.due_date | invoice_date }}
                     </div>
 
                     {% endif %}
@@ -131,45 +131,43 @@
             </div>
 
 
-            <!-- VEHICLE / TRAVEL DETAILS -->
+            <!-- SHIP TO -->
 
-            <div class="party invoice-context-details">
+            <div class="party">
 
                 <div class="party-label">
-                    VEHICLE / TRAVEL DETAILS
+                    SHIP TO
                 </div>
 
-                {% if invoice.vehicle_number %}
-                <div class="invoice-context-row">
-                    <span>Vehicle No.</span>
-                    <strong>{{ invoice.vehicle_number }}</strong>
+                {% if invoice.shipping_name %}
+
+                <div class="party-name">
+                    {{ invoice.shipping_name }}
                 </div>
+
                 {% endif %}
 
-                {% if invoice.driver_name %}
-                <div class="invoice-context-row">
-                    <span>Driver</span>
-                    <strong>{{ invoice.driver_name }}</strong>
+
+                {% if invoice.shipping_address %}
+
+                <div class="party-address">
+                    {{ invoice.shipping_address }}
                 </div>
+
                 {% endif %}
 
-                {% if invoice.route %}
-                <div class="invoice-context-row">
-                    <span>Route</span>
-                    <strong>{{ invoice.route }}</strong>
-                </div>
-                {% endif %}
 
-                {% if invoice.travel_date %}
-                <div class="invoice-context-row">
-                    <span>Travel Date</span>
-                    <strong>{{ invoice.travel_date }}</strong>
+                {% if invoice.shipping_gstin %}
+
+                <div class="party-gstin">
+                    GSTIN {{ invoice.shipping_gstin }}
                 </div>
+
                 {% endif %}
 
             </div>
 
-        </section>              
+        </section>       
 
 
         <!-- ======================================================
@@ -329,7 +327,7 @@
                     </div>
 
                     <div class="message-sub">
-                        You bought the thing. We made the paperwork.
+                        Seriously, we appreciate it.
                     </div>
 
                 </div>
@@ -421,7 +419,7 @@
                 <div class="summary-total">
 
                     <div class="summary-total-label">
-                        AMOUNT DUE
+                        INVOICE TOTAL
                     </div>
 
                     <div class="summary-total-value">
@@ -434,7 +432,7 @@
                 {% if invoice.due_date %}
 
                 <div class="summary-due">
-                    Due {{ invoice.due_date }}
+                    Due {{ invoice.due_date | invoice_date }}
                 </div>
 
                 {% endif %}
@@ -455,11 +453,11 @@
             <div class="footer-content">
 
                 <span>
-                    Generated with Zoothy
+                    Clear numbers. Good business. 
                 </span>
 
                 <span>
-                    No drama. Just an invoice.
+                    Until next time.
                 </span>
 
             </div>

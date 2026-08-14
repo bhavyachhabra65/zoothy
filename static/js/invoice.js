@@ -6,7 +6,99 @@ document.addEventListener("DOMContentLoaded", () => {
     const subtotalElement = document.getElementById("subtotal");
     const totalElement = document.getElementById("total");
     const invoiceForm = document.getElementById("invoiceForm");
+    const shippingSameAsBilling =
+        document.getElementById("shippingSameAsBilling");
 
+    const shippingName =
+        document.getElementById("shippingName");
+
+    const shippingAddress =
+        document.getElementById("shippingAddress");
+
+    const shippingGstin =
+        document.getElementById("shippingGstin");
+
+    const customerName =
+        document.getElementById("customerName");
+
+    const customerAddress =
+        document.getElementById("customerAddress");
+
+    const customerGstin =
+        document.getElementById("customerGstin");
+
+    /* ==========================================================
+    DEFAULT INVOICE DATE
+    ========================================================== */
+
+    const invoiceDate =
+        document.getElementById("invoiceDate");
+
+    if (invoiceDate && !invoiceDate.value) {
+
+        const today = new Date();
+
+        const year =
+            today.getFullYear();
+
+        const month =
+            String(today.getMonth() + 1)
+                .padStart(2, "0");
+
+        const day =
+            String(today.getDate())
+                .padStart(2, "0");
+
+        invoiceDate.value =
+            `${year}-${month}-${day}`;
+    }
+
+    function syncShippingWithBilling() {
+
+        if (!shippingSameAsBilling.checked) {
+
+            shippingName.readOnly = false;
+            shippingAddress.readOnly = false;
+            shippingGstin.readOnly = false;
+
+            return;
+        }
+
+
+        shippingName.value =
+            customerName.value;
+
+        shippingAddress.value =
+            customerAddress.value;
+
+        shippingGstin.value =
+            customerGstin.value;
+
+
+        shippingName.readOnly = true;
+        shippingAddress.readOnly = true;
+        shippingGstin.readOnly = true;
+    }
+
+    shippingSameAsBilling.addEventListener(
+        "change",
+        syncShippingWithBilling
+    );
+
+    customerName.addEventListener(
+        "input",
+        syncShippingWithBilling
+    );
+
+    customerAddress.addEventListener(
+        "input",
+        syncShippingWithBilling
+    );
+
+    customerGstin.addEventListener(
+        "input",
+        syncShippingWithBilling
+    );
     let itemIndex = 1;
 
 
