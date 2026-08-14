@@ -2,92 +2,62 @@
    HEADER
 ========================================================== */
 
-.z-page-header{
+.z-page-header {
 
-    display:flex;
-
-    align-items:stretch;
-
-    gap:var(--z-space-4);
-
-    margin-bottom:var(--z-space-7);
-
-}
-
-.z-page-header::before{
-
-    content:"";
-
-    width:6px;
-
-    flex: 0 0 6px;
-
-    background:var(--z-primary);
-
-    border-radius:999px;
-
-}
-
-.z-page-header-content {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 
-.z-page-header-brand {
-    display: inline-block;
-
-    color: var(--z-text);
-
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.1;
-
-    text-decoration: none;
-
-    transition: color var(--z-transition);
-}
-
-
-.z-page-header-subtitle {
-    margin-top: var(--z-space-2);
-
-    font-size: 18px;
-    line-height: 1.4;
-
-    color: var(--z-text-secondary);
-}
-
-.z-page-header-nav {
-    display: flex;
     align-items: center;
+
+    justify-content: space-between;
 
     gap: var(--z-space-6);
 
-    margin-left: auto;
-}
+    margin-bottom: var(--z-space-7);
 
-.z-page-header-nav a {
-    color: var(--z-text-secondary);
-
-    font-size: var(--z-font-body-size);
-    font-weight: 500;
-
-    text-decoration: none;
-
-    transition:
-        color var(--z-transition);
-}
-
-.z-page-header-nav a:hover {
-    color: var(--z-primary);
 }
 
 /* ==========================================================
-   TITLE
+   PAGE HEADING
 ========================================================== */
 
-.z-title {
+.z-page-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: var(--z-space-4);
+
+    margin-bottom: var(--z-space-7);
+
+}
+
+.z-page-heading::before {
+
+    content: "";
+
+    width: 5px;
+
+    height: 56px;
+
+    flex: 0 0 5px;
+
+    background: linear-gradient(
+        to bottom,
+        var(--z-primary),
+        #4F8CFF
+    );
+
+    border-radius: 999px;
+
+    box-shadow:
+        0 2px 8px rgba(37, 99, 235, 0.18);
+
+}
+
+.z-page-heading-title {
+
+    margin: 0;
 
     font-size: var(--z-font-title-size);
 
@@ -95,9 +65,158 @@
 
     line-height: var(--z-line-height-title);
 
-    margin-bottom:36px;
+    color: var(--z-text);
 
 }
+
+
+/* ==========================================================
+   BRAND
+========================================================== */
+
+.z-brand {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding-left: var(--z-space-5);
+
+}
+
+
+/* ==========================================================
+   BRAND ACCENT LINE
+========================================================== */
+
+.z-brand::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 50%;
+
+    width: 5px;
+    height: 56px;
+
+    transform: translateY(-50%);
+
+    background: linear-gradient(
+        to bottom,
+        var(--z-primary),
+        #4F8CFF
+    );
+
+    border-radius: 999px;
+
+    box-shadow:
+        0 2px 8px rgba(37, 99, 235, 0.18);
+
+}
+
+
+/* ==========================================================
+   BRAND NAME
+========================================================== */
+
+.z-brand-name {
+
+    display: inline-block;
+
+    color: var(--z-text);
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    line-height: 1.1;
+
+    text-decoration: none;
+
+    transition: color var(--z-transition);
+
+}
+
+.z-brand-name:hover {
+
+    color: var(--z-primary);
+
+}
+
+
+/* ==========================================================
+   BRAND TAGLINE
+========================================================== */
+
+.z-brand-tagline {
+
+    margin-top: var(--z-space-2);
+
+    font-size: 18px;
+
+    line-height: 1.4;
+
+    color: var(--z-text-secondary);
+
+}
+
+
+/* ==========================================================
+   HEADER NAVIGATION
+========================================================== */
+
+.z-page-header-nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: var(--z-space-6);
+
+}
+
+.z-page-header-nav a {
+
+    color: var(--z-text-secondary);
+
+    font-size: var(--z-font-body-size);
+
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition: color var(--z-transition);
+
+}
+
+.z-page-header-nav a:hover {
+
+    color: var(--z-primary);
+
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+/* .z-title {
+
+    font-size: var(--z-font-title-size);
+
+    font-weight: var(--z-font-title-weight);
+
+    line-height: var(--z-line-height-title);
+
+    margin-bottom: 36px;
+
+} */
 
 
 /* ==========================================================
@@ -199,9 +318,9 @@
 }
 
 .z-checkbox input[type="checkbox"] {
+
     appearance: auto;
     -webkit-appearance: checkbox;
-
 
     width: 18px;
     height: 18px;
@@ -241,7 +360,6 @@
 
     transition: var(--z-transition);
 
-
 }
 
 .z-button:hover {
@@ -257,21 +375,26 @@
 
 .z-actions {
 
-    margin-top:var(--z-space-4);
+    margin-top: var(--z-space-4);
 
 }
+
 
 /* ==========================================================
    MODULE CARD
 ========================================================== */
 
 .z-module-card {
+
     width: 220px;
     height: 180px;
 
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
+
     align-items: center;
 
     gap: var(--z-space-4);
@@ -279,6 +402,7 @@
     background: var(--z-surface);
 
     border: var(--z-border-width) solid var(--z-border);
+
     border-radius: var(--z-radius-lg);
 
     cursor: pointer;
@@ -288,52 +412,159 @@
         box-shadow var(--z-transition),
         border-color var(--z-transition),
         background var(--z-transition);
+
 }
 
 .z-module-card:hover {
+
     transform: translateY(-2px);
 
     border-color: var(--z-primary);
 
     box-shadow: var(--z-shadow-md);
+
 }
 
 .z-module-card:active {
+
     transform: translateY(0);
+
 }
 
+
+/* ==========================================================
+   MODULE ICON
+========================================================== */
+
 .z-module-icon {
+
     width: 56px;
     height: 56px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     color: var(--z-primary);
+
 }
 
 .z-module-icon svg {
+
     width: 40px;
     height: 40px;
+
 }
 
+
+/* ==========================================================
+   MODULE TITLE
+========================================================== */
+
 .z-module-title {
+
     font-size: 18px;
+
     font-weight: 600;
 
     color: var(--z-text);
 
     text-align: center;
+
 }
+
+
+/* ==========================================================
+   MODULE GRID
+========================================================== */
 
 .z-module-grid {
 
     display: grid;
 
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
 
     gap: var(--z-space-4);
 
     justify-items: center;
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE — TABLET
+========================================================== */
+
+@media (max-width: 900px) {
+
+    .z-page-header {
+
+        gap: var(--z-space-5);
+
+    }
+
+    .z-page-header-nav {
+
+        gap: var(--z-space-4);
+
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+========================================================== */
+
+@media (max-width: 680px) {
+
+    .z-page-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: var(--z-space-5);
+
+    }
+
+    .z-page-header-nav {
+
+        width: 100%;
+
+        margin-left: 0;
+
+        gap: var(--z-space-5);
+
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE — SMALL MOBILE
+========================================================== */
+
+@media (max-width: 440px) {
+
+    .z-brand-name {
+
+        font-size: 30px;
+
+    }
+
+    .z-brand-tagline {
+
+        font-size: 17px;
+
+    }
+
+    .z-page-header-nav {
+
+        gap: var(--z-space-4);
+
+    }
+
 }

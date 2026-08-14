@@ -21,30 +21,29 @@ z-dashboard-main-container
 
     <div class="z-dashboard-container">
 
-        <div class="z-page-header">
+        <header class="z-page-header">
 
-            <div class="z-page-header-content">
+            <div class="z-brand">
 
-            <a href="{{ url_for('dashboard.index') }}"
-            class="z-page-header-brand">
-                Zoothy
-            </a>
+                <a href="/" class="z-brand-name">
+                    Zoothy
+                </a>
 
-                <p class="z-page-header-subtitle">
+                <p class="z-brand-tagline">
                     Making accounting easy for startups.
                 </p>
 
             </div>
 
-            <nav class="z-page-header-nav" aria-label="Main navigation">
+            <nav class="z-page-header-nav">
 
-                <a href="#">Blog</a>
-                <a href="#">Login</a>
-                <a href="#">Register</a>
+                <a href="/blog">Blog</a>
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
 
             </nav>
 
-        </div>
+        </header>
 
         <main class="z-dashboard-main">
 

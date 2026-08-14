@@ -38,7 +38,7 @@
    HEADER
 ========================================================== */
 
-.z-dashboard-header {
+/* .z-dashboard-header {
     display: flex;
     align-items: stretch;
     gap: var(--z-space-4);
@@ -86,7 +86,7 @@
     line-height: 1.4;
 
     color: var(--z-text-secondary);
-}
+} */
 
 /* ==========================================================
    MAIN
@@ -263,13 +263,13 @@
             var(--z-space-5);
     }
 
-    .z-page-header {
+    /* .z-page-header {
         align-items: flex-start;
     }
 
     .z-page-header-nav {
         gap: var(--z-space-4);
-    }
+    } */
 
 
 }
@@ -291,13 +291,15 @@
         gap: var(--z-space-4);
     }
 
-    .z-page-header {
+     .z-page-header {
+        flex-direction: column;
         align-items: flex-start;
     }
 
     .z-page-header-nav {
+        margin-left: 0;
         gap: var(--z-space-4);
-    }
+    } 
 
 
 }
@@ -322,14 +324,13 @@
         flex: 0 0 auto;
     }
 
-    .z-page-header {
+     .z-page-header {
         flex-direction: column;
-        gap: var(--z-space-4);
     }
 
     .z-page-header-nav {
         margin-left: 0;
-    }
+    } 
 
 }
 
