@@ -10,16 +10,24 @@ z-dashboard-main-container
 
 
 {% block styles %}
+
 <link
     rel="stylesheet"
     href="{{ url_for('static', filename='css/dashboard.css') }}">
+
 {% endblock %}
+
 
 {% block content %}
 
 <div class="z-dashboard-page">
 
     <div class="z-dashboard-container">
+
+
+        <!-- ==================================================
+             HEADER
+        ================================================== -->
 
         <header class="z-page-header">
 
@@ -35,32 +43,56 @@ z-dashboard-main-container
 
             </div>
 
+
             <nav class="z-page-header-nav">
 
-                <a href="/blog">Blog</a>
-                <a href="/login">Login</a>
-                <a href="/register">Register</a>
+                <a href="/#">
+                    Blog
+                </a>
+
+                <a href="/#">
+                    Login
+                </a>
+
+                <a href="/#">
+                    Register
+                </a>
 
             </nav>
 
         </header>
 
+
+
+        <!-- ==================================================
+             DASHBOARD
+        ================================================== -->
+
         <main class="z-dashboard-main">
 
-            <!-- Money -->
+
+            <!-- ==================================================
+                 MONEY
+            ================================================== -->
+
             <section class="z-dashboard-section">
 
                 <h2 class="z-dashboard-section-title">
                     Money
                 </h2>
 
+
                 <div class="z-module-grid">
+
+
+                    <!-- Sales -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
                         data-module="Sales"
                     >
+
                         <span class="z-module-icon">
                             <i data-lucide="trending-up"></i>
                         </span>
@@ -68,14 +100,18 @@ z-dashboard-main-container
                         <span class="z-module-title">
                             Sales
                         </span>
+
                     </a>
 
+
+                    <!-- Expenses -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
                         data-module="Expenses"
                     >
+
                         <span class="z-module-icon">
                             <i data-lucide="wallet"></i>
                         </span>
@@ -83,71 +119,76 @@ z-dashboard-main-container
                         <span class="z-module-title">
                             Expenses
                         </span>
+
                     </a>
 
+
+                    <!-- Receive Money -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
-                        data-module="Payments"
+                        data-module="Receive Money"
                     >
+
                         <span class="z-module-icon">
-                            <i data-lucide="indian-rupee"></i>
+                            <i data-lucide="circle-arrow-down"></i>
                         </span>
 
                         <span class="z-module-title">
-                            Payments
+                            Receive Money
                         </span>
+
                     </a>
 
+
+                    <!-- Pay Money -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
-                        data-module="Bills"
+                        data-module="Pay Money"
                     >
+
                         <span class="z-module-icon">
-                            <i data-lucide="receipt"></i>
+                            <i data-lucide="circle-arrow-up"></i>
                         </span>
 
                         <span class="z-module-title">
-                            Bills
-                        </span>
-                    </a>
-
-                    <a
-                        href="#"
-                        class="z-module-card z-module-card-disabled"
-                        data-module="Cash"
-                    >
-                        <span class="z-module-icon">
-                            <i data-lucide="wallet-cards"></i>
+                            Pay Money
                         </span>
 
-                        <span class="z-module-title">
-                            Cash
-                        </span>
                     </a>
+
 
                 </div>
 
             </section>
 
 
-            <!-- Business -->
+
+            <!-- ==================================================
+                 BUSINESS
+            ================================================== -->
+
             <section class="z-dashboard-section">
 
                 <h2 class="z-dashboard-section-title">
                     Business
                 </h2>
 
+
                 <div class="z-module-grid">
+
+
+                    <!-- Customers -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
                         data-module="Customers"
                     >
+
                         <span class="z-module-icon">
                             <i data-lucide="users"></i>
                         </span>
@@ -155,14 +196,18 @@ z-dashboard-main-container
                         <span class="z-module-title">
                             Customers
                         </span>
+
                     </a>
 
+
+                    <!-- Suppliers -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
                         data-module="Suppliers"
                     >
+
                         <span class="z-module-icon">
                             <i data-lucide="truck"></i>
                         </span>
@@ -170,14 +215,18 @@ z-dashboard-main-container
                         <span class="z-module-title">
                             Suppliers
                         </span>
+
                     </a>
 
+
+                    <!-- Products -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
                         data-module="Products"
                     >
+
                         <span class="z-module-icon">
                             <i data-lucide="package"></i>
                         </span>
@@ -185,14 +234,18 @@ z-dashboard-main-container
                         <span class="z-module-title">
                             Products
                         </span>
+
                     </a>
 
+
+                    <!-- Inventory -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
                         data-module="Inventory"
                     >
+
                         <span class="z-module-icon">
                             <i data-lucide="boxes"></i>
                         </span>
@@ -200,27 +253,38 @@ z-dashboard-main-container
                         <span class="z-module-title">
                             Inventory
                         </span>
+
                     </a>
+
 
                 </div>
 
             </section>
 
 
-            <!-- Documents -->
+
+            <!-- ==================================================
+                 DOCUMENTS
+            ================================================== -->
+
             <section class="z-dashboard-section">
 
                 <h2 class="z-dashboard-section-title">
                     Documents
                 </h2>
 
+
                 <div class="z-module-grid">
+
+
+                    <!-- Invoices -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
                         data-module="Invoices"
                     >
+
                         <span class="z-module-icon">
                             <i data-lucide="file-text"></i>
                         </span>
@@ -228,28 +292,37 @@ z-dashboard-main-container
                         <span class="z-module-title">
                             Invoices
                         </span>
+
                     </a>
 
 
+                    <!-- Bills -->
+
                     <a
-                        href="{{ url_for('cheque.index') }}"
-                        class="z-module-card"
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Bills"
                     >
+
                         <span class="z-module-icon">
-                            <i data-lucide="square-pen"></i>
+                            <i data-lucide="receipt"></i>
                         </span>
 
                         <span class="z-module-title">
-                            Cheques
+                            Bills
                         </span>
+
                     </a>
 
+
+                    <!-- Receipts -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
                         data-module="Receipts"
                     >
+
                         <span class="z-module-icon">
                             <i data-lucide="badge-indian-rupee"></i>
                         </span>
@@ -257,14 +330,36 @@ z-dashboard-main-container
                         <span class="z-module-title">
                             Receipts
                         </span>
+
                     </a>
 
+
+                    <!-- Cheques -->
+
+                    <a
+                        href="{{ url_for('cheque.index') }}"
+                        class="z-module-card"
+                    >
+
+                        <span class="z-module-icon">
+                            <i data-lucide="square-pen"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Cheques
+                        </span>
+
+                    </a>
+
+
+                    <!-- Delivery Notes -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
                         data-module="Delivery Notes"
                     >
+
                         <span class="z-module-icon">
                             <i data-lucide="truck"></i>
                         </span>
@@ -272,14 +367,18 @@ z-dashboard-main-container
                         <span class="z-module-title">
                             Delivery Notes
                         </span>
+
                     </a>
 
+
+                    <!-- Purchase Orders -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
                         data-module="Purchase Orders"
                     >
+
                         <span class="z-module-icon">
                             <i data-lucide="clipboard-list"></i>
                         </span>
@@ -287,42 +386,171 @@ z-dashboard-main-container
                         <span class="z-module-title">
                             Purchase Orders
                         </span>
+
                     </a>
+
 
                 </div>
 
             </section>
 
 
-            <!-- Insights -->
+
+            <!-- ==================================================
+                 REPORTS
+            ================================================== -->
+
             <section class="z-dashboard-section">
 
                 <h2 class="z-dashboard-section-title">
-                    Insights
+                    Reports
                 </h2>
 
+
                 <div class="z-module-grid">
+
+
+                    <!-- Overview -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
-                        data-module="Business Reports"
+                        data-module="Overview"
                     >
+
                         <span class="z-module-icon">
-                            <i data-lucide="chart-no-axes-column"></i>
+                            <i data-lucide="layout-dashboard"></i>
                         </span>
 
                         <span class="z-module-title">
-                            Business Reports
+                            Overview
                         </span>
+
                     </a>
 
+
+                    <!-- Sales -->
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Sales Reports"
+                    >
+
+                        <span class="z-module-icon">
+                            <i data-lucide="trending-up"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Sales
+                        </span>
+
+                    </a>
+
+
+                    <!-- Expenses -->
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Expense Reports"
+                    >
+
+                        <span class="z-module-icon">
+                            <i data-lucide="wallet"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Expenses
+                        </span>
+
+                    </a>
+
+
+                    <!-- Money -->
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Money Reports"
+                    >
+
+                        <span class="z-module-icon">
+                            <i data-lucide="indian-rupee"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Money
+                        </span>
+
+                    </a>
+
+
+                    <!-- Customers -->
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Customer Reports"
+                    >
+
+                        <span class="z-module-icon">
+                            <i data-lucide="users"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Customers
+                        </span>
+
+                    </a>
+
+
+                    <!-- Suppliers -->
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Supplier Reports"
+                    >
+
+                        <span class="z-module-icon">
+                            <i data-lucide="truck"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Suppliers
+                        </span>
+
+                    </a>
+
+
+                    <!-- Inventory -->
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Inventory Reports"
+                    >
+
+                        <span class="z-module-icon">
+                            <i data-lucide="boxes"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Inventory
+                        </span>
+
+                    </a>
+
+
+                    <!-- Tax -->
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
                         data-module="Tax"
                     >
+
                         <span class="z-module-icon">
                             <i data-lucide="landmark"></i>
                         </span>
@@ -330,23 +558,51 @@ z-dashboard-main-container
                         <span class="z-module-title">
                             Tax
                         </span>
+
                     </a>
+
+
+                    <!-- Accounting -->
+
+                    <a
+                        href="#"
+                        class="z-module-card z-module-card-disabled"
+                        data-module="Accounting"
+                    >
+
+                        <span class="z-module-icon">
+                            <i data-lucide="book-open"></i>
+                        </span>
+
+                        <span class="z-module-title">
+                            Accounting
+                        </span>
+
+                    </a>
+
 
                 </div>
 
             </section>
 
 
-            <!-- Settings -->
+
+            <!-- ==================================================
+                 SETTINGS
+            ================================================== -->
+
             <section class="z-dashboard-section z-dashboard-settings">
 
+
                 <div class="z-module-grid">
+
 
                     <a
                         href="#"
                         class="z-module-card z-module-card-disabled"
                         data-module="Settings"
                     >
+
                         <span class="z-module-icon">
                             <i data-lucide="settings"></i>
                         </span>
@@ -354,11 +610,14 @@ z-dashboard-main-container
                         <span class="z-module-title">
                             Settings
                         </span>
+
                     </a>
+
 
                 </div>
 
             </section>
+
 
         </main>
 
@@ -367,11 +626,17 @@ z-dashboard-main-container
 </div>
 
 
+
+<!-- ==========================================================
+     COMING SOON DIALOG
+========================================================== -->
+
 <div
     class="z-dialog-backdrop"
     id="comingSoonDialog"
     hidden
 >
+
     <div
         class="z-dialog"
         role="dialog"
@@ -396,9 +661,12 @@ z-dashboard-main-container
         </button>
 
     </div>
+
 </div>
 
+
 {% endblock %}
+
 
 
 {% block scripts %}
