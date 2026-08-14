@@ -4,16 +4,19 @@
 
 {% block styles %}
 <link rel="stylesheet"
-      href="{{ url_for('static', filename='css/invoice.css') }}">
+      href="{{ url_for('static', filename='css/invoice.css') }}?v=3">
 {% endblock %}
 
 {% block content %}
 
 <div class="z-page-heading">
+
     <h1 class="z-page-heading-title">
-        Invoice
+        Print Invoice
     </h1>
+
 </div>
+
 
 <form
     class="z-form"
@@ -184,6 +187,102 @@
 
     </div>
 
+    <!-- Shipping Details -->
+    <div class="z-invoice-section">
+
+        <h2 class="z-section-title">
+            Shipping Details
+        </h2>
+
+        <div class="z-checkbox-row">
+
+            <input
+                type="checkbox"
+                id="shippingSameAsBilling"
+                name="shipping_same_as_billing"
+                class="z-checkbox"
+            >
+
+            <label
+                for="shippingSameAsBilling"
+                class="z-checkbox-label"
+            >
+                Shipping address same as Bill To address
+            </label>
+
+        </div>
+
+        <div class="z-row">
+
+            <div class="z-form-group z-col-1">
+
+                <label
+                    class="z-label"
+                    for="shippingName"
+                >
+                    Ship To
+                </label>
+
+                <input
+                    type="text"
+                    id="shippingName"
+                    name="shipping_name"
+                    class="z-input"
+                    maxlength="150"
+                    autocomplete="organization"
+                >
+
+            </div>
+
+
+            <div class="z-form-group z-col-1">
+
+                <label
+                    class="z-label"
+                    for="shippingGstin"
+                >
+                    Ship To GSTIN
+                </label>
+
+                <input
+                    type="text"
+                    id="shippingGstin"
+                    name="shipping_gstin"
+                    class="z-input"
+                    maxlength="15"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="z-row">
+
+            <div class="z-form-group z-col-2">
+
+                <label
+                    class="z-label"
+                    for="shippingAddress"
+                >
+                    Shipping Address
+                </label>
+
+                <textarea
+                    id="shippingAddress"
+                    name="shipping_address"
+                    class="z-input"
+                    rows="3"
+                    maxlength="500"
+                    autocomplete="street-address"
+                ></textarea>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <!-- Items -->
 
@@ -259,7 +358,6 @@
                                 type="text"
                                 class="z-input item-hsn"
                                 name="items[0][hsn_code]"
-                                placeholder="HSN / SAC"
                                 maxlength="20"
                                 autocomplete="off"
                                 required

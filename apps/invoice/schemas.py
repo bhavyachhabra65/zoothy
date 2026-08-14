@@ -28,6 +28,10 @@ class Invoice:
     customer_address: str
     customer_gstin: str
 
+    shipping_name: str
+    shipping_address: str
+    shipping_gstin: str
+
     supplier_state_code: str
     customer_state_code: str
     place_of_supply: str

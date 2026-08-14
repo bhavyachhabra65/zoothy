@@ -520,6 +520,18 @@
 
 @media (max-width: 680px) {
 
+    .z-page-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: var(--z-space-4);
+
+    margin-bottom: var(--z-space-7);
+
+}
+
     .z-page-header {
 
         align-items: flex-start;

@@ -53,6 +53,104 @@
     margin-bottom: 16px;
 }
 
+/* ==========================================================
+   SHIPPING SAME AS BILLING
+   ========================================================== */
+
+.z-checkbox-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+
+.z-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 18px;
+    height: 18px;
+
+    flex: 0 0 18px;
+
+    margin: 0;
+    padding: 0;
+
+    border: 1.5px solid #9ca3af;
+    border-radius: 4px;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+
+/* Checked */
+
+.z-checkbox:checked {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+
+/* Check mark */
+
+.z-checkbox:checked::after {
+    content: "";
+
+    position: absolute;
+
+    left: 5px;
+    top: 2px;
+
+    width: 5px;
+    height: 9px;
+
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+
+    transform: rotate(45deg);
+}
+
+
+/* Keyboard focus */
+
+.z-checkbox:focus-visible {
+    outline: 2px solid rgba(37, 99, 235, 0.25);
+    outline-offset: 2px;
+}
+
+
+.z-checkbox-label {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    line-height: 1.4;
+
+    color: #64748b;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.z-input:disabled {
+    background: var(--z-surface-subtle);
+    color: var(--z-text-secondary);
+
+    cursor: not-allowed;
+
+    opacity: 0.8;
+}
+
 
 /* ==========================================================
    TOP ROW
@@ -266,43 +364,282 @@
 
 
 /* ==========================================================
-   RESPONSIVE
+   MOBILE RESPONSIVE
    ========================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
+
+    /* ------------------------------------------------------
+       FORM
+       ------------------------------------------------------ */
+
+    .z-form {
+        width: 100%;
+    }
+
+
+    .z-row {
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+
+    .z-col-1,
+    .z-col-2,
+    .z-field-full,
+    .z-field-medium {
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    .z-form-group {
+        width: 100%;
+    }
+
+
+    .z-input {
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    .z-textarea {
+        min-height: 90px;
+    }
+
+
+    /* ------------------------------------------------------
+       INVOICE SECTIONS
+       ------------------------------------------------------ */
+
+    .z-invoice-section {
+        margin-top: 28px;
+    }
+
+
+    .z-section-title {
+        margin-bottom: 16px;
+    }
+
+
+    /* ------------------------------------------------------
+       INVOICE DETAILS
+       ------------------------------------------------------ */
+
+    #invoiceForm > .z-row:first-child {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ------------------------------------------------------
+       BILL TO / SHIP TO
+       ------------------------------------------------------ */
+
+    .z-invoice-section .z-row {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ------------------------------------------------------
+       SHIPPING CHECKBOX
+       ------------------------------------------------------ */
+
+    .z-checkbox-row {
+        margin-bottom: 16px;
+    }
+
+
+    .z-checkbox-label {
+        align-items: flex-start;
+
+        gap: 9px;
+
+        font-size: 13px;
+
+        line-height: 1.4;
+    }
+
+
+    .z-checkbox {
+        margin-top: 1px;
+
+        flex: 0 0 18px;
+    }
+
+
+    /* ------------------------------------------------------
+       ITEMS
+       ------------------------------------------------------ */
 
     .z-invoice-item-header {
         display: none;
     }
 
+
     .z-invoice-item {
-        grid-template-columns:
-            minmax(180px, 1fr)
-            90px
-            140px
-            130px
-            40px;
+        padding: 16px;
+
+        margin-bottom: 14px;
+
+        border: 1px solid var(--z-border);
+        border-radius: 10px;
+
+        background: var(--z-surface);
+    }
+
+
+    .z-item-top,
+    .z-item-bottom {
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+
+    .z-item-top {
+        margin-bottom: 14px;
+    }
+
+
+    .z-item-field,
+    .z-item-amount-field {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    .z-item-field .z-input {
+        width: 100%;
+    }
+
+
+    .z-item-amount-field {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        min-height: 42px;
+
+        padding: 0 2px;
+    }
+
+
+    .z-item-amount-field label {
+        margin: 0;
+    }
+
+
+    .z-invoice-item-amount {
+        font-weight: 700;
+    }
+
+
+    .z-item-remove {
+        width: 100%;
+
+        min-height: 40px;
+
+        margin-top: 2px;
+    }
+
+
+    /* ------------------------------------------------------
+       ADD ITEM
+       ------------------------------------------------------ */
+
+    #addItemButton {
+        width: 100%;
+
+        min-height: 44px;
+    }
+
+
+    /* ------------------------------------------------------
+       TOTALS
+       ------------------------------------------------------ */
+
+    .z-invoice-total-section {
+        width: 100%;
+    }
+
+
+    .z-invoice-total-row {
+        gap: 12px;
+    }
+
+
+    .z-total-input {
+        width: 150px;
+        max-width: 100%;
+    }
+
+
+    .z-invoice-total-final {
+        font-size: 17px;
+    }
+
+
+    /* ------------------------------------------------------
+       ACTION
+       ------------------------------------------------------ */
+
+    .z-actions {
+        width: 100%;
+
+        margin-top: 24px;
+    }
+
+
+    .z-actions .z-button {
+        width: 100%;
+
+        min-height: 48px;
     }
 
 }
 
+/* ==========================================================
+   SMALL MOBILE
+   ========================================================== */
 
-@media (max-width: 680px) {
+@media (max-width: 480px) {
+
+    .z-invoice-section {
+        margin-top: 24px;
+    }
+
 
     .z-invoice-item {
-        grid-template-columns: 1fr 1fr;
+        padding: 13px;
     }
 
-    .z-invoice-item .item-name {
-        grid-column: 1 / -1;
+
+    .z-item-top,
+    .z-item-bottom {
+        gap: 12px;
     }
 
-    .z-invoice-item-amount {
-        padding-left: var(--z-space-3);
+
+    .z-invoice-total-row {
+        font-size: 14px;
     }
 
-    .z-invoice-total-section {
-        width: 100%;
+
+    .z-invoice-total-final {
+        font-size: 16px;
+    }
+
+
+    .z-total-input {
+        width: 110px;
+        max-width: 100%;
     }
 
 }

@@ -1,7 +1,10 @@
+/* ==========================================================
+   RESET
+   ========================================================== */
+
 * {
     box-sizing: border-box;
 }
-
 
 html,
 body {
@@ -9,22 +12,38 @@ body {
     padding: 0;
 }
 
-
 body {
-    background: white;
-    font-family: Arial, sans-serif;
-    color: #111;
+    background: #f5f6f8;
+
+    color: #111827;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
 }
 
 
-.invoice-print {
+/* ==========================================================
+   A4 PAGE
+   ========================================================== */
+
+.invoice-page {
     width: 210mm;
     min-height: 297mm;
 
     margin: 0 auto;
-    padding: 15mm;
+    padding: 10mm 14mm 8mm;
 
-    font-size: 9pt;
+    box-sizing: border-box;
+
+    background: #ffffff;
 }
 
 
@@ -34,86 +53,278 @@ body {
 
 .invoice-header {
     display: flex;
+
+    align-items: flex-start;
     justify-content: space-between;
-    gap: 12mm;
 
-    padding-bottom: 7mm;
-
-    border-bottom: 0.3mm solid #222;
+    gap: 20mm;
 }
 
 
-.invoice-business {
+.invoice-brand {
     max-width: 105mm;
 }
 
 
-.invoice-business h1 {
-    margin: 0 0 3mm;
+.invoice-brand-name {
+    margin-bottom: 4mm;
 
-    font-size: 21pt;
-    font-weight: 700;
+    font-size: 22pt;
+    font-weight: 750;
+
+    letter-spacing: -0.4px;
+    line-height: 1.1;
 }
 
 
-.invoice-address {
-    white-space: pre-line;
-    line-height: 1.4;
+.invoice-brand-meta {
+    font-size: 8.5pt;
+    line-height: 1.55;
+
+    color: #6b7280;
 }
 
 
-.invoice-gstin {
-    margin-top: 2mm;
+.invoice-heading {
+    min-width: 55mm;
 
-    font-size: 9pt;
-    font-weight: 600;
-}
-
-
-.invoice-title h2 {
-    margin: 0 0 3mm;
-
-    font-size: 20pt;
-    font-weight: 700;
-}
-
-
-.invoice-title h2 {
-    margin: 0 0 3mm;
-
-    font-size: 20pt;
-    font-weight: 700;
-}
-
-
-/* ==========================================================
-   CUSTOMER
-   ========================================================== */
-
-.invoice-parties {
-    margin-top: 7mm;
-    margin-bottom: 7mm;
-}
-
-
-.invoice-party {
-    width: 95mm;
-
-    line-height: 1.5;
+    text-align: right;
 }
 
 
 .invoice-label {
-    margin-bottom: 2mm;
+    font-size: 22pt;
+    font-weight: 800;
 
-    font-size: 8pt;
-    font-weight: 700;
-    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    line-height: 1;
+}
+
+
+.invoice-number {
+    margin-top: 3mm;
+
+    font-size: 10pt;
+    font-weight: 650;
+
+    color: #374151;
+}
+
+
+.invoice-date {
+    margin-top: 4mm;
+
+    font-size: 8.5pt;
+    line-height: 1.7;
+
+    color: #6b7280;
+}
+
+
+.invoice-date div {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+}
+
+
+.invoice-date span {
+    color: #9ca3af;
 }
 
 
 /* ==========================================================
-   ITEMS
+   ACCENT
+   ========================================================== */
+
+.invoice-accent {
+    display: flex;
+
+    gap: 3px;
+
+    margin-top: 5mm;
+    margin-bottom: 6mm;
+}
+
+
+.invoice-accent span:nth-child(1) {
+    width: 28mm;
+    height: 1.2mm;
+
+    border-radius: 999px;
+
+    background: #2563eb;
+}
+
+
+.invoice-accent span:nth-child(2) {
+    width: 8mm;
+    height: 1.2mm;
+
+    border-radius: 999px;
+
+    background: #60a5fa;
+}
+
+
+.invoice-accent span:nth-child(3) {
+    width: 3mm;
+    height: 1.2mm;
+
+    border-radius: 999px;
+
+    background: #bfdbfe;
+}
+
+
+/* ==========================================================
+   BILL TO + SHIP TO
+   ========================================================== */
+
+.invoice-parties {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20mm;
+
+    margin-bottom: 6mm;
+}
+
+
+.party {
+    min-width: 0;
+}
+
+
+.party-label {
+    margin-bottom: 2.5mm;
+
+    font-size: 7.5pt;
+    font-weight: 750;
+
+    letter-spacing: 1px;
+
+    color: #6b7280;
+}
+
+
+.party-name {
+    margin-bottom: 1.5mm;
+
+    font-size: 10.5pt;
+    font-weight: 700;
+}
+
+
+.party-address {
+    white-space: pre-line;
+
+    font-size: 8.5pt;
+    line-height: 1.45;
+
+    color: #6b7280;
+}
+
+
+.party-gstin {
+    margin-top: 2mm;
+
+    font-size: 8pt;
+    font-weight: 600;
+
+    color: #4b5563;
+}
+
+
+
+/* ==========================================================
+   CONTEXT DETAILS
+   ========================================================== */
+
+.invoice-context-details {
+    padding-left: 10mm;
+
+    border-left: 1px solid #e5e7eb;
+}
+
+
+.invoice-context-row {
+    display: flex;
+
+    align-items: baseline;
+    justify-content: space-between;
+
+    gap: 8mm;
+
+    margin-bottom: 1.8mm;
+
+    font-size: 8.5pt;
+}
+
+
+.invoice-context-row:last-child {
+    margin-bottom: 0;
+}
+
+
+.invoice-context-row span {
+    color: #9ca3af;
+}
+
+
+.invoice-context-row strong {
+    color: #374151;
+
+    font-weight: 650;
+
+    text-align: right;
+
+    max-width: 60%;
+
+    overflow-wrap: anywhere;
+}
+
+/* ==========================================================
+   SECTION HEADING
+   ========================================================== */
+
+.invoice-items-section {
+    margin-top: 2mm;
+}
+
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5mm;
+
+    margin-bottom: 3.5mm;
+
+    font-size: 7.5pt;
+    font-weight: 750;
+
+    letter-spacing: 1px;
+
+    color: #6b7280;
+}
+
+
+.section-heading-line {
+    flex: 1;
+
+    height: 1px;
+
+    background: #e5e7eb;
+}
+
+
+/* ==========================================================
+   ITEMS TABLE
    ========================================================== */
 
 .invoice-items {
@@ -125,136 +336,274 @@ body {
 }
 
 
-.invoice-items th,
-.invoice-items td {
-    padding: 2.3mm 1.2mm;
+.invoice-items th {
+    padding: 2.2mm 1.5mm;
 
-    border-bottom: 0.2mm solid #ccc;
+    background: #f8fafc;
+
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+
+    font-size: 7.5pt;
+    font-weight: 700;
+
+    color: #6b7280;
+
+    white-space: nowrap;
+}
+
+
+.invoice-items td {
+    padding: 2.5mm 1.5mm;
+
+    border-bottom: 1px solid #edf0f3;
+
+    font-size: 8.5pt;
 
     vertical-align: middle;
 }
 
 
-.invoice-items th {
-    font-size: 8pt;
-    font-weight: 700;
+.invoice-items tbody tr:last-child td {
+    border-bottom: 1px solid #d1d5db;
+}
+
+
+/* ==========================================================
+   TABLE COLUMNS
+   ========================================================== */
+
+.col-number {
+    width: 5%;
+
+    text-align: center;
+}
+
+
+.col-item {
+    width: 23%;
+
     text-align: left;
+}
+
+
+.col-hsn {
+    width: 10%;
+
+    text-align: center;
+
     white-space: nowrap;
-
-    border-top: 0.3mm solid #222;
-    border-bottom: 0.3mm solid #222;
 }
 
 
-.invoice-items td {
-    font-size: 8.5pt;
+.col-qty {
+    width: 7%;
+
+    text-align: right;
 }
 
 
-.invoice-items td:nth-child(2) {
-    text-align: left;
+.col-price {
+    width: 11%;
+
+    text-align: right;
+}
+
+
+.col-discount {
+    width: 12%;
+
+    text-align: right;
+}
+
+
+.col-gst {
+    width: 7%;
+
+    text-align: right;
+}
+
+
+.col-tax {
+    width: 11%;
+
+    text-align: right;
+}
+
+
+.col-total {
+    width: 14%;
+
+    text-align: right;
+}
+
+
+.item-name {
+    font-weight: 600;
+
+    color: #111827;
+
     overflow-wrap: anywhere;
 }
 
 
 /* ==========================================================
-   COLUMN WIDTHS
+   LOWER SECTION
    ========================================================== */
 
-.invoice-items .item-number {
-    width: 4%;
-    text-align: center;
+.invoice-lower {
+    display: grid;
+
+    grid-template-columns: 1fr 65mm;
+
+    gap: 10mm;
+
+    align-items: start;
+
+    margin-top: 5mm;
 }
 
 
-.invoice-items .item-hsn {
-    width: 11%;
-    text-align: center;
-    white-space: nowrap;
+/* ==========================================================
+   LEFT SIDE
+   ========================================================== */
+
+.invoice-note-area {
+    min-width: 0;
 }
 
 
-.invoice-items .item-quantity {
-    width: 7%;
-    text-align: right;
+.invoice-detail-block {
+    margin-bottom: 12mm;
 }
 
 
-.invoice-items .item-price {
-    width: 12%;
-    text-align: right;
+.invoice-detail-label {
+    margin-bottom: 1.5mm;
+
+    font-size: 7pt;
+    font-weight: 750;
+
+    letter-spacing: 1px;
+
+    color: #9ca3af;
 }
 
 
-.invoice-items .item-discount {
-    width: 12%;
-    text-align: right;
+.invoice-detail-value {
+    font-size: 9pt;
+    font-weight: 650;
+
+    color: #374151;
 }
 
 
-.invoice-items .item-gst {
-    width: 7%;
-    text-align: right;
+.invoice-message {
+    padding-top: 7mm;
+
+    border-top: 1px solid #e5e7eb;
 }
 
 
-.invoice-items .item-tax {
-    width: 10%;
-    text-align: right;
+.message-main {
+    font-size: 9pt;
+    font-weight: 650;
+
+    color: #374151;
 }
 
 
-.invoice-items .item-amount {
-    width: 13%;
-    text-align: right;
+.message-sub {
+    margin-top: 1.5mm;
+
+    font-size: 8pt;
+
+    color: #9ca3af;
 }
+
 
 /* ==========================================================
    SUMMARY
    ========================================================== */
 
 .invoice-summary {
-    width: 70mm;
-
-    margin-left: auto;
-    margin-top: 3mm;
+    width: 100%;
 }
 
 
 .summary-row {
     display: flex;
-    justify-content: space-between;
 
-    padding: 1.6mm 0;
+    justify-content: space-between;
+    align-items: baseline;
 
     gap: 8mm;
+
+    padding: 1.8mm 0;
+
+    font-size: 8.5pt;
+
+    color: #6b7280;
 }
 
 
 .summary-row strong {
+    color: #374151;
+
+    font-weight: 650;
+
     white-space: nowrap;
 }
 
 
-.summary-total {
-    margin-top: 2mm;
-    padding-top: 3mm;
-
-    border-top: 0.3mm solid #222;
-
-    font-size: 11pt;
-    font-weight: 700;
+.summary-discount strong {
+    color: #15803d;
 }
 
 
 /* ==========================================================
-   PLACE OF SUPPLY
+   TOTAL
    ========================================================== */
 
-.invoice-place-of-supply {
-    margin-top: 4mm;
+.summary-total {
+    margin-top: 3mm;
 
-    font-size: 8.5pt;
+    padding-top: 4mm;
+
+    border-top: 1.5px solid #111827;
+}
+
+
+.summary-total-label {
+    font-size: 7.5pt;
+    font-weight: 750;
+
+    letter-spacing: 1px;
+
+    color: #6b7280;
+}
+
+
+.summary-total-value {
+    margin-top: 1mm;
+
+    font-size: 21pt;
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+
+    color: #111827;
+
+    white-space: nowrap;
+}
+
+
+.summary-due {
+    margin-top: 2mm;
+
+    font-size: 8pt;
+
+    color: #6b7280;
 }
 
 
@@ -263,16 +612,38 @@ body {
    ========================================================== */
 
 .invoice-footer {
-    margin-top: 18mm;
+    margin-top: 7mm;
+}
+
+
+.footer-line {
+    width: 100%;
+
+    height: 1px;
+
+    background: #e5e7eb;
+}
+
+
+.footer-content {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10mm;
 
     padding-top: 4mm;
 
-    border-top: 0.2mm solid #ccc;
+    font-size: 7.5pt;
 
-    font-size: 8.5pt;
-    text-align: center;
+    color: #9ca3af;
+}
 
-    color: #555;
+
+.footer-content span:last-child {
+    font-weight: 600;
+
+    color: #6b7280;
 }
 
 
@@ -282,6 +653,7 @@ body {
 
 @page {
     size: A4;
+
     margin: 0;
 }
 
@@ -290,12 +662,24 @@ body {
 
     html,
     body {
-        margin: 0;
-        padding: 0;
+        width: 210mm;
+        min-height: 297mm;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        background: #ffffff;
     }
 
-    .invoice-print {
-        margin: 0;
-    }
+    .invoice-page {
+        width: 210mm;
+        min-height: 297mm;
 
+        margin: 0 !important;
+        padding: 10mm 14mm 8mm !important;
+
+        box-sizing: border-box;
+
+        background: #ffffff;
+    }
 }

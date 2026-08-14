@@ -66,6 +66,18 @@ class InvoiceService:
             "customer_gstin", ""
         ).strip().upper()
 
+        shipping_name = data.get(
+            "shipping_name", ""
+        ).strip()
+
+        shipping_address = data.get(
+            "shipping_address", ""
+        ).strip()
+
+        shipping_gstin = data.get(
+            "shipping_gstin", ""
+        ).strip().upper()
+
         supplier_state_code = (
             InvoiceService.extract_state_code(
                 business_gstin
@@ -241,6 +253,10 @@ class InvoiceService:
 
             customer_gstin=customer_gstin,
 
+            shipping_name=shipping_name,
+            shipping_address=shipping_address,
+            shipping_gstin=shipping_gstin,
+
             supplier_state_code=supplier_state_code,
 
             customer_state_code=customer_state_code,
@@ -261,64 +277,6 @@ class InvoiceService:
                 discount,
                 2
             ),
-
-            cgst=cgst,
-            sgst=sgst,
-            igst=igst,
-
-            total_tax=total_tax,
-
-            total=total
-        )
-
-        return Invoice(
-
-            invoice_number=data.get(
-                "invoice_number", ""
-            ).strip(),
-
-            invoice_date=data.get(
-                "invoice_date", ""
-            ),
-
-            due_date=data.get(
-                "due_date", ""
-            ),
-
-            business_name=data.get(
-                "business_name", ""
-            ).strip(),
-
-            business_address=data.get(
-                "business_address", ""
-            ).strip(),
-
-            business_gstin=business_gstin,
-
-            customer_name=data.get(
-                "customer_name", ""
-            ).strip(),
-
-            customer_address=data.get(
-                "customer_address", ""
-            ).strip(),
-
-            customer_gstin=customer_gstin,
-
-            supplier_state_code=supplier_state_code,
-
-            customer_state_code=customer_state_code,
-
-            place_of_supply=GST_STATE_CODES.get(
-                customer_state_code,
-                customer_state_code
-            ),
-
-            items=items,
-
-            subtotal=round(subtotal, 2),
-
-            discount=round(discount, 2),
 
             cgst=cgst,
             sgst=sgst,
