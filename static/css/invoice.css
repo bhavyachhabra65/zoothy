@@ -32,74 +32,170 @@
 
 
 /* ==========================================================
-   ITEMS
+   INVOICE ITEMS
    ========================================================== */
 
-.z-invoice-items {
-    display: flex;
-    flex-direction: column;
-    gap: var(--z-space-3);
-}
-
-
-.z-invoice-item-header,
-.z-invoice-item {
-    display: grid;
-    grid-template-columns:
-        minmax(280px, 1fr)
-        100px
-        160px
-        150px
-        40px;
-
-    gap: var(--z-space-3);
-    align-items: center;
-}
-
-
 .z-invoice-item-header {
-    padding: 0 var(--z-space-2);
-    font-size: 13px;
-    font-weight: 600;
+    display: none;
+}
+
+
+.z-invoice-item {
+    width: 100%;
+
+    padding: 24px;
+
+    border: 1px solid var(--z-border-color);
+    border-radius: 14px;
+
+    background: var(--z-surface);
+
+    margin-bottom: 16px;
+}
+
+
+/* ==========================================================
+   TOP ROW
+   ========================================================== */
+
+.z-item-top {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2.5fr)
+        minmax(180px, 1fr);
+
+    gap: 24px;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid var(--z-border-color);
+}
+
+
+/* ==========================================================
+   BOTTOM ROW
+   ========================================================== */
+
+.z-item-bottom {
+    display: grid;
+
+    grid-template-columns:
+        minmax(100px, 0.7fr)
+        minmax(150px, 1fr)
+        minmax(120px, 0.8fr)
+        minmax(180px, 1.2fr)
+        auto;
+
+    gap: 20px;
+
+    align-items: end;
+
+    padding-top: 22px;
+}
+
+
+/* ==========================================================
+   FIELDS
+   ========================================================== */
+
+.z-item-field {
+    min-width: 0;
+}
+
+
+.z-item-field label,
+.z-item-amount-field label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+    font-weight: 500;
+
     color: var(--z-text-secondary);
+}
+
+
+.z-item-field .z-input {
+    width: 100%;
+}
+
+
+/* ==========================================================
+   AMOUNT
+   ========================================================== */
+
+.z-item-amount-field {
+    min-width: 0;
 }
 
 
 .z-invoice-item-amount {
-    font-size: var(--z-font-body-size);
-    font-weight: 500;
-    color: var(--z-text);
+    display: flex;
+
+    align-items: center;
+
+    min-height: 48px;
+
+    padding: 0 4px;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    color: var(--z-text-primary);
+
     white-space: nowrap;
 }
 
 
+/* ==========================================================
+   REMOVE
+   ========================================================== */
+
 .z-item-remove {
-    width: 32px;
-    height: 32px;
-    padding: 0;
+    width: 42px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     border: 0;
-    border-radius: var(--z-radius-sm);
-
     background: transparent;
-    color: var(--z-text-secondary);
 
-    font-size: 22px;
-    line-height: 1;
+    color: var(--z-text-muted);
+
+    font-size: 24px;
 
     cursor: pointer;
+
+    border-radius: 8px;
+
+    transition:
+        color 0.15s ease,
+        background 0.15s ease;
 }
 
 
 .z-item-remove:hover:not(:disabled) {
     color: var(--z-danger);
-    background: var(--z-background);
+    background: var(--z-danger-soft);
 }
 
 
 .z-item-remove:disabled {
-    opacity: 0.35;
+    opacity: 0.45;
     cursor: default;
+}
+
+
+/* ==========================================================
+   ADD ITEM
+   ========================================================== */
+
+.z-add-item {
+    margin-top: 4px;
 }
 
 

@@ -196,78 +196,182 @@
         <div class="z-invoice-items">
 
             <div class="z-invoice-item-header">
-                <span>Item</span>
-                <span>HSN / SAC</span>
-                <span>Qty</span>
-                <span>Price</span>
-                <span>GST</span>
-                <span>Amount</span>
-                <span></span>
+
+                <span class="item-header-name">
+                    Item
+                </span>
+
+                <span class="item-header-hsn">
+                    HSN / SAC
+                </span>
+
+                <span class="item-header-qty">
+                    Qty
+                </span>
+
+                <span class="item-header-price">
+                    Price
+                </span>
+
+                <span class="item-header-gst">
+                    GST
+                </span>
+
+                <span class="item-header-amount">
+                    Amount
+                </span>
+
             </div>
 
             <div id="invoiceItems">
 
                 <div class="z-invoice-item">
 
-                    <input
-                        type="text"
-                        class="z-input item-name"
-                        name="items[0][name]"
-                        placeholder="Product / Service"
-                        maxlength="150"
-                        required>
+                    <!-- Row 1 -->
 
-                    <input
-                        type="text"
-                        class="z-input item-hsn"
-                        name="items[0][hsn_code]"
-                        placeholder="HSN / SAC"
-                        maxlength="20"
-                        autocomplete="off"
-                        required>
+                    <div class="z-item-top">
 
-                    <input
-                        type="number"
-                        class="z-input item-quantity"
-                        name="items[0][quantity]"
-                        min="0.01"
-                        step="0.01"
-                        value="1"
-                        required>
+                        <div class="z-item-field z-item-name-field">
 
-                    <input
-                        type="number"
-                        class="z-input item-price"
-                        name="items[0][price]"
-                        min="0"
-                        step="0.01"
-                        value="0"
-                        required>
+                            <label>
+                                Item
+                            </label>
 
-                    <select
-                        class="z-input item-gst"
-                        name="items[0][gst_rate]"
-                        required>
+                            <input
+                                type="text"
+                                class="z-input item-name"
+                                name="items[0][name]"
+                                placeholder="Product / Service"
+                                maxlength="150"
+                                required
+                            >
 
-                        <option value="0">0%</option>
-                        <option value="5">5%</option>
-                        <option value="12">12%</option>
-                        <option value="18" selected>18%</option>
-                        <option value="28">28%</option>
+                        </div>
 
-                    </select>
 
-                    <span class="z-invoice-item-amount">
-                        ₹0.00
-                    </span>
+                        <div class="z-item-field z-item-hsn-field">
 
-                    <button
-                        type="button"
-                        class="z-item-remove"
-                        aria-label="Remove item"
-                        disabled>
-                        ×
-                    </button>
+                            <label>
+                                HSN / SAC
+                            </label>
+
+                            <input
+                                type="text"
+                                class="z-input item-hsn"
+                                name="items[0][hsn_code]"
+                                placeholder="HSN / SAC"
+                                maxlength="20"
+                                autocomplete="off"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Row 2 -->
+
+                    <div class="z-item-bottom">
+
+                        <div class="z-item-field z-item-qty-field">
+
+                            <label>
+                                Qty
+                            </label>
+
+                            <input
+                                type="number"
+                                class="z-input item-quantity"
+                                name="items[0][quantity]"
+                                min="0.01"
+                                step="0.01"
+                                value="1"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="z-item-field z-item-price-field">
+
+                            <label>
+                                Price
+                            </label>
+
+                            <input
+                                type="number"
+                                class="z-input item-price"
+                                name="items[0][price]"
+                                min="0"
+                                step="0.01"
+                                value="0"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="z-item-field z-item-gst-field">
+
+                            <label>
+                                GST
+                            </label>
+
+                            <select
+                                class="z-input item-gst"
+                                name="items[0][gst_rate]"
+                                required
+                            >
+
+                                <option value="0">
+                                    0%
+                                </option>
+
+                                <option value="5">
+                                    5%
+                                </option>
+
+                                <option value="12">
+                                    12%
+                                </option>
+
+                                <option value="18" selected>
+                                    18%
+                                </option>
+
+                                <option value="28">
+                                    28%
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="z-item-amount-field">
+
+                            <label>
+                                Amount
+                            </label>
+
+                            <span class="z-invoice-item-amount">
+                                ₹0.00
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="z-item-remove"
+                            aria-label="Remove item"
+                            disabled
+                        >
+                            ×
+                        </button>
+
+                    </div>
 
                 </div>
             </div>
