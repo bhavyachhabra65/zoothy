@@ -32,7 +32,7 @@ class Invoice:
     shipping_address: str
     shipping_gstin: str
 
-    supplier_state_code: str
+    business_state_code: str
     customer_state_code: str
     place_of_supply: str
 
