@@ -520,18 +520,6 @@
 
 @media (max-width: 680px) {
 
-    .z-page-heading {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: var(--z-space-4);
-
-    margin-bottom: var(--z-space-7);
-
-}
-
     .z-page-header {
 
         align-items: flex-start;
@@ -559,7 +547,7 @@
    RESPONSIVE — SMALL MOBILE
 ========================================================== */
 
-@media (max-width: 440px) {
+@media (max-width: 460px) {
 
     .z-brand-name {
 
