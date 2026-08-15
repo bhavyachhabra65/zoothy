@@ -686,7 +686,8 @@ document.addEventListener(
             const printWindow =
                 window.open(
                     "",
-                    "_blank"
+                    "invoicePrintWindow",
+                    "width=1000,height=800,resizable=yes,scrollbars=yes"
                 );
 
 
