@@ -284,7 +284,7 @@ document.addEventListener(
                     <div class="z-item-field z-item-name-field">
 
                         <label>
-                            Item
+                            Item*
                         </label>
 
                         <input
@@ -302,7 +302,7 @@ document.addEventListener(
                     <div class="z-item-field z-item-hsn-field">
 
                         <label>
-                            HSN / SAC
+                            HSN / SAC*
                         </label>
 
                         <input
@@ -325,7 +325,7 @@ document.addEventListener(
                     <div class="z-item-field z-item-qty-field">
 
                         <label>
-                            Qty
+                            Qty*
                         </label>
 
                         <input
@@ -344,7 +344,7 @@ document.addEventListener(
                     <div class="z-item-field z-item-price-field">
 
                         <label>
-                            Price
+                            Price*
                         </label>
 
                         <input
@@ -354,6 +354,7 @@ document.addEventListener(
                             min="0"
                             step="0.01"
                             value="0"
+                            onfocus="if (this.value === '0') this.value = ''"
                             required
                         >
 
@@ -363,7 +364,7 @@ document.addEventListener(
                     <div class="z-item-field z-item-gst-field">
 
                         <label>
-                            GST
+                            GST*
                         </label>
 
                         <select
