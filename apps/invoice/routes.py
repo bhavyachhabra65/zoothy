@@ -62,11 +62,10 @@ def index():
                 "message": str(e)
             }), 400
 
-        except Exception as e:
-            print(Exception)
+        except Exception:
             return jsonify({
                 "success": False,
-                "message": str(e)
+                "message": "Something went wrong in the application"
             }), 500
 
         return render_template(
