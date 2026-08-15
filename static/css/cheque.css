@@ -87,10 +87,6 @@ body{
 
 @media (max-width: 460px) {
 
-    .z-container {
-        padding: var(--z-space-4);
-    }
-
     .z-row {
         flex-direction: column;
         align-items: stretch;

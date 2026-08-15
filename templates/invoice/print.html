@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Invoice {{ invoice.invoice_number }}
+    </title>
+
+    
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/invoice-print.css') }}?v=4"
+    >
+
+</head>
+
+
+<body>
+
+<main class="invoice-page">
+
+    <div class="invoice-content">
+
+        <!-- ======================================================
+            HEADER
+            ====================================================== -->
+
+        <header class="invoice-header">
+
+            <div class="invoice-brand">
+
+                <div class="invoice-brand-name">
+                    {{ invoice.business_name }}
+                </div>
+
+                <div class="invoice-brand-meta">
+
+                    {% if invoice.business_address %}
+                        <div>
+                            {{ invoice.business_address }}
+                        </div>
+                    {% endif %}
+
+                    {% if invoice.business_gstin %}
+                        <div>
+                            GSTIN: {{ invoice.business_gstin }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="invoice-heading">
+
+                <div class="invoice-label">
+                    INVOICE
+                </div>
+
+                <div class="invoice-number">
+                    #{{ invoice.invoice_number }}
+                </div>
+
+                <div class="invoice-date">
+
+                    <div>
+                        <span>Date</span>
+                        {{ invoice.invoice_date | invoice_date }}
+                    </div>
+
+                    {% if invoice.due_date %}
+
+                    <div>
+                        <span>Due</span>
+                        {{ invoice.due_date | invoice_date }}
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ======================================================
+            ACCENT
+            ====================================================== -->
+
+        <div class="invoice-accent">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+
+        <!-- ======================================================
+            PARTIES
+            ====================================================== -->
+
+        <section class="invoice-parties">
+
+            <!-- BILL TO -->
+
+            <div class="party">
+
+                <div class="party-label">
+                    BILL TO
+                </div>
+
+                <div class="party-name">
+                    {{ invoice.customer_name }}
+                </div>
+
+                {% if invoice.customer_address %}
+                <div class="party-address">
+                    {{ invoice.customer_address }}
+                </div>
+                {% endif %}
+
+                {% if invoice.customer_gstin %}
+                <div class="party-gstin">
+                    GSTIN {{ invoice.customer_gstin }}
+                </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- SHIP TO -->
+
+            <div class="party">
+
+                <div class="party-label">
+                    SHIP TO
+                </div>
+
+                {% if invoice.shipping_name %}
+
+                <div class="party-name">
+                    {{ invoice.shipping_name }}
+                </div>
+
+                {% endif %}
+
+
+                {% if invoice.shipping_address %}
+
+                <div class="party-address">
+                    {{ invoice.shipping_address }}
+                </div>
+
+                {% endif %}
+
+
+                {% if invoice.shipping_gstin %}
+
+                <div class="party-gstin">
+                    GSTIN {{ invoice.shipping_gstin }}
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>       
+
+
+        <!-- ======================================================
+            ITEMS
+            ====================================================== -->
+
+        <section class="invoice-items-section">
+
+            <div class="section-heading">
+
+                <div>
+                    WHAT YOU'RE PAYING FOR
+                </div>
+
+                <div class="section-heading-line"></div>
+
+            </div>
+
+
+            <table class="invoice-items">
+
+                <thead>
+
+                    <tr>
+
+                        <th class="col-number">
+                            #
+                        </th>
+
+                        <th class="col-item">
+                            Item
+                        </th>
+
+                        <th class="col-hsn">
+                            HSN/SAC
+                        </th>
+
+                        <th class="col-qty">
+                            Qty
+                        </th>
+
+                        <th class="col-price">
+                            Price
+                        </th>
+
+                        <th class="col-discount">
+                            Discount
+                        </th>
+
+                        <th class="col-gst">
+                            GST
+                        </th>
+
+                        <th class="col-tax">
+                            Tax
+                        </th>
+
+                        <th class="col-total">
+                            Amount
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for item in invoice.items %}
+
+                    <tr>
+
+                        <td class="col-number">
+                            {{ loop.index }}
+                        </td>
+
+                        <td class="col-item item-name">
+                            {{ item.name }}
+                        </td>
+
+                        <td class="col-hsn">
+                            {{ item.hsn_code }}
+                        </td>
+
+                        <td class="col-qty">
+                            {{ "%.2f"|format(item.quantity) }}
+                        </td>
+
+                        <td class="col-price">
+                            ₹{{ "%.2f"|format(item.price) }}
+                        </td>
+
+                        <td class="col-discount">
+
+                            {% if item.discount_amount > 0 %}
+                                ₹{{ "%.2f"|format(item.discount_amount) }}
+                            {% else %}
+                                —
+                            {% endif %}
+
+                        </td>
+
+                        <td class="col-gst">
+                            {{ "%.2f"|format(item.gst_rate) }}%
+                        </td>
+
+                        <td class="col-tax">
+                            ₹{{ "%.2f"|format(item.tax_amount) }}
+                        </td>
+
+                        <td class="col-total">
+                            ₹{{ "%.2f"|format(item.amount) }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+        <!-- ======================================================
+            LOWER CONTENT
+            ====================================================== -->
+
+        <section class="invoice-lower">
+
+            <!-- LEFT -->
+
+            <div class="invoice-note-area">
+
+                {% if invoice.place_of_supply %}
+
+                <div class="invoice-detail-block">
+
+                    <div class="invoice-detail-label">
+                        PLACE OF SUPPLY
+                    </div>
+
+                    <div class="invoice-detail-value">
+                        {{ invoice.place_of_supply }}
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                <div class="invoice-message">
+
+                    <div class="message-main">
+                        Thanks for doing business with us.
+                    </div>
+
+                    <div class="message-sub">
+                        Seriously, we appreciate it.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT -->
+
+            <div class="invoice-summary">
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong>
+                        ₹{{ "%.2f"|format(invoice.subtotal) }}
+                    </strong>
+
+                </div>
+
+
+                {% if invoice.discount > 0 %}
+
+                <div class="summary-row summary-discount">
+
+                    <span>
+                        Discount
+                    </span>
+
+                    <strong>
+                        − ₹{{ "%.2f"|format(invoice.discount) }}
+                    </strong>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if invoice.cgst > 0 %}
+
+                <div class="summary-row">
+
+                    <span>
+                        CGST
+                    </span>
+
+                    <strong>
+                        ₹{{ "%.2f"|format(invoice.cgst) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        SGST
+                    </span>
+
+                    <strong>
+                        ₹{{ "%.2f"|format(invoice.sgst) }}
+                    </strong>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if invoice.igst > 0 %}
+
+                <div class="summary-row">
+
+                    <span>
+                        IGST
+                    </span>
+
+                    <strong>
+                        ₹{{ "%.2f"|format(invoice.igst) }}
+                    </strong>
+
+                </div>
+
+                {% endif %}
+
+
+                <div class="summary-total">
+
+                    <div class="summary-total-label">
+                        INVOICE TOTAL
+                    </div>
+
+                    <div class="summary-total-value">
+                        ₹{{ "%.2f"|format(invoice.total) }}
+                    </div>
+
+                </div>
+
+
+                {% if invoice.due_date %}
+
+                <div class="summary-due">
+                    Due {{ invoice.due_date | invoice_date }}
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================================
+            FOOTER
+            ====================================================== -->
+
+        <footer class="invoice-footer">
+
+            <div class="footer-line"></div>
+
+            <div class="footer-content">
+
+                <span>
+                    Clear numbers. Good business. 
+                </span>
+
+                <span>
+                    Until next time.
+                </span>
+
+            </div>
+
+        </footer>
+        
+    </div>
+
+</main>
+
+
+<script>
+
+    window.addEventListener("load", async () => {
+
+        if (document.fonts) {
+            await document.fonts.ready;
+        }
+
+        requestAnimationFrame(() => {
+
+            requestAnimationFrame(() => {
+
+                window.print();
+
+            });
+
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>

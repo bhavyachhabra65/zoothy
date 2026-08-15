@@ -1,3 +1,285 @@
+Basic code: For sample:
+
+Cheque.html
+
+{% extends "base.html" %}
+
+{% block title %}Print Cheque{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/cheque.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="z-page-heading">
+
+    <h1 class="z-page-heading-title">
+        Print Cheque
+    </h1>
+
+</div>
+
+<form class="z-form" id="chequeForm" method="POST" action="{{ url_for('cheque.print_cheque') }}">
+
+    <div class="z-row">
+
+        <div class="z-form-group z-col-2">
+
+            <label class="z-label">
+
+                Bank
+
+            </label>
+
+        <select class="z-input" name="bank" required>
+
+            <option value="">Select Bank</option>
+
+            <option value="sbi">State Bank of India</option>
+            <option value="hdfc">HDFC Bank</option>
+            <option value="icici">ICICI Bank</option>
+            <option value="axis">Axis Bank</option>
+            <option value="kotak">Kotak Mahindra Bank</option>
+            <option value="pnb">Punjab National Bank</option>
+            <option value="bob">Bank of Baroda</option>
+            <option value="boi">Bank of India</option>
+            <option value="union">Union Bank</option>
+            <option value="federal">Federal Bank</option>
+            <option value="indusind">IndusInd Bank</option>
+            <option value="bandhan">Bandhan Bank</option>
+            <option value="ausmallfinance">AU Small Finance Bank</option>
+            <option value="uco">UCO Bank</option>
+
+        </select>
+            
+
+        </div>
+
+        <div class="z-form-group z-col-1">
+
+            <label class="z-label">
+
+                Date
+
+            </label>
+
+            <input
+                type="date"
+                id="date"
+                class="z-input"
+                name="date"
+                min="1900-01-01"
+                max="2099-12-31"
+                required>
+
+        </div>
+
+    </div>
+
+    <div class="z-form-group z-field-full">
+
+        <label class="z-label">
+            Pay To
+        </label>
+
+        <input
+            type="text"
+            maxlength="100"
+            class="z-input"
+            name="pay_to"
+            autocomplete="off"
+            required>
+
+    </div>
+
+    <div class="z-row z-row-bottom">
+
+        <div class="z-form-group z-field-medium">
+
+            <label class="z-label">
+                Amount
+            </label>
+
+            <input
+                type="number"
+                id="amount"
+                class="z-input"
+                name="amount"
+                step="0.01"
+                min="0.01"
+                max="999999999.99"
+                autocomplete="off"
+                required>
+
+        </div>
+
+        <div class="z-form-group z-checkbox-group">
+
+            <label class="z-label">
+                &nbsp;
+            </label>
+
+            <label class="z-checkbox">
+
+                <input
+                    type="checkbox"
+                    id="acPayee"
+                    name="ac_payee_only">
+
+                <span>A/C Payee Only</span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+    <div class="z-actions">
+
+        <button
+            type="submit"
+            id="printButton"
+            class="z-button">
+
+            Print
+
+        </button>
+
+    </div>
+
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/print-service.js') }}"></script>
+<script src="{{ url_for('static', filename='js/cheque.js') }}"></script>
+{% endblock %}
+
+
+
+Cheque.css
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    background:white;
+
+    font-family:Arial,sans-serif;
+
+}
+
+.cheque{
+
+    position:relative;
+
+    width:190mm;
+
+    height:80mm;
+
+    margin:auto;
+
+}
+
+.field{
+
+    position:absolute;
+
+    white-space:nowrap;
+
+    font-size:12pt;
+
+}
+
+.amount{
+
+    font-weight:bold;
+
+}
+
+@page{
+
+    margin:0;
+
+}
+
+.ac-payee-box {
+    width: 25mm;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.ac-payee-box .line {
+    border-top: 1px solid #000;
+    margin: 2px 0;
+}
+
+
+
+@media print{
+
+    body{
+
+        margin:0;
+
+    }
+
+}
+
+
+#amountWords > div + div {
+    margin-top: 3mm;
+    margin-left: -17mm;
+}
+
+@media (min-width: 460px) {
+    .z-checkbox-group {
+    margin-bottom: 13px;
+    display: flex;
+    flex-direction: column;
+    }
+
+}
+
+@media (max-width: 460px) {
+
+    .z-container {
+        padding: var(--z-space-4);
+    }
+
+    .z-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--z-space-4);
+    }
+
+    .z-col-1,
+    .z-col-2,
+    .z-col-3,
+    .z-field-small,
+    .z-field-medium,
+    .z-field-large,
+    .z-field-full {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+    }
+
+    .z-actions .z-button {
+        width: 100%;
+    }
+
+}
+
+
+Components.css:
 /* ==========================================================
    HEADER
 ========================================================== */
@@ -547,7 +829,7 @@
    RESPONSIVE — SMALL MOBILE
 ========================================================== */
 
-@media (max-width: 460px) {
+@media (max-width: 440px) {
 
     .z-brand-name {
 
@@ -566,5 +848,144 @@
         gap: var(--z-space-4);
 
     }
+
+}
+
+
+variable.css
+/* ==========================================================
+   Zoothy Design Tokens v1.0
+   ----------------------------------------------------------
+   DO NOT USE HARD-CODED VALUES IN CSS.
+   Always use these variables.
+========================================================== */
+
+:root {
+
+   --z-page-max-width-wide: 1280px;
+
+    /* ======================================================
+       COLORS
+    ====================================================== */
+
+    --z-primary: #2563EB;
+    --z-primary-hover: #1D4ED8;
+
+    --z-background: #FCFCFD;
+    --z-surface: #FFFFFF;
+
+    --z-text: #111827;
+    --z-text-secondary: #6B7280;
+
+    --z-border: #E5E7EB;
+
+    --z-success: #16A34A;
+    --z-warning: #D97706;
+    --z-danger: #DC2626;
+
+
+    /* ======================================================
+       TYPOGRAPHY
+    ====================================================== */
+
+    --z-font-family: "Inter", sans-serif;
+
+    /* Page Title */
+    --z-font-title-size: 32px;
+    --z-font-title-weight: 700;
+
+    /* Labels */
+    --z-font-label-size: 14px;
+    --z-font-label-weight: 600;
+
+    /* Body / Inputs / Buttons */
+    --z-font-body-size: 16px;
+    --z-font-body-weight: 400;
+
+    /* Line Heights */
+    --z-line-height-title: 1.2;
+    --z-line-height-body: 1.6;
+
+
+    /* ======================================================
+       FIELD WIDTHS
+    ====================================================== */
+
+    --z-field-small: 180px;
+    --z-field-medium: 320px;
+    --z-field-large: 480px;
+    --z-field-full: 100%;
+
+
+    /* ======================================================
+       COMPONENT HEIGHTS
+    ====================================================== */
+
+    --z-input-height: 48px;
+    --z-button-height: 48px;
+
+
+    /* ======================================================
+       SPACING (8px Grid)
+    ====================================================== */
+
+    --z-space-1: 4px;
+    --z-space-2: 8px;
+    --z-space-3: 16px;
+    --z-space-4: 24px;
+    --z-space-5: 32px;
+    --z-space-6: 40px;
+    --z-space-7: 48px;
+    --z-space-8: 64px;
+    --z-space-9: 80px;
+
+
+    /* ======================================================
+       LAYOUT
+    ====================================================== */
+
+    --z-page-max-width: 960px;
+
+    --z-label-gap: 8px;
+
+    --z-field-gap: 16px;
+
+    --z-section-gap: 48px;
+
+
+    /* ======================================================
+       BORDER RADIUS
+    ====================================================== */
+
+    --z-radius-sm: 6px;
+    --z-radius-md: 10px;
+    --z-radius-lg: 14px;
+
+
+    /* ======================================================
+       BORDERS
+    ====================================================== */
+
+    --z-border-width: 1px;
+
+
+    /* ======================================================
+       SHADOWS
+    ====================================================== */
+
+    --z-shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.04);
+
+    --z-shadow-md: 0 8px 20px rgba(15, 23, 42, 0.06);
+
+
+    /* ======================================================
+       ANIMATION
+    ====================================================== */
+
+    --z-transition-fast: 150ms ease;
+
+    --z-transition: 180ms ease;
+
+    --z-transition-slow: 250ms ease;
 
 }

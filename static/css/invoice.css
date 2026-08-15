@@ -1,0 +1,651 @@
+/* ==========================================================
+   INVOICE SCREEN
+   ========================================================== */
+
+.z-invoice-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-space-4);
+    margin-top: var(--z-space-7);
+}
+
+
+.z-section-title {
+    margin: 0 0 var(--z-space-2);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--z-text);
+}
+
+
+/* ==========================================================
+   TEXTAREA
+   ========================================================== */
+
+.z-textarea {
+    height: auto;
+    min-height: 96px;
+    padding-top: var(--z-space-3);
+    padding-bottom: var(--z-space-3);
+    resize: vertical;
+}
+
+
+/* ==========================================================
+   INVOICE ITEMS
+   ========================================================== */
+
+.z-invoice-item-header {
+    display: none;
+}
+
+
+.z-invoice-item {
+    width: 100%;
+
+    padding: 24px;
+
+    border: 1px solid var(--z-border-color);
+    border-radius: 14px;
+
+    background: var(--z-surface);
+
+    margin-bottom: 16px;
+}
+
+/* ==========================================================
+   SHIPPING SAME AS BILLING
+   ========================================================== */
+
+.z-checkbox-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+
+.z-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 18px;
+    height: 18px;
+
+    flex: 0 0 18px;
+
+    margin: 0;
+    padding: 0;
+
+    border: 1.5px solid #9ca3af;
+    border-radius: 4px;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+
+/* Checked */
+
+.z-checkbox:checked {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+
+/* Check mark */
+
+.z-checkbox:checked::after {
+    content: "";
+
+    position: absolute;
+
+    left: 5px;
+    top: 2px;
+
+    width: 5px;
+    height: 9px;
+
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+
+    transform: rotate(45deg);
+}
+
+
+/* Keyboard focus */
+
+.z-checkbox:focus-visible {
+    outline: 2px solid rgba(37, 99, 235, 0.25);
+    outline-offset: 2px;
+}
+
+
+.z-checkbox-label {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    line-height: 1.4;
+
+    color: #64748b;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.z-input:disabled {
+    background: var(--z-surface-subtle);
+    color: var(--z-text-secondary);
+
+    cursor: not-allowed;
+
+    opacity: 0.8;
+}
+
+
+/* ==========================================================
+   TOP ROW
+   ========================================================== */
+
+.z-item-top {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2.5fr)
+        minmax(180px, 1fr);
+
+    gap: 24px;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid var(--z-border-color);
+}
+
+
+/* ==========================================================
+   BOTTOM ROW
+   ========================================================== */
+
+.z-item-bottom {
+    display: grid;
+
+    grid-template-columns:
+        minmax(100px, 0.7fr)
+        minmax(150px, 1fr)
+        minmax(120px, 0.8fr)
+        minmax(180px, 1.2fr)
+        auto;
+
+    gap: 20px;
+
+    align-items: end;
+
+    padding-top: 22px;
+}
+
+
+/* ==========================================================
+   FIELDS
+   ========================================================== */
+
+.z-item-field {
+    min-width: 0;
+}
+
+
+.z-item-field label,
+.z-item-amount-field label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: var(--z-text-secondary);
+}
+
+
+.z-item-field .z-input {
+    width: 100%;
+}
+
+
+/* ==========================================================
+   AMOUNT
+   ========================================================== */
+
+.z-item-amount-field {
+    min-width: 0;
+}
+
+
+.z-invoice-item-amount {
+    display: flex;
+
+    align-items: center;
+
+    min-height: 48px;
+
+    padding: 0 4px;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    color: var(--z-text-primary);
+
+    white-space: nowrap;
+}
+
+
+/* ==========================================================
+   REMOVE
+   ========================================================== */
+
+.z-item-remove {
+    width: 42px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    background: transparent;
+
+    color: var(--z-text-muted);
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    border-radius: 8px;
+
+    transition:
+        color 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.z-item-remove:hover:not(:disabled) {
+    color: var(--z-danger);
+    background: var(--z-danger-soft);
+}
+
+
+.z-item-remove:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+
+/* ==========================================================
+   ADD ITEM
+   ========================================================== */
+
+.z-add-item {
+    margin-top: 4px;
+}
+
+
+/* ==========================================================
+   SECONDARY BUTTON
+   ========================================================== */
+
+.z-button-secondary {
+    width: fit-content;
+    min-width: 120px;
+
+    background: var(--z-surface);
+    color: var(--z-primary);
+    border: var(--z-border-width) solid var(--z-primary);
+}
+
+
+.z-button-secondary:hover {
+    background: var(--z-surface);
+    color: var(--z-primary-hover);
+    border-color: var(--z-primary-hover);
+}
+
+
+/* ==========================================================
+   TOTALS
+   ========================================================== */
+
+.z-invoice-total-section {
+    width: 420px;
+    max-width: 100%;
+    margin-top: var(--z-space-7);
+    margin-left: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-space-3);
+}
+
+
+.z-invoice-total-row {
+    display: grid;
+    grid-template-columns: 1fr 160px;
+    align-items: center;
+    gap: var(--z-space-4);
+
+    font-size: var(--z-font-body-size);
+}
+
+
+.z-invoice-total-row > strong {
+    text-align: right;
+}
+
+
+.z-total-input {
+    width: 160px;
+    margin-left: auto;
+}
+
+
+.z-invoice-total-final {
+    padding-top: var(--z-space-3);
+    border-top: var(--z-border-width) solid var(--z-border);
+
+    font-size: 18px;
+}
+
+
+/* ==========================================================
+   MOBILE RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 768px) {
+
+    /* ------------------------------------------------------
+       FORM
+       ------------------------------------------------------ */
+
+    .z-form {
+        width: 100%;
+    }
+
+
+    .z-row {
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+
+    .z-col-1,
+    .z-col-2,
+    .z-field-full,
+    .z-field-medium {
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    .z-form-group {
+        width: 100%;
+    }
+
+
+    .z-input {
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    .z-textarea {
+        min-height: 90px;
+    }
+
+
+    /* ------------------------------------------------------
+       INVOICE SECTIONS
+       ------------------------------------------------------ */
+
+    .z-invoice-section {
+        margin-top: 28px;
+    }
+
+
+    .z-section-title {
+        margin-bottom: 16px;
+    }
+
+
+    /* ------------------------------------------------------
+       INVOICE DETAILS
+       ------------------------------------------------------ */
+
+    #invoiceForm > .z-row:first-child {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ------------------------------------------------------
+       BILL TO / SHIP TO
+       ------------------------------------------------------ */
+
+    .z-invoice-section .z-row {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ------------------------------------------------------
+       SHIPPING CHECKBOX
+       ------------------------------------------------------ */
+
+    .z-checkbox-row {
+        margin-bottom: 16px;
+    }
+
+
+    .z-checkbox-label {
+        align-items: flex-start;
+
+        gap: 9px;
+
+        font-size: 13px;
+
+        line-height: 1.4;
+    }
+
+
+    .z-checkbox {
+        margin-top: 1px;
+
+        flex: 0 0 18px;
+    }
+
+
+    /* ------------------------------------------------------
+       ITEMS
+       ------------------------------------------------------ */
+
+    .z-invoice-item-header {
+        display: none;
+    }
+
+
+    .z-invoice-item {
+        padding: 16px;
+
+        margin-bottom: 14px;
+
+        border: 1px solid var(--z-border);
+        border-radius: 10px;
+
+        background: var(--z-surface);
+    }
+
+
+    .z-item-top,
+    .z-item-bottom {
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+
+    .z-item-top {
+        margin-bottom: 14px;
+    }
+
+
+    .z-item-field,
+    .z-item-amount-field {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    .z-item-field .z-input {
+        width: 100%;
+    }
+
+
+    .z-item-amount-field {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        min-height: 42px;
+
+        padding: 0 2px;
+    }
+
+
+    .z-item-amount-field label {
+        margin: 0;
+    }
+
+
+    .z-invoice-item-amount {
+        font-weight: 700;
+    }
+
+
+    .z-item-remove {
+        width: 100%;
+
+        min-height: 40px;
+
+        margin-top: 2px;
+    }
+
+
+    /* ------------------------------------------------------
+       ADD ITEM
+       ------------------------------------------------------ */
+
+    #addItemButton {
+        width: 100%;
+
+        min-height: 44px;
+    }
+
+
+    /* ------------------------------------------------------
+       TOTALS
+       ------------------------------------------------------ */
+
+    .z-invoice-total-section {
+        width: 100%;
+    }
+
+
+    .z-invoice-total-row {
+        gap: 12px;
+    }
+
+
+    .z-total-input {
+        width: 150px;
+        max-width: 100%;
+    }
+
+
+    .z-invoice-total-final {
+        font-size: 17px;
+    }
+
+
+    /* ------------------------------------------------------
+       ACTION
+       ------------------------------------------------------ */
+
+    .z-actions {
+        width: 100%;
+
+        margin-top: 24px;
+    }
+
+
+    .z-actions .z-button {
+        width: 100%;
+
+        min-height: 48px;
+    }
+
+}
+
+/* ==========================================================
+   SMALL MOBILE
+   ========================================================== */
+
+@media (max-width: 480px) {
+
+    .z-invoice-section {
+        margin-top: 24px;
+    }
+
+
+    .z-invoice-item {
+        padding: 13px;
+    }
+
+
+    .z-item-bottom {
+        margin: 0;
+        gap: 12px;
+        padding-top: 12px;
+    }
+
+    .z-item-top{
+        margin: 0;
+        gap: 12px;
+        padding-bottom: 0px;
+    }
+
+    .z-invoice-total-row {
+        font-size: 14px;
+    }
+
+
+    .z-invoice-total-final {
+        font-size: 16px;
+    }
+
+
+    .z-total-input {
+        width: 110px;
+        max-width: 100%;
+    }
+
+}
