@@ -1,8 +1,10 @@
 import json
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, jsonify
 
 from .services import InvoiceService
+from .validators import ValidationError
+
 
 from datetime import datetime
 
@@ -36,14 +38,36 @@ def format_invoice_date(value):
 def index():
 
     if request.method == "POST":
+        try:
 
-        data = request.form.to_dict()
+            data = request.form.to_dict()
 
-        data["items"] = json.loads(
-            request.form.get("items", "[]")
-        )
+            data["items"] = json.loads(
+                request.form.get("items", "[]")
+            )
 
-        invoice = InvoiceService.build_invoice(data)
+            invoice = InvoiceService.build_invoice(data)
+
+        except ValidationError as e:
+
+            return jsonify({
+                "success": False,
+                "message": str(e)
+            }), 400
+
+        except ValueError as e:
+
+            return jsonify({
+                "success": False,
+                "message": str(e)
+            }), 400
+
+        except Exception as e:
+            print(Exception)
+            return jsonify({
+                "success": False,
+                "message": str(e)
+            }), 500
 
         return render_template(
             "invoice/print.html",
