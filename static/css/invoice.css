@@ -621,11 +621,17 @@
     }
 
 
-    .z-item-top,
     .z-item-bottom {
+        margin: 0;
         gap: 12px;
+        padding-top: 12px;
     }
 
+    .z-item-top{
+        margin: 0;
+        gap: 12px;
+        padding-bottom: 0px;
+    }
 
     .z-invoice-total-row {
         font-size: 14px;
