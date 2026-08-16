@@ -1,0 +1,687 @@
+{% extends "base.html" %}
+
+{% block title %}
+Free Business & Accounting Tools for Small Businesses in India | Zoothy
+{% endblock %}
+
+{% block main_class %}
+z-cover-main-container
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cover.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="z-cover">
+
+    <!-- ==================================================
+         HEADER
+    ================================================== -->
+
+    <header class="z-page-header z-cover-header">
+
+        <div class="z-brand">
+            <a href="{{ url_for('cover.index') }}" class="z-brand-name">
+                Zoothy
+            </a>
+
+            <p class="z-brand-tagline">
+                Simple business tools for India.
+            </p>
+        </div>
+
+        <nav class="z-page-header-nav">
+            <a href="#">
+                Log in
+            </a>
+
+            <a href="#free-tools" class="z-cover-register">
+                Create Free Account
+            </a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- ==================================================
+             HERO
+        ================================================== -->
+
+        <section class="z-cover-hero">
+
+            <div class="z-cover-hero-glow z-cover-hero-glow-one"></div>
+            <div class="z-cover-hero-glow z-cover-hero-glow-two"></div>
+
+            <div class="z-cover-hero-content">
+
+                <div class="z-cover-eyebrow">
+                    Free business tools for India
+                </div>
+
+                <h1>
+                    Simple tools to
+                    <span>run your business.</span>
+                </h1>
+
+                <p class="z-cover-hero-text">
+                    Create invoices, print cheques and manage
+                    everyday business work with Zoothy.
+                    More tools are being built every day.
+                </p>
+
+                <div class="z-cover-hero-actions">
+
+                    <a href="#free-tools" class="z-cover-primary-button">
+                        Explore Free Tools
+                    </a>
+
+                    <a href="#coming-soon" class="z-cover-secondary-button">
+                        See What's Coming
+                    </a>
+
+                </div>
+
+                <div class="z-cover-hero-points">
+                    <span>Free to use</span>
+                    <span>Made for India</span>
+                    <span>No account required</span>
+                </div>
+
+            </div>
+
+            <div class="z-cover-hero-bottom-line"></div>
+
+        </section>
+
+
+        <!-- ==================================================
+             AVAILABLE NOW
+        ================================================== -->
+
+        <section class="z-cover-section" id="free-tools">
+
+            <div class="z-cover-section-heading">
+
+                <div class="z-cover-section-kicker">
+                    Available now
+                </div>
+
+                <h2>
+                    Free Business Tools
+                </h2>
+
+                <p>
+                    Use these tools immediately.
+                    No account is required.
+                </p>
+
+            </div>
+
+            <div class="z-cover-tools-grid">
+
+                <a href="{{ url_for('cheque.index') }}" class="z-cover-tool-card">
+
+                    <div class="z-cover-tool-top">
+
+                        <span class="z-cover-tool-icon">
+                            <i data-lucide="square-pen"></i>
+                        </span>
+
+                        <span class="z-cover-tool-status">
+                            Available
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Print Cheque
+                    </h3>
+
+                    <p>
+                        Print cheques easily using a simple
+                        tool designed for Indian businesses.
+                    </p>
+
+                    <span class="z-cover-tool-link">
+                        Print a Cheque
+                        <i data-lucide="arrow-right"></i>
+                    </span>
+
+                </a>
+
+
+                <a href="{{ url_for('invoice.index') }}" class="z-cover-tool-card">
+
+                    <div class="z-cover-tool-top">
+
+                        <span class="z-cover-tool-icon">
+                            <i data-lucide="file-text"></i>
+                        </span>
+
+                        <span class="z-cover-tool-status">
+                            Available
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Make Invoice
+                    </h3>
+
+                    <p>
+                        Create professional invoices quickly
+                        without creating an account.
+                    </p>
+
+                    <span class="z-cover-tool-link">
+                        Make an Invoice
+                        <i data-lucide="arrow-right"></i>
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             COMING SOON
+        ================================================== -->
+
+        <section class="z-cover-section z-cover-coming-soon" id="coming-soon">
+
+            <div class="z-cover-section-heading">
+
+                <div class="z-cover-section-kicker">
+                    In development
+                </div>
+
+                <h2>
+                    More Tools Are Coming
+                </h2>
+
+                <p>
+                    Zoothy is being built into a complete business
+                    workspace for founders, entrepreneurs and
+                    small businesses.
+                </p>
+
+            </div>
+
+            <div class="z-cover-workspace-grid">
+
+                <div class="z-cover-workspace-group">
+                    <div class="z-cover-workspace-header">
+                        <h3>Money</h3>
+                        <span>Coming Soon</span>
+                    </div>
+
+                    <p>
+                        Sales · Expenses · Receive Money · Pay Money
+                    </p>
+                </div>
+
+
+                <div class="z-cover-workspace-group">
+                    <div class="z-cover-workspace-header">
+                        <h3>Business</h3>
+                        <span>Coming Soon</span>
+                    </div>
+
+                    <p>
+                        Customers · Suppliers · Products · Inventory
+                    </p>
+                </div>
+
+
+                <div class="z-cover-workspace-group">
+                    <div class="z-cover-workspace-header">
+                        <h3>Documents</h3>
+                        <span>In Development</span>
+                    </div>
+
+                    <p>
+                        Bills · Receipts · Delivery Notes · Purchase Orders
+                    </p>
+
+                    <div class="z-cover-workspace-available">
+                        Available now:
+                        <strong>Invoices · Cheques</strong>
+                    </div>
+                </div>
+
+
+                <div class="z-cover-workspace-group">
+                    <div class="z-cover-workspace-header">
+                        <h3>Reports</h3>
+                        <span>Coming Soon</span>
+                    </div>
+
+                    <p>
+                        Overview · Sales · Expenses · Money ·
+                        Customers · Suppliers · Inventory ·
+                        Tax · Accounting
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             BUILT TO BE FREE
+        ================================================== -->
+
+        <section class="z-cover-section z-cover-free">
+
+            <div class="z-cover-free-content">
+
+                <div class="z-cover-free-mark">
+                    <i data-lucide="sparkles"></i>
+                </div>
+
+                <div class="z-cover-section-kicker">
+                    Our principle
+                </div>
+
+                <h2>
+                    Built to Be Free.
+                </h2>
+
+                <p class="z-cover-free-lead">
+                    We believe useful business software
+                    should be accessible to everyone.
+                </p>
+
+                <p>
+                    Zoothy is being built as a genuinely free
+                    platform for entrepreneurs, founders and
+                    small businesses in India.
+                </p>
+
+                <div class="z-cover-free-points">
+                    <span>No free trial</span>
+                    <span>No paid upgrade pressure</span>
+                    <span>Free business tools</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             DIRECTION
+        ================================================== -->
+
+        <section class="z-cover-section">
+
+            <div class="z-cover-section-heading">
+
+                <div class="z-cover-section-kicker">
+                    Our direction
+                </div>
+
+                <h2>
+                    One Place for Your Everyday Business Work
+                </h2>
+
+                <p>
+                    We're building Zoothy to bring everyday
+                    business tasks together in one simple,
+                    easy-to-use workspace.
+                </p>
+
+            </div>
+
+            <div class="z-cover-benefits-grid">
+
+                <div class="z-cover-benefit">
+                    <span class="z-cover-benefit-icon">
+                        <i data-lucide="layout-dashboard"></i>
+                    </span>
+
+                    <h3>Simple</h3>
+
+                    <p>
+                        Clear tools and straightforward language
+                        for everyday business work.
+                    </p>
+                </div>
+
+
+                <div class="z-cover-benefit">
+                    <span class="z-cover-benefit-icon">
+                        <i data-lucide="map-pin"></i>
+                    </span>
+
+                    <h3>Made for India</h3>
+
+                    <p>
+                        Built around the needs of Indian
+                        businesses and entrepreneurs.
+                    </p>
+                </div>
+
+
+                <div class="z-cover-benefit">
+                    <span class="z-cover-benefit-icon">
+                        <i data-lucide="zap"></i>
+                    </span>
+
+                    <h3>Fast</h3>
+
+                    <p>
+                        Designed to help you complete
+                        everyday tasks quickly.
+                    </p>
+                </div>
+
+
+                <div class="z-cover-benefit">
+                    <span class="z-cover-benefit-icon">
+                        <i data-lucide="blocks"></i>
+                    </span>
+
+                    <h3>Growing</h3>
+
+                    <p>
+                        New business and accounting tools
+                        are being added over time.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             HOW IT WORKS
+        ================================================== -->
+
+        <section class="z-cover-section">
+
+            <div class="z-cover-section-heading">
+
+                <div class="z-cover-section-kicker">
+                    Getting started
+                </div>
+
+                <h2>
+                    Start With What You Need
+                </h2>
+
+                <p>
+                    Use the tools that are available today
+                    while we continue building Zoothy.
+                </p>
+
+            </div>
+
+            <div class="z-cover-steps">
+
+                <div class="z-cover-step">
+                    <span class="z-cover-step-number">1</span>
+
+                    <h3>Choose a tool</h3>
+
+                    <p>
+                        Start with cheque printing or
+                        invoice making.
+                    </p>
+                </div>
+
+
+                <div class="z-cover-step">
+                    <span class="z-cover-step-number">2</span>
+
+                    <h3>Get your work done</h3>
+
+                    <p>
+                        Use the available tools without
+                        creating an account.
+                    </p>
+                </div>
+
+
+                <div class="z-cover-step">
+                    <span class="z-cover-step-number">3</span>
+
+                    <h3>Explore what's next</h3>
+
+                    <p>
+                        More business and accounting tools
+                        are already in development.
+                    </p>
+                </div>
+
+
+                <div class="z-cover-step">
+                    <span class="z-cover-step-number">4</span>
+
+                    <h3>Grow with Zoothy</h3>
+
+                    <p>
+                        Use Zoothy as more of your everyday
+                        business work comes together.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             AUDIENCE
+        ================================================== -->
+
+        <section class="z-cover-section z-cover-audience">
+
+            <div class="z-cover-section-heading">
+
+                <div class="z-cover-section-kicker">
+                    Built for
+                </div>
+
+                <h2>
+                    Businesses of All Sizes
+                </h2>
+
+                <p>
+                    Zoothy is being built for people who want
+                    simple business tools without complicated
+                    accounting software.
+                </p>
+
+            </div>
+
+            <div class="z-cover-audience-list">
+                <span>Startups</span>
+                <span>Small Businesses</span>
+                <span>Founders</span>
+                <span>Freelancers</span>
+                <span>Shops</span>
+                <span>Small Teams</span>
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             FAQ
+        ================================================== -->
+
+        <section class="z-cover-section z-cover-faq">
+
+            <div class="z-cover-section-heading">
+
+                <div class="z-cover-section-kicker">
+                    Questions
+                </div>
+
+                <h2>
+                    Frequently Asked Questions
+                </h2>
+
+            </div>
+
+            <div class="z-cover-faq-list">
+
+                <details>
+                    <summary>What is Zoothy?</summary>
+
+                    <p>
+                        Zoothy is a growing business and accounting
+                        software platform for startups, founders and
+                        small businesses in India.
+                    </p>
+                </details>
+
+
+                <details>
+                    <summary>Is Zoothy free?</summary>
+
+                    <p>
+                        Yes. Zoothy is being built as a genuinely
+                        free platform. The tools currently available
+                        can be used without an account, and more free
+                        business and accounting tools are being developed.
+                    </p>
+                </details>
+
+
+                <details>
+                    <summary>Why is Zoothy free?</summary>
+
+                    <p>
+                        We believe useful business software should be
+                        accessible to entrepreneurs and small businesses
+                        without unnecessary cost barriers.
+                    </p>
+                </details>
+
+
+                <details>
+                    <summary>Can I make an invoice without signing up?</summary>
+
+                    <p>
+                        Yes. Zoothy's invoice-making tool is available
+                        without creating an account.
+                    </p>
+                </details>
+
+
+                <details>
+                    <summary>Can I print a cheque without signing up?</summary>
+
+                    <p>
+                        Yes. Zoothy's cheque printing tool is available
+                        without an account.
+                    </p>
+                </details>
+
+
+                <details>
+                    <summary>What is Zoothy building next?</summary>
+
+                    <p>
+                        Zoothy is building tools for sales, expenses,
+                        customers, suppliers, products, inventory, bills,
+                        receipts, delivery notes, purchase orders and
+                        business reports.
+                    </p>
+                </details>
+
+
+                <details>
+                    <summary>Is Zoothy made for Indian businesses?</summary>
+
+                    <p>
+                        Yes. Zoothy is being built with Indian startups,
+                        founders and small businesses in mind.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             FINAL CTA
+        ================================================== -->
+
+        <section class="z-cover-final-cta">
+
+            <div class="z-cover-final-glow"></div>
+
+            <div class="z-cover-section-kicker">
+                Start today
+            </div>
+
+            <h2>
+                Simple Tools.
+                <span>Free to Use.</span>
+            </h2>
+
+            <p>
+                Start with the tools available today and follow
+                Zoothy as we build more for your business.
+            </p>
+
+            <a href="#free-tools" class="z-cover-primary-button">
+                Explore Free Tools
+            </a>
+
+            <p class="z-cover-login-text">
+                Already have an account?
+                <a href="#">Log in</a>
+            </p>
+
+        </section>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+
+<footer class="z-cover-footer">
+
+    <div class="z-cover-footer-brand">
+        Zoothy
+    </div>
+
+    <p>
+        Free business tools for entrepreneurs and small businesses in India.
+    </p>
+
+    <div class="z-cover-footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+    </div>
+
+</footer>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+    lucide.createIcons();
+</script>
+
+{% endblock %}

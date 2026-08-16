@@ -3,6 +3,7 @@ from pathlib import Path
 
 from core.settings import Config
 
+from apps.cover.routes import cover_bp
 from apps.dashboard.routes import dashboard_bp
 from apps.cheque.routes import cheque_bp
 from apps.invoice.routes import invoice_bp
@@ -19,6 +20,8 @@ def create_app():
     )
     app.config.from_object(Config)
 
+    app.register_blueprint(cover_bp)
+
     app.register_blueprint(dashboard_bp)
 
     app.register_blueprint(cheque_bp)
@@ -29,6 +32,5 @@ def create_app():
 
     @app.route("/")
     def home():
-        return redirect(url_for("dashboard.index"))
-
+        return redirect(url_for("cover.index"))
     return app
