@@ -2,6 +2,8 @@ from flask import Flask, redirect, url_for
 from pathlib import Path
 
 from core.settings import Config
+from core.extensions import db, migrate
+
 
 from apps.cover.routes import cover_bp
 from apps.dashboard.routes import dashboard_bp
@@ -19,6 +21,9 @@ def create_app():
         static_folder=str(BASE_DIR / "static")
     )
     app.config.from_object(Config)
+
+    db.init_app(app)
+    migrate.init_app(app, db)
 
     app.register_blueprint(cover_bp)
 
