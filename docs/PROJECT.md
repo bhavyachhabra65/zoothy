@@ -28,6 +28,7 @@ Completed Modules
 ---------------
 ✔ Dashboard
 ✔ Cheque Printing
+✔ Invoice Printing
 
 
 All Modules
