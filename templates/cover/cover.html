@@ -9,167 +9,169 @@ z-cover-main-container
 {% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/cover.css') }}?v=11">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cover.css') }}?v=12">
 {% endblock %}
 
 {% block content %}
 
 <div class="z-cover">
 
-    <!-- ==================================================
-         HEADER
-    ================================================== -->
+    <div class="z-cover-container">
 
-    <header class="z-page-header z-cover-header">
+        <!-- ==================================================
+            HEADER
+        ================================================== -->
 
-        <div class="z-brand">
-            <a href="{{ url_for('cover.index') }}" class="z-brand-name">
-                Zoothy
-            </a>
+        <header class="z-page-header">
 
-            <p class="z-brand-tagline">
-                Simple business tools for India.
-            </p>
-        </div>
+            <div class="z-brand">
+                <a href="{{ url_for('cover.index') }}" class="z-brand-name">
+                    Zoothy
+                </a>
 
-        <nav class="z-page-header-nav">
-            <a href="#available-tools">
-                Log in
-            </a>
+                <p class="z-brand-tagline">
+                    Simple business tools for India.
+                </p>
+            </div>
 
-            <a href="#available-tools" class="z-cover-register">
-                Create Free Account
-            </a>
-        </nav>
+            <nav class="z-page-header-nav">
+                <a href="#available-tools">
+                    Log in
+                </a>
 
-    </header>
+                <a href="#available-tools" class="z-cover-register">
+                    Create Free Account
+                </a>
+            </nav>
+
+        </header>
 
 
-    <main>
-    <section class="z-about-cover">
-        <div class="z-about-cover-inner">
+        <main>
+            <section class="z-about-cover">
+                <div class="z-about-cover-inner">
 
-            <div class="z-about-cover-cards">
+                    <div class="z-about-cover-cards">
 
-                <a href="{{ url_for('cheque.index') }}" class="z-about-tool-card">
-                    <div class="z-about-tool-card-top">
-                        <span class="z-about-tool-icon">
-                            <i data-lucide="square-pen"></i>
-                        </span>
-                        <span class="z-about-tool-status">Free · Available</span>
+                        <a href="{{ url_for('cheque.index') }}" class="z-about-tool-card">
+                            <div class="z-about-tool-card-top">
+                                <span class="z-about-tool-icon">
+                                    <i data-lucide="square-pen"></i>
+                                </span>
+                                <span class="z-about-tool-status">Free · Available</span>
+                            </div>
+
+                            <h2>Print Cheques</h2>
+
+                            <p>
+                                Print your cheques easily, without dealing with
+                                complicated software.
+                            </p>
+
+                            <span class="z-about-tool-action">
+                                Open Cheque Printing
+                                <i data-lucide="arrow-up-right"></i>
+                            </span>
+                        </a>
+
+
+                        <a href="{{ url_for('invoice.index') }}" class="z-about-tool-card">
+                            <div class="z-about-tool-card-top">
+                                <span class="z-about-tool-icon">
+                                    <i data-lucide="file-text"></i>
+                                </span>
+                                <span class="z-about-tool-status">Free · Available</span>
+                            </div>
+
+                            <h2>Make Invoices</h2>
+
+                            <p>
+                                Create professional invoices without having to
+                                learn accounting first.
+                            </p>
+
+                            <span class="z-about-tool-action">
+                                Open Invoice Making
+                                <i data-lucide="arrow-up-right"></i>
+                            </span>
+                        </a>
+
                     </div>
 
-                    <h2>Print Cheques</h2>
 
-                    <p>
-                        Print your cheques easily, without dealing with
-                        complicated software.
-                    </p>
+                    <article class="z-about-cover-story">
 
-                    <span class="z-about-tool-action">
-                        Open Cheque Printing
-                        <i data-lucide="arrow-up-right"></i>
-                    </span>
-                </a>
+                        <p>
+                            <strong>Zoothy started with a simple thought:</strong>
+                            running a business is already hard enough. The software
+                            you use shouldn't make it harder.
+                        </p>
+
+                        <p>
+                            We are building Zoothy for the person who has started a
+                            business, not for someone who has spent years studying
+                            accounts. You might be working alone, with one or two
+                            people, or just getting your startup off the ground.
+                            You should still be able to manage your everyday
+                            business work yourself.
+                        </p>
+
+                        <p>
+                            So we are taking the things businesses need and making
+                            them straightforward. <strong>No accounting tuition.
+                            No complicated language. No need to build a whole
+                            accounts department just to use your own business
+                            software.</strong>
+                        </p>
+
+                        <p>
+                            We have already started with two things businesses use
+                            all the time: <strong>printing cheques and making
+                            invoices.</strong> They are available today, free to
+                            use, and you don't even need an account to get started.
+                        </p>
+
+                        <p>
+                            And this is only the beginning. We are building Zoothy
+                            into a wider workspace for money, business, documents
+                            and reports — with the same idea behind every module:
+                            <strong>if you can understand your business, you should
+                            be able to understand Zoothy.</strong>
+                        </p>
+
+                        <p>
+                            Most importantly, we are building all of it to be
+                            <strong>free</strong>. The tools available today are
+                            free, and the modules we add tomorrow are being built
+                            with the same promise.
+                        </p>
+
+                    </article>
 
 
-                <a href="{{ url_for('invoice.index') }}" class="z-about-tool-card">
-                    <div class="z-about-tool-card-top">
-                        <span class="z-about-tool-icon">
-                            <i data-lucide="file-text"></i>
-                        </span>
-                        <span class="z-about-tool-status">Free · Available</span>
+                    <div class="z-about-cover-coming">
+                        <span>Being built</span>
+                        <p>Money · Business · Documents · Reports</p>
                     </div>
 
-                    <h2>Make Invoices</h2>
 
-                    <p>
-                        Create professional invoices without having to
-                        learn accounting first.
-                    </p>
+                    <div class="z-about-cover-footer">
+                        <p>
+                            <strong>Zoothy is still being built.</strong>
+                            The idea, however, is already simple:
+                            make business software that the business owner
+                            can actually use.
+                        </p>
 
-                    <span class="z-about-tool-action">
-                        Open Invoice Making
-                        <i data-lucide="arrow-up-right"></i>
-                    </span>
-                </a>
+                        <a href="#">
+                            Already have an account? Log in
+                        </a>
+                    </div>
 
-            </div>
-
-
-            <article class="z-about-cover-story">
-
-                <p>
-                    <strong>Zoothy started with a simple thought:</strong>
-                    running a business is already hard enough. The software
-                    you use shouldn't make it harder.
-                </p>
-
-                <p>
-                    We are building Zoothy for the person who has started a
-                    business, not for someone who has spent years studying
-                    accounts. You might be working alone, with one or two
-                    people, or just getting your startup off the ground.
-                    You should still be able to manage your everyday
-                    business work yourself.
-                </p>
-
-                <p>
-                    So we are taking the things businesses need and making
-                    them straightforward. <strong>No accounting tuition.
-                    No complicated language. No need to build a whole
-                    accounts department just to use your own business
-                    software.</strong>
-                </p>
-
-                <p>
-                    We have already started with two things businesses use
-                    all the time: <strong>printing cheques and making
-                    invoices.</strong> They are available today, free to
-                    use, and you don't even need an account to get started.
-                </p>
-
-                <p>
-                    And this is only the beginning. We are building Zoothy
-                    into a wider workspace for money, business, documents
-                    and reports — with the same idea behind every module:
-                    <strong>if you can understand your business, you should
-                    be able to understand Zoothy.</strong>
-                </p>
-
-                <p>
-                    Most importantly, we are building all of it to be
-                    <strong>free</strong>. The tools available today are
-                    free, and the modules we add tomorrow are being built
-                    with the same promise.
-                </p>
-
-            </article>
-
-
-            <div class="z-about-cover-coming">
-                <span>Being built</span>
-                <p>Money · Business · Documents · Reports</p>
-            </div>
-
-
-            <div class="z-about-cover-footer">
-                <p>
-                    <strong>Zoothy is still being built.</strong>
-                    The idea, however, is already simple:
-                    make business software that the business owner
-                    can actually use.
-                </p>
-
-                <a href="#">
-                    Already have an account? Log in
-                </a>
-            </div>
-
-        </div>
-    </section>
-</main>
-
+                </div>
+            </section>
+        </main>
+    </div>
 </div>
 
 {% endblock %}
