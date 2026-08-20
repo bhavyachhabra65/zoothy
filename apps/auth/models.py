@@ -49,3 +49,48 @@ class User(UserMixin, db.Model):
         default=lambda: datetime.now(timezone.utc),
         onupdate=lambda: datetime.now(timezone.utc)
     )
+
+
+class PasswordResetOTP(db.Model):
+
+    __tablename__ = "password_reset_otps"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey("users.id"),
+        nullable=False,
+        index=True
+    )
+
+    otp_hash = db.Column(
+        db.String(255),
+        nullable=False
+    )
+
+    expires_at = db.Column(
+        db.DateTime(timezone=True),
+        nullable=False
+    )
+
+    attempts = db.Column(
+        db.Integer,
+        nullable=False,
+        default=0
+    )
+
+    is_used = db.Column(
+        db.Boolean,
+        nullable=False,
+        default=False
+    )
+
+    created_at = db.Column(
+        db.DateTime(timezone=True),
+        nullable=False,
+        default=lambda: datetime.now(timezone.utc)
+    )
