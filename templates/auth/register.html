@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Account
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/auth.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<div class="z-auth-page">
+
+    <div class="z-auth-container">
+
+        <div class="z-page-heading">
+
+            <h1 class="z-page-heading-title">
+                Create your account
+            </h1>
+
+        </div>
+
+        <form
+            class="z-auth-form"
+            method="POST"
+            action="{{ url_for('auth.register_submit') }}"
+        >
+
+            {% if error %}
+                <div class="z-auth-error">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <div class="z-auth-form-group">
+
+                <label
+                    class="z-auth-label"
+                    for="name"
+                >
+                    Name
+                </label>
+
+                <input
+                    class="z-auth-input"
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="{{ name or '' }}"
+                    required
+                    autocomplete="name"
+                    placeholder="Your name"
+                >
+
+            </div>
+
+            <div class="z-auth-form-group">
+
+                <label
+                    class="z-auth-label"
+                    for="email"
+                >
+                    Email
+                </label>
+
+                <input
+                    class="z-auth-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ email or '' }}"
+                    required
+                    autocomplete="email"
+                    placeholder="you@example.com"
+                >
+
+            </div>
+
+            <div class="z-auth-form-group">
+
+                <label
+                    class="z-auth-label"
+                    for="password"
+                >
+                    Password
+                </label>
+
+                <input
+                    class="z-auth-input"
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    autocomplete="new-password"
+                    placeholder="At least 8 characters"
+                >
+
+            </div>
+
+            <div class="z-auth-form-group">
+
+                <label
+                    class="z-auth-label"
+                    for="confirm_password"
+                >
+                    Confirm password
+                </label>
+
+                <input
+                    class="z-auth-input"
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    required
+                    autocomplete="new-password"
+                    placeholder="Enter your password again"
+                >
+
+            </div>
+
+            <button
+                class="z-auth-button"
+                type="submit"
+            >
+                Create account
+            </button>
+
+        </form>
+
+        <div class="z-auth-footer">
+
+            Already have an account?
+
+            <a href="{{ url_for('auth.login') }}">
+                Log in
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

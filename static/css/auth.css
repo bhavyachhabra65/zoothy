@@ -1,0 +1,201 @@
+/* ==========================================================
+   AUTH MAIN
+   ========================================================== */
+
+.z-container.z-auth-main {
+    /* min-height: 100vh; */
+
+    padding-bottom: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ==========================================================
+   AUTH
+   ========================================================== */
+
+.z-auth-page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* ==========================================================
+   AUTH CONTAINER
+   ========================================================== */
+
+.z-auth-container {
+    width: 100%;
+    max-width: 550px;
+}
+
+
+/* ==========================================================
+   AUTH FORM
+   ========================================================== */
+
+.z-auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-field-gap);
+}
+
+
+/* ==========================================================
+   FORM GROUP
+   ========================================================== */
+
+.z-auth-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-label-gap);
+}
+
+
+/* ==========================================================
+   LABEL
+   ========================================================== */
+
+.z-auth-label {
+    font-size: var(--z-font-label-size);
+    font-weight: var(--z-font-label-weight);
+    color: var(--z-text);
+}
+
+
+/* ==========================================================
+   INPUT
+   ========================================================== */
+
+.z-auth-input {
+    width: 100%;
+    height: var(--z-input-height);
+    padding: 0 var(--z-space-3);
+
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-md);
+
+    background: var(--z-surface);
+    color: var(--z-text);
+
+    /* font-size: var(--z-font-body-size); */
+
+    transition:
+        border-color var(--z-transition),
+        box-shadow var(--z-transition);
+}
+
+.z-auth-input:hover {
+    border-color: #D1D5DB;
+}
+
+.z-auth-input:focus {
+    border-color: var(--z-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+.z-auth-input::placeholder {
+    color: var(--z-text-secondary);
+}
+
+
+/* ==========================================================
+   ERROR
+   ========================================================== */
+
+.z-auth-error {
+    padding: var(--z-space-2) var(--z-space-3);
+
+    border: var(--z-border-width) solid var(--z-danger);
+    border-radius: var(--z-radius-sm);
+
+    background: rgba(220, 38, 38, 0.05);
+    color: var(--z-danger);
+
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+   SUBMIT BUTTON
+   ========================================================== */
+
+.z-auth-button {
+    width: 100%;
+    height: var(--z-button-height);
+    margin-top: var(--z-space-2);
+
+    padding: 0 var(--z-space-5);
+
+    background: var(--z-primary);
+    color: var(--z-surface);
+
+    border-radius: var(--z-radius-md);
+
+    font-size: var(--z-font-body-size);
+    font-weight: 600;
+
+    transition:
+        background var(--z-transition),
+        transform var(--z-transition),
+        box-shadow var(--z-transition);
+}
+
+.z-auth-button:hover {
+    background: var(--z-primary-hover);
+    box-shadow: var(--z-shadow-sm);
+}
+
+.z-auth-button:active {
+    transform: translateY(1px);
+}
+
+
+/* ==========================================================
+   AUTH FOOTER
+   ========================================================== */
+
+.z-auth-footer {
+    margin-top: var(--z-space-5);
+
+    text-align: center;
+
+    font-size: 14px;
+    color: var(--z-text-secondary);
+}
+
+.z-auth-footer a {
+    color: var(--z-primary);
+    font-weight: 500;
+}
+
+.z-auth-footer a:hover {
+    color: var(--z-primary-hover);
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 480px) {
+
+    .z-auth-main {
+        min-height: auto;
+        align-items: flex-start;
+    }
+
+    .z-auth-page {
+        padding-top: var(--z-space-5);
+        padding-bottom: var(--z-space-5);
+    }
+
+    .z-auth-container {
+        max-width: 100%;
+    }
+}
