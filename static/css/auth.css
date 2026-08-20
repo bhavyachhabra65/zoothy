@@ -121,6 +121,14 @@
 }
 
 
+
+.z-auth-description {
+    margin: 0;
+    color: var(--z-text-secondary);
+    font-size: var(--z-font-body-size);
+    line-height: var(--z-line-height-body);
+}
+
 /* ==========================================================
    SUBMIT BUTTON
    ========================================================== */
