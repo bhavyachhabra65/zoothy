@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}
+Log in
+{% endblock %}
+
+{% block main_class %}
+    z-auth-main 
+{% endblock %}
+
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/auth.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<div class="z-auth-page">
+
+    <div class="z-auth-container">
+
+        <div class="z-page-heading">
+
+            <h1 class="z-page-heading-title">
+                Log in
+            </h1>
+
+        </div>
+
+        <form
+            class="z-auth-form"
+            method="POST"
+            action="{{ url_for('auth.login_submit') }}"
+        >
+
+            {% if error %}
+                <div class="z-auth-error">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <div class="z-auth-form-group">
+
+                <label
+                    class="z-auth-label"
+                    for="email"
+                >
+                    Email
+                </label>
+
+                <input
+                    class="z-auth-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ email or '' }}"
+                    required
+                    autocomplete="email"
+                    placeholder="you@example.com"
+                >
+
+            </div>
+
+            <div class="z-auth-form-group">
+
+                <label
+                    class="z-auth-label"
+                    for="password"
+                >
+                    Password
+                </label>
+
+                <input
+                    class="z-auth-input"
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    autocomplete="current-password"
+                    placeholder="Your password"
+                >
+
+            </div>
+
+            <button
+                class="z-auth-button"
+                type="submit"
+            >
+                Log in
+            </button>
+
+        </form>
+
+        <div class="z-auth-footer">
+
+            Don't have an account?
+
+            <a href="{{ url_for('auth.register') }}">
+                Create an account
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
