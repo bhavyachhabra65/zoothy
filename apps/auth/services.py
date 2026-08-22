@@ -56,9 +56,46 @@ class AuthService:
 
         return user
 
+    # ======================================================
+    # OTP
+    # ======================================================
+
     @staticmethod
     def generate_otp():
+
         return f"{secrets.randbelow(1_000_000):06d}"
+
+    @staticmethod
+    def _create_password_reset_otp(user):
+
+        # Invalidate all previous unused OTPs
+        PasswordResetOTP.query.filter_by(
+            user_id=user.id,
+            is_used=False
+        ).update(
+            {
+                PasswordResetOTP.is_used: True
+            },
+            synchronize_session=False
+        )
+
+        otp = AuthService.generate_otp()
+
+        expires_at = (
+            datetime.now(timezone.utc)
+            + timedelta(minutes=10)
+        )
+
+        otp_record = PasswordResetOTP(
+            user_id=user.id,
+            otp_hash=generate_password_hash(otp),
+            expires_at=expires_at
+        )
+
+        db.session.add(otp_record)
+        db.session.commit()
+
+        return otp_record, otp
 
     @staticmethod
     def create_password_reset_otp(email):
@@ -72,27 +109,30 @@ class AuthService:
         if not user or not user.is_active:
             return None, None
 
-        PasswordResetOTP.query.filter_by(
-            user_id=user.id,
-            is_used=False
-        ).update(
-            {
-                PasswordResetOTP.is_used: True
-            },
-            synchronize_session=False
+        otp_record, otp = (
+            AuthService._create_password_reset_otp(
+                user
+            )
         )
 
-        otp = AuthService.generate_otp()
+        return user, otp
 
-        otp_record = PasswordResetOTP(
-            user_id=user.id,
-            otp_hash=generate_password_hash(otp),
-            expires_at=datetime.now(timezone.utc)
-            + timedelta(minutes=10)
+    @staticmethod
+    def resend_password_reset_otp(user_id):
+
+        user = db.session.get(
+            User,
+            user_id
         )
 
-        db.session.add(otp_record)
-        db.session.commit()
+        if not user or not user.is_active:
+            return None, None
+
+        otp_record, otp = (
+            AuthService._create_password_reset_otp(
+                user
+            )
+        )
 
         return user, otp
 
@@ -135,6 +175,10 @@ class AuthService:
         db.session.commit()
 
         return valid
+
+    # ======================================================
+    # RESET PASSWORD
+    # ======================================================
 
     @staticmethod
     def reset_password(user_id, password):
