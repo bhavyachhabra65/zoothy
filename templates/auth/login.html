@@ -73,15 +73,48 @@ Log in
                     Password
                 </label>
 
-                <input
-                    class="z-auth-input"
-                    type="password"
-                    id="password"
-                    name="password"
-                    required
-                    autocomplete="current-password"
-                    placeholder="Your password"
-                >
+                <div class="z-auth-password-wrapper">
+
+                    <input
+                        class="z-auth-input"
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        autocomplete="current-password"
+                        placeholder="Your password"
+                    >
+
+                    <button
+                        class="z-auth-password-toggle"
+                        type="button"
+                        aria-label="Show password"
+                        onclick="togglePassword('password', this)"
+                    >
+                        👁
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="z-auth-remember">
+
+                <label class="z-auth-checkbox">
+
+                    <input
+                        type="checkbox"
+                        name="remember"
+                        value="1"
+                    >
+
+                    <span class="z-auth-checkbox-box"></span>
+
+                    <span class="z-auth-checkbox-label">
+                        Remember me
+                    </span>
+
+                </label>
 
             </div>
 
@@ -116,4 +149,8 @@ Log in
 {% endblock %}
 
 {% block footer %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
 {% endblock %}

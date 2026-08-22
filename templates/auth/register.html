@@ -90,15 +90,28 @@ Create Account
                     Password
                 </label>
 
-                <input
-                    class="z-auth-input"
-                    type="password"
-                    id="password"
-                    name="password"
-                    required
-                    autocomplete="new-password"
-                    placeholder="At least 8 characters"
-                >
+                <div class="z-auth-password-wrapper">
+
+                    <input
+                        class="z-auth-input"
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        autocomplete="new-password"
+                        placeholder="Create a password"
+                    >
+
+                    <button
+                        class="z-auth-password-toggle"
+                        type="button"
+                        aria-label="Show password"
+                        onclick="togglePassword('password', this)"
+                    >
+                        👁
+                    </button>
+
+                </div>
 
             </div>
 
@@ -111,15 +124,28 @@ Create Account
                     Confirm password
                 </label>
 
-                <input
-                    class="z-auth-input"
-                    type="password"
-                    id="confirm_password"
-                    name="confirm_password"
-                    required
-                    autocomplete="new-password"
-                    placeholder="Enter your password again"
-                >
+                <div class="z-auth-password-wrapper">
+
+                    <input
+                        class="z-auth-input"
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        required
+                        autocomplete="new-password"
+                        placeholder="Enter your password again"
+                    >
+
+                    <button
+                        class="z-auth-password-toggle"
+                        type="button"
+                        aria-label="Show password"
+                        onclick="togglePassword('confirm_password', this)"
+                    >
+                        👁
+                    </button>
+
+                </div>
 
             </div>
 
@@ -149,4 +175,8 @@ Create Account
 {% endblock %}
 
 {% block footer %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
 {% endblock %}
