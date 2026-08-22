@@ -58,6 +58,12 @@ z-dashboard-main-container
                     Register
                 </a>
 
+                <form method="POST" action="{{ url_for('auth.logout') }}">
+                    <button type="submit">
+                        Logout
+                    </button>
+                </form>
+
             </nav>
 
         </header>

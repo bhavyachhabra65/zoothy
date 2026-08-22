@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
+from flask_login import login_required
 from apps.cheque.layouts import ausmallfinance, axis, bandhan, bob, boi, fb, hdfc, icici, indusind, kotak, pnb, sbi, union, uco
 
 from .services import build_cheque_data
@@ -28,6 +29,7 @@ LAYOUTS = {
 }
 
 @cheque_bp.route("/")
+@login_required
 def index():
     return render_template("cheque/print.html")
 
