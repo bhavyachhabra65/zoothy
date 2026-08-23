@@ -67,18 +67,13 @@ fi
 
 
 # ==========================================================
-# LOAD ENVIRONMENT VARIABLES
+# CHECK REQUIRED ENVIRONMENT VARIABLES
 # ==========================================================
 
 echo ""
-echo "Loading environment variables..."
+echo "Checking environment configuration..."
 
-set -a
-source "$ENV_FILE"
-set +a
-
-
-if [ -z "$POSTGRES_PASSWORD" ]; then
+if ! grep -q '^POSTGRES_PASSWORD=' "$ENV_FILE"; then
 
     echo ""
     echo "ERROR: POSTGRES_PASSWORD is not set."
@@ -87,8 +82,7 @@ if [ -z "$POSTGRES_PASSWORD" ]; then
 
 fi
 
-
-echo "PostgreSQL password loaded."
+echo "PostgreSQL password found."
 
 
 # ==========================================================
@@ -107,7 +101,7 @@ git reset --hard "origin/$CURRENT_BRANCH"
 
 
 # ==========================================================
-# SHOW COMPOSE CONFIGURATION
+# VALIDATE DOCKER COMPOSE
 # ==========================================================
 
 echo ""
@@ -123,7 +117,7 @@ echo "Docker Compose configuration is valid."
 
 
 # ==========================================================
-# BUILD
+# BUILD DOCKER IMAGES
 # ==========================================================
 
 echo ""
@@ -151,7 +145,7 @@ docker compose \
 
 
 # ==========================================================
-# START
+# START CONTAINERS
 # ==========================================================
 
 echo ""
@@ -205,7 +199,7 @@ until curl $CURL_OPTIONS -fs "$HEALTH_URL" >/dev/null; do
 
         echo ""
         echo "Recent application logs:"
-        
+
         docker compose \
             --project-name "$PROJECT_NAME" \
             --env-file "$ENV_FILE" \
@@ -244,7 +238,7 @@ docker compose \
 
 
 # ==========================================================
-# CLEANUP
+# CLEAN UNUSED IMAGES
 # ==========================================================
 
 echo ""
@@ -252,6 +246,10 @@ echo "Cleaning unused images..."
 
 docker image prune -f
 
+
+# ==========================================================
+# COMPLETE
+# ==========================================================
 
 echo ""
 echo "======================================"
