@@ -162,6 +162,38 @@ docker compose \
     -f "$COMPOSE_FILE" \
     up -d
 
+# ==========================================================
+# DATABASE MIGRATIONS
+# ==========================================================
+
+echo ""
+echo "Waiting for PostgreSQL..."
+
+until docker compose \
+    --project-name "$PROJECT_NAME" \
+    --env-file "$ENV_FILE" \
+    -f "$COMPOSE_FILE" \
+    exec -T postgres pg_isready -U postgres >/dev/null 2>&1
+do
+
+    echo "Waiting for PostgreSQL..."
+    sleep 2
+
+done
+
+echo "PostgreSQL is ready."
+
+echo ""
+echo "Running database migrations..."
+
+docker compose \
+    --project-name "$PROJECT_NAME" \
+    --env-file "$ENV_FILE" \
+    -f "$COMPOSE_FILE" \
+    exec -T web flask --app run.py db upgrade
+
+echo "Database migrations completed."s
+
 
 # ==========================================================
 # WAIT FOR APPLICATION
