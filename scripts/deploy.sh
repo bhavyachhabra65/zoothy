@@ -67,25 +67,6 @@ fi
 
 
 # ==========================================================
-# CHECK REQUIRED ENVIRONMENT VARIABLES
-# ==========================================================
-
-echo ""
-echo "Checking environment configuration..."
-
-if ! grep -q '^POSTGRES_PASSWORD=' "$ENV_FILE"; then
-
-    echo ""
-    echo "ERROR: POSTGRES_PASSWORD is not set."
-    echo "Check $ENV_FILE"
-    exit 1
-
-fi
-
-echo "PostgreSQL password found."
-
-
-# ==========================================================
 # UPDATE CODE
 # ==========================================================
 
@@ -117,7 +98,7 @@ echo "Docker Compose configuration is valid."
 
 
 # ==========================================================
-# BUILD DOCKER IMAGES
+# BUILD
 # ==========================================================
 
 echo ""
@@ -145,7 +126,7 @@ docker compose \
 
 
 # ==========================================================
-# START CONTAINERS
+# START
 # ==========================================================
 
 echo ""
@@ -238,7 +219,7 @@ docker compose \
 
 
 # ==========================================================
-# CLEAN UNUSED IMAGES
+# CLEANUP
 # ==========================================================
 
 echo ""
@@ -246,10 +227,6 @@ echo "Cleaning unused images..."
 
 docker image prune -f
 
-
-# ==========================================================
-# COMPLETE
-# ==========================================================
 
 echo ""
 echo "======================================"
