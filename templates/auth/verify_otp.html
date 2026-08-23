@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block title %}
+Verify code
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/auth.css') }}"
+>
+{% endblock %}
+
+{% block main_class %}
+z-auth-main
+{% endblock %}
+
+{% block content %}
+
+<div class="z-auth-page">
+
+    <div class="z-auth-container">
+
+        <div class="z-page-heading">
+
+            <h1 class="z-page-heading-title">
+                Verify your email
+            </h1>
+
+        </div>
+
+        <form
+            class="z-auth-form"
+            method="POST"
+            action="{{ url_for('auth.verify_otp_submit') }}"
+        >
+
+            <p class="z-auth-description">
+                Enter the 6-digit code we sent to your email.
+                The code is valid for 10 minutes.
+            </p>
+
+
+            <!-- ==================================================
+                 FLASH MESSAGES
+                 ================================================== -->
+
+            {% with messages = get_flashed_messages(
+                with_categories=true
+            ) %}
+
+                {% for category, message in messages %}
+
+                    {% if category == "success" %}
+
+                        <div class="z-auth-success">
+                            {{ message }}
+                        </div>
+
+                    {% elif category == "error" %}
+
+                        <div class="z-auth-error">
+                            {{ message }}
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            {% endwith %}
+
+
+            <!-- ==================================================
+                 VALIDATION ERROR
+                 ================================================== -->
+
+            {% if error %}
+
+                <div class="z-auth-error">
+                    {{ error }}
+                </div>
+
+            {% endif %}
+
+
+            <!-- ==================================================
+                 OTP
+                 ================================================== -->
+
+            <div class="z-auth-form-group">
+
+                <label
+                    class="z-auth-label"
+                    for="otp"
+                >
+                    Verification code
+                </label>
+
+                <input
+                    class="z-auth-input"
+                    type="text"
+                    id="otp"
+                    name="otp"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    maxlength="6"
+                    pattern="[0-9]{6}"
+                    required
+                    placeholder="Enter 6-digit code"
+                    autofocus
+                >
+
+            </div>
+
+
+            <!-- ==================================================
+                 VERIFY BUTTON
+                 ================================================== -->
+
+            <button
+                class="z-auth-button"
+                type="submit"
+            >
+                Verify code
+            </button>
+
+        </form>
+
+
+        <!-- ======================================================
+             RESEND OTP
+             ====================================================== -->
+
+        <div class="z-auth-resend">
+
+            <span>
+                Didn't receive the code?
+            </span>
+
+            <form
+                method="POST"
+                action="{{ url_for('auth.resend_otp') }}"
+                class="z-auth-resend-form"
+            >
+
+                <button
+                    type="submit"
+                    class="z-auth-link-button"
+                    id="resend-button"
+                    disabled
+                >
+                    Resend code in
+                    <span id="resend-timer">30</span>s
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ======================================================
+             START AGAIN
+             ====================================================== -->
+
+        <div class="z-auth-footer">
+
+            <a
+                href="{{ url_for('auth.forgot_password') }}"
+            >
+                Start again
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================================
+     RESEND TIMER
+     ========================================================== -->
+
+<script>
+
+    const resendButton = document.getElementById(
+        "resend-button"
+    );
+
+    const resendTimer = document.getElementById(
+        "resend-timer"
+    );
+
+    let remaining = 30;
+
+
+    const resendInterval = setInterval(
+        function () {
+
+            remaining--;
+
+            resendTimer.textContent = remaining;
+
+
+            if (remaining <= 0) {
+
+                clearInterval(
+                    resendInterval
+                );
+
+                resendButton.disabled = false;
+
+                resendButton.textContent =
+                    "Resend code";
+            }
+
+        },
+        1000
+    );
+
+</script>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}
