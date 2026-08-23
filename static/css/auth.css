@@ -156,8 +156,6 @@
 
 .z-auth-password-toggle:hover {
     color: var(--z-text);
-
-    background: rgba(0, 0, 0, 0.04);
 }
 
 
