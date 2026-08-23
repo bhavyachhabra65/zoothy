@@ -126,6 +126,30 @@ docker compose \
 
 
 # ==========================================================
+# REMOVE CONFLICTING CONTAINERS
+# ==========================================================
+
+echo ""
+echo "Removing conflicting containers..."
+
+for CONTAINER in \
+    "zoothy-dev-postgres" \
+    "zoothy-dev-web" \
+    "zoothy-dev-nginx"
+do
+
+    if docker ps -a --format '{{.Names}}' | grep -qx "$CONTAINER"; then
+
+        echo "Removing $CONTAINER..."
+
+        docker rm -f "$CONTAINER"
+
+    fi
+
+done
+
+
+# ==========================================================
 # START
 # ==========================================================
 
