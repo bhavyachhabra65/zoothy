@@ -25,8 +25,8 @@ modules = [
     },
     {
         "title": "Settings",
-        "route": "#",
+        "route": "/settings",
         "icon": "settings",
-        "enabled": False
+        "enabled": True
     }
 ]
