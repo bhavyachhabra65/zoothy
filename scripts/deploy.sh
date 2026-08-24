@@ -67,31 +67,6 @@ fi
 
 
 # ==========================================================
-# LOAD ENVIRONMENT VARIABLES
-# ==========================================================
-
-echo ""
-echo "Loading environment variables..."
-
-set -a
-source "$ENV_FILE"
-set +a
-
-
-if [ -z "$POSTGRES_PASSWORD" ]; then
-
-    echo ""
-    echo "ERROR: POSTGRES_PASSWORD is not set."
-    echo "Check $ENV_FILE"
-    exit 1
-
-fi
-
-
-echo "PostgreSQL password loaded."
-
-
-# ==========================================================
 # UPDATE CODE
 # ==========================================================
 
@@ -107,7 +82,7 @@ git reset --hard "origin/$CURRENT_BRANCH"
 
 
 # ==========================================================
-# SHOW COMPOSE CONFIGURATION
+# VALIDATE DOCKER COMPOSE
 # ==========================================================
 
 echo ""
@@ -151,6 +126,30 @@ docker compose \
 
 
 # ==========================================================
+# REMOVE CONFLICTING CONTAINERS
+# ==========================================================
+
+echo ""
+echo "Removing conflicting containers..."
+
+for CONTAINER in \
+    "zoothy-dev-postgres" \
+    "zoothy-dev-web" \
+    "zoothy-dev-nginx"
+do
+
+    if docker ps -a --format '{{.Names}}' | grep -qx "$CONTAINER"; then
+
+        echo "Removing $CONTAINER..."
+
+        docker rm -f "$CONTAINER"
+
+    fi
+
+done
+
+
+# ==========================================================
 # START
 # ==========================================================
 
@@ -162,6 +161,38 @@ docker compose \
     --env-file "$ENV_FILE" \
     -f "$COMPOSE_FILE" \
     up -d
+
+# ==========================================================
+# DATABASE MIGRATIONS
+# ==========================================================
+
+echo ""
+echo "Waiting for PostgreSQL..."
+
+until docker compose \
+    --project-name "$PROJECT_NAME" \
+    --env-file "$ENV_FILE" \
+    -f "$COMPOSE_FILE" \
+    exec -T postgres pg_isready -U postgres >/dev/null 2>&1
+do
+
+    echo "Waiting for PostgreSQL..."
+    sleep 2
+
+done
+
+echo "PostgreSQL is ready."
+
+echo ""
+echo "Running database migrations..."
+
+docker compose \
+    --project-name "$PROJECT_NAME" \
+    --env-file "$ENV_FILE" \
+    -f "$COMPOSE_FILE" \
+    exec -T web flask --app run.py db upgrade
+
+echo "Database migrations completed."s
 
 
 # ==========================================================
@@ -205,7 +236,7 @@ until curl $CURL_OPTIONS -fs "$HEALTH_URL" >/dev/null; do
 
         echo ""
         echo "Recent application logs:"
-        
+
         docker compose \
             --project-name "$PROJECT_NAME" \
             --env-file "$ENV_FILE" \
