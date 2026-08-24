@@ -11,6 +11,10 @@ Create Account
 >
 {% endblock %}
 
+{% block main_class %}
+z-auth-main
+{% endblock %}
+
 {% block content %}
 
 <div class="z-auth-page">
@@ -32,9 +36,11 @@ Create Account
         >
 
             {% if error %}
+
                 <div class="z-auth-error">
                     {{ error }}
                 </div>
+
             {% endif %}
 
             <div class="z-auth-form-group">
@@ -98,6 +104,7 @@ Create Account
                         id="password"
                         name="password"
                         required
+                        minlength="8"
                         autocomplete="new-password"
                         placeholder="Create a password"
                     >
@@ -132,6 +139,7 @@ Create Account
                         id="confirm_password"
                         name="confirm_password"
                         required
+                        minlength="8"
                         autocomplete="new-password"
                         placeholder="Enter your password again"
                     >

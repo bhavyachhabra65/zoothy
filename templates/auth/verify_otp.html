@@ -24,7 +24,13 @@ z-auth-main
         <div class="z-page-heading">
 
             <h1 class="z-page-heading-title">
-                Verify your email
+
+                {% if purpose == "registration" %}
+                    Verify your email
+                {% else %}
+                    Verify your email
+                {% endif %}
+
             </h1>
 
         </div>
@@ -36,14 +42,22 @@ z-auth-main
         >
 
             <p class="z-auth-description">
-                Enter the 6-digit code we sent to your email.
+
+                {% if purpose == "registration" %}
+
+                    Enter the 6-digit code we sent to your email
+                    to verify your account.
+
+                {% else %}
+
+                    Enter the 6-digit code we sent to your email
+                    to reset your password.
+
+                {% endif %}
+
                 The code is valid for 10 minutes.
+
             </p>
-
-
-            <!-- ==================================================
-                 FLASH MESSAGES
-                 ================================================== -->
 
             {% with messages = get_flashed_messages(
                 with_categories=true
@@ -69,11 +83,6 @@ z-auth-main
 
             {% endwith %}
 
-
-            <!-- ==================================================
-                 VALIDATION ERROR
-                 ================================================== -->
-
             {% if error %}
 
                 <div class="z-auth-error">
@@ -81,11 +90,6 @@ z-auth-main
                 </div>
 
             {% endif %}
-
-
-            <!-- ==================================================
-                 OTP
-                 ================================================== -->
 
             <div class="z-auth-form-group">
 
@@ -112,11 +116,6 @@ z-auth-main
 
             </div>
 
-
-            <!-- ==================================================
-                 VERIFY BUTTON
-                 ================================================== -->
-
             <button
                 class="z-auth-button"
                 type="submit"
@@ -125,11 +124,6 @@ z-auth-main
             </button>
 
         </form>
-
-
-        <!-- ======================================================
-             RESEND OTP
-             ====================================================== -->
 
         <div class="z-auth-resend">
 
@@ -157,29 +151,27 @@ z-auth-main
 
         </div>
 
-
-        <!-- ======================================================
-             START AGAIN
-             ====================================================== -->
-
         <div class="z-auth-footer">
 
-            <a
-                href="{{ url_for('auth.forgot_password') }}"
-            >
-                Start again
-            </a>
+            {% if purpose == "registration" %}
+
+                <a href="{{ url_for('auth.register') }}">
+                    Start again
+                </a>
+
+            {% else %}
+
+                <a href="{{ url_for('auth.forgot_password') }}">
+                    Start again
+                </a>
+
+            {% endif %}
 
         </div>
 
     </div>
 
 </div>
-
-
-<!-- ==========================================================
-     RESEND TIMER
-     ========================================================== -->
 
 <script>
 
@@ -193,14 +185,12 @@ z-auth-main
 
     let remaining = 30;
 
-
     const resendInterval = setInterval(
         function () {
 
             remaining--;
 
             resendTimer.textContent = remaining;
-
 
             if (remaining <= 0) {
 
@@ -221,7 +211,6 @@ z-auth-main
 </script>
 
 {% endblock %}
-
 
 {% block footer %}
 {% endblock %}

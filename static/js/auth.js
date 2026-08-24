@@ -1,17 +1,25 @@
 function togglePassword(inputId, button) {
 
-    const input = document.getElementById(inputId);
+    const input = document.getElementById(
+        inputId
+    );
 
     if (!input) {
         return;
     }
 
-    const isPassword = input.type === "password";
+    const isPassword =
+        input.type === "password";
 
-    input.type = isPassword ? "text" : "password";
+    input.type =
+        isPassword
+            ? "text"
+            : "password";
 
     button.setAttribute(
         "aria-label",
-        isPassword ? "Hide password" : "Show password"
+        isPassword
+            ? "Hide password"
+            : "Show password"
     );
 }
