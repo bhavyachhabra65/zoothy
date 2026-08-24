@@ -59,3 +59,5 @@ Comments
 Explain WHY.
 
 Not WHAT.
+
+Dont make the UI dominating, keep everything light calm.

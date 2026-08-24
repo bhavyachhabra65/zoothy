@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}
+Settings
+{% endblock %}
+
+{% block styles %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/settings.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="z-page-heading">
+
+    <h1 class="z-page-heading-title">
+        Settings
+    </h1>
+
+</div>
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+        {% for category, message in messages %}
+
+            <div class="z-alert z-alert-{{ category }}">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endwith %}
+
+
+{% if error %}
+
+    <div class="z-alert z-alert-error">
+        {{ error }}
+    </div>
+
+{% endif %}
+
+
+<form
+    method="POST"
+    action="{{ url_for('settings.save') }}"
+    class="z-settings-form"
+>
+
+
+    <!-- BUSINESS NAME -->
+
+    <div class="z-form-group">
+
+        <label
+            for="business_name"
+            class="z-label"
+        >
+            Business Name
+        </label>
+
+        <input
+            type="text"
+            id="business_name"
+            name="business_name"
+            class="z-input"
+            value="{{ form_data.business_name if form_data else (business.business_name if business else '') }}"
+            maxlength="150"
+            required
+        >
+
+    </div>
+
+
+    <!-- PHONE -->
+
+    <div class="z-form-group">
+
+        <label
+            for="phone"
+            class="z-label"
+        >
+            Phone
+        </label>
+
+        <input
+            type="tel"
+            id="phone"
+            name="phone"
+            class="z-input"
+            value="{{ form_data.phone if form_data else (business.phone if business else '') }}"
+            maxlength="10"
+            inputmode="numeric"
+        >
+
+    </div>
+
+
+    <!-- GSTIN -->
+
+    <div class="z-form-group">
+
+        <label
+            for="gstin"
+            class="z-label"
+        >
+            GSTIN
+        </label>
+
+        <input
+            type="text"
+            id="gstin"
+            name="gstin"
+            class="z-input"
+            value="{{ form_data.gstin if form_data else (business.gstin if business else '') }}"
+            maxlength="15"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- BUSINESS ADDRESS -->
+
+    <div class="z-form-group">
+
+        <label
+            for="address"
+            class="z-label"
+        >
+            Business Address
+        </label>
+
+        <textarea
+            id="address"
+            name="address"
+            class="z-textarea"
+            rows="4"
+        >{{ form_data.address if form_data else (business.address if business else '') }}</textarea>
+
+    </div>
+
+
+    <!-- ACTION -->
+
+    <div class="z-actions">
+
+        <button
+            type="submit"
+            class="z-button"
+        >
+            Save Changes
+        </button>
+
+    </div>
+
+</form>
+
+{% endblock %}

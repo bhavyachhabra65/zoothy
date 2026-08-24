@@ -7,8 +7,3 @@ class RegisterData:
     email: str
     password: str
 
-
-@dataclass
-class LoginData:
-    email: str
-    password: str

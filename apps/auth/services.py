@@ -33,6 +33,7 @@ class AuthService:
         if existing_user:
 
             if not existing_user.is_active:
+
                 return (
                     existing_user,
                     "This email is already registered but not verified."
@@ -140,7 +141,13 @@ class AuthService:
         purpose
     ):
 
-        if not user or not user.is_active and purpose == AuthService.PASSWORD_RESET_OTP:
+        if not user:
+            return None
+
+        if (
+            purpose == AuthService.PASSWORD_RESET_OTP
+            and not user.is_active
+        ):
             return None
 
         _, otp = AuthService._create_otp(
@@ -222,6 +229,24 @@ class AuthService:
 
         return user, otp
 
+    @staticmethod
+    def get_active_otp(
+        user_id,
+        purpose
+    ):
+
+        return (
+            EmailOTP.query
+            .filter_by(
+                user_id=user_id,
+                purpose=purpose,
+                is_used=False
+            )
+            .order_by(
+                EmailOTP.created_at.desc()
+            )
+            .first()
+        )
 
     # ==========================================================
     # PASSWORD RESET
@@ -249,28 +274,6 @@ class AuthService:
         return user, otp
 
     @staticmethod
-    def verify_password_reset_otp(
-        user_id,
-        otp
-    ):
-
-        return AuthService.verify_otp(
-            user_id,
-            AuthService.PASSWORD_RESET_OTP,
-            otp
-        )
-
-    @staticmethod
-    def resend_password_reset_otp(
-        user_id
-    ):
-
-        return AuthService.resend_otp(
-            user_id,
-            AuthService.PASSWORD_RESET_OTP
-        )
-
-    @staticmethod
     def reset_password(
         user_id,
         password
@@ -292,8 +295,14 @@ class AuthService:
 
         return True
 
+    # ==========================================================
+    # USER
+    # ==========================================================
+
     @staticmethod
-    def activate_user(user_id):
+    def activate_user(
+        user_id
+    ):
 
         user = db.session.get(
             User,
@@ -309,9 +318,10 @@ class AuthService:
 
         return user
 
-
     @staticmethod
-    def get_user(user_id):
+    def get_user(
+        user_id
+    ):
 
         return db.session.get(
             User,
