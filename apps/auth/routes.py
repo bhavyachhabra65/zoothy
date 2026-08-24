@@ -1,11 +1,13 @@
+from datetime import datetime, timezone
+
 from flask import (
     Blueprint,
-    request,
+    flash,
     redirect,
     render_template,
+    request,
     session,
-    url_for,
-    flash
+    url_for
 )
 
 from flask_login import (
@@ -13,17 +15,12 @@ from flask_login import (
     logout_user
 )
 
-from datetime import (
-    datetime,
-    timezone
-)
-
-from apps.auth.services import AuthService
-from apps.auth.email import send_password_reset_otp
+from apps.auth.email import send_otp
 from apps.auth.schemas import RegisterData
+from apps.auth.services import AuthService
 from apps.auth.validators import (
     validate_login,
-    validate_registration,
+    validate_registration
 )
 
 
@@ -85,9 +82,9 @@ def login_submit():
             email=email
         ), 401
 
-    remember = request.form.get(
-        "remember"
-    ) == "1"
+    remember = (
+        request.form.get("remember") == "1"
+    )
 
     login_user(
         user,
@@ -97,14 +94,19 @@ def login_submit():
     session.permanent = True
 
     session["last_activity"] = (
-        datetime.now(timezone.utc).isoformat()
+        datetime.now(
+            timezone.utc
+        ).isoformat()
     )
 
     next_page = request.args.get(
         "next"
     )
 
-    if next_page and next_page.startswith("/"):
+    if (
+        next_page
+        and next_page.startswith("/")
+    ):
 
         return redirect(
             next_page
@@ -178,6 +180,33 @@ def register_submit():
 
     if error:
 
+        if user and not user.is_active:
+
+            session["otp_user_id"] = user.id
+            session["otp_purpose"] = (
+                AuthService.REGISTRATION_OTP
+            )
+
+            otp = AuthService.create_otp(
+                user,
+                AuthService.REGISTRATION_OTP
+            )
+
+            send_otp(
+                user.email,
+                otp,
+                AuthService.REGISTRATION_OTP
+            )
+
+            flash(
+                "We've sent a new verification code to your email.",
+                "success"
+            )
+
+            return redirect(
+                url_for("auth.verify_otp")
+            )
+
         return render_template(
             "auth/register.html",
             error=error,
@@ -185,18 +214,40 @@ def register_submit():
             email=email
         ), 409
 
-    login_user(
-        user
+    otp = AuthService.create_otp(
+        user,
+        AuthService.REGISTRATION_OTP
     )
 
-    session.permanent = True
+    send_otp(
+        user.email,
+        otp,
+        AuthService.REGISTRATION_OTP
+    )
 
-    session["last_activity"] = (
-        datetime.now(timezone.utc).isoformat()
+    session["otp_user_id"] = user.id
+
+    session["otp_purpose"] = (
+        AuthService.REGISTRATION_OTP
+    )
+
+    session["otp_expires_at"] = (
+        datetime.now(
+            timezone.utc
+        ).timestamp()
+        + (
+            AuthService.OTP_EXPIRY_MINUTES
+            * 60
+        )
+    )
+
+    flash(
+        "We've sent a verification code to your email.",
+        "success"
     )
 
     return redirect(
-        url_for("dashboard.index")
+        url_for("auth.verify_otp")
     )
 
 
@@ -236,43 +287,45 @@ def forgot_password_submit():
         ""
     ).strip().lower()
 
-    user, otp = AuthService.create_password_reset_otp(
-        email
+    user, otp = (
+        AuthService.create_password_reset_otp(
+            email
+        )
     )
 
-    # Start a new password-reset flow.
-    session["password_reset_flow"] = True
-    session["password_reset_verified"] = False
+    session["otp_purpose"] = (
+        AuthService.PASSWORD_RESET_OTP
+    )
+
+    session["otp_expires_at"] = (
+        datetime.now(
+            timezone.utc
+        ).timestamp()
+        + (
+            AuthService.OTP_EXPIRY_MINUTES
+            * 60
+        )
+    )
 
     if user:
 
-        send_password_reset_otp(
+        session["otp_user_id"] = user.id
+
+        send_otp(
             user.email,
-            otp
-        )
-
-        session["password_reset_user_id"] = (
-            user.id
-        )
-
-        # OTP is valid for 10 minutes.
-        session["password_reset_expires_at"] = (
-            datetime.now(timezone.utc).timestamp()
-            + 600
+            otp,
+            AuthService.PASSWORD_RESET_OTP
         )
 
     else:
 
-        # Do not reveal whether the email
-        # exists in our system.
-
         session.pop(
-            "password_reset_user_id",
+            "otp_user_id",
             None
         )
 
         session.pop(
-            "password_reset_expires_at",
+            "otp_expires_at",
             None
         )
 
@@ -293,18 +346,24 @@ def forgot_password_submit():
 @auth_bp.get("/verify-otp")
 def verify_otp():
 
-    if not session.get(
-        "password_reset_flow"
+    purpose = session.get(
+        "otp_purpose"
+    )
+
+    if purpose not in (
+        AuthService.REGISTRATION_OTP,
+        AuthService.PASSWORD_RESET_OTP
     ):
 
         return redirect(
-            url_for("auth.forgot_password")
+            url_for("auth.login")
         )
 
     return render_template(
         "auth/verify_otp.html",
+        purpose=purpose,
         expires_at=session.get(
-            "password_reset_expires_at"
+            "otp_expires_at"
         )
     )
 
@@ -313,13 +372,23 @@ def verify_otp():
 def verify_otp_submit():
 
     user_id = session.get(
-        "password_reset_user_id"
+        "otp_user_id"
     )
 
-    if not user_id:
+    purpose = session.get(
+        "otp_purpose"
+    )
+
+    if (
+        not user_id
+        or purpose not in (
+            AuthService.REGISTRATION_OTP,
+            AuthService.PASSWORD_RESET_OTP
+        )
+    ):
 
         return redirect(
-            url_for("auth.forgot_password")
+            url_for("auth.login")
         )
 
     otp = request.form.get(
@@ -327,8 +396,9 @@ def verify_otp_submit():
         ""
     ).strip()
 
-    valid = AuthService.verify_password_reset_otp(
+    valid = AuthService.verify_otp(
         user_id,
+        purpose,
         otp
     )
 
@@ -337,12 +407,85 @@ def verify_otp_submit():
         return render_template(
             "auth/verify_otp.html",
             error="The code is incorrect or has expired.",
+            purpose=purpose,
             expires_at=session.get(
-                "password_reset_expires_at"
+                "otp_expires_at"
             )
         ), 400
 
+    # ------------------------------------------------------
+    # REGISTRATION
+    # ------------------------------------------------------
+
+    if purpose == AuthService.REGISTRATION_OTP:
+
+        user = AuthService.activate_user(
+            user_id
+        )
+
+        if not user:
+            return redirect(
+                url_for("auth.login")
+            )
+
+        login_user(
+            user
+        )
+
+        session.permanent = True
+
+        session["last_activity"] = (
+            datetime.now(
+                timezone.utc
+            ).isoformat()
+        )
+
+        session.pop(
+            "otp_user_id",
+            None
+        )
+
+        session.pop(
+            "otp_purpose",
+            None
+        )
+
+        session.pop(
+            "otp_expires_at",
+            None
+        )
+
+        flash(
+            "Your account has been verified successfully.",
+            "success"
+        )
+
+        return redirect(
+            url_for("dashboard.index")
+        )
+
+    # ------------------------------------------------------
+    # PASSWORD RESET
+    # ------------------------------------------------------
+
+    session["password_reset_user_id"] = user_id
+
     session["password_reset_verified"] = True
+
+    session.pop(
+        "otp_user_id",
+        None
+    )
+
+    session.pop(
+        "otp_purpose",
+        None
+    )
+
+    session.pop(
+        "otp_expires_at",
+        None
+    )
 
     return redirect(
         url_for("auth.reset_password")
@@ -357,40 +500,66 @@ def verify_otp_submit():
 def resend_otp():
 
     user_id = session.get(
-        "password_reset_user_id"
+        "otp_user_id"
     )
 
-    if not user_id:
+    purpose = session.get(
+        "otp_purpose"
+    )
+
+    if (
+        not user_id
+        or purpose not in (
+            AuthService.REGISTRATION_OTP,
+            AuthService.PASSWORD_RESET_OTP
+        )
+    ):
 
         return redirect(
-            url_for("auth.forgot_password")
+            url_for("auth.login")
         )
 
-    user, otp = AuthService.resend_password_reset_otp(
-        user_id
+    user, otp = AuthService.resend_otp(
+        user_id,
+        purpose
     )
 
     if not user:
 
         return redirect(
-            url_for("auth.forgot_password")
+            url_for("auth.login")
         )
 
-    send_password_reset_otp(
+    send_otp(
         user.email,
-        otp
+        otp,
+        purpose
     )
 
-    # Reset the OTP timer to 10 minutes.
-    session["password_reset_expires_at"] = (
-        datetime.now(timezone.utc).timestamp()
-        + 600
+    session["otp_expires_at"] = (
+        datetime.now(
+            timezone.utc
+        ).timestamp()
+        + (
+            AuthService.OTP_EXPIRY_MINUTES
+            * 60
+        )
     )
 
-    session["password_reset_verified"] = False
+    if purpose == AuthService.REGISTRATION_OTP:
+
+        message = (
+            "A new verification code has been sent to your email."
+        )
+
+    else:
+
+        message = (
+            "A new password reset code has been sent to your email."
+        )
 
     flash(
-        "A new verification code has been sent to your email.",
+        message,
         "success"
     )
 
@@ -471,12 +640,6 @@ def reset_password_submit():
             url_for("auth.forgot_password")
         )
 
-    # Completely clear the password reset flow.
-    session.pop(
-        "password_reset_flow",
-        None
-    )
-
     session.pop(
         "password_reset_user_id",
         None
@@ -488,8 +651,23 @@ def reset_password_submit():
     )
 
     session.pop(
-        "password_reset_expires_at",
+        "otp_user_id",
         None
+    )
+
+    session.pop(
+        "otp_purpose",
+        None
+    )
+
+    session.pop(
+        "otp_expires_at",
+        None
+    )
+
+    flash(
+        "Your password has been reset successfully.",
+        "success"
     )
 
     return redirect(

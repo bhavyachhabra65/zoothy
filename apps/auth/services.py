@@ -1,4 +1,5 @@
 import secrets
+
 from datetime import datetime, timedelta, timezone
 
 from werkzeug.security import (
@@ -6,11 +7,21 @@ from werkzeug.security import (
     generate_password_hash
 )
 
-from apps.auth.models import PasswordResetOTP, User
+from apps.auth.models import EmailOTP, User
 from core.extensions import db
 
 
 class AuthService:
+
+    OTP_EXPIRY_MINUTES = 10
+    OTP_MAX_ATTEMPTS = 5
+
+    REGISTRATION_OTP = "registration"
+    PASSWORD_RESET_OTP = "password_reset"
+
+    # ==========================================================
+    # REGISTRATION
+    # ==========================================================
 
     @staticmethod
     def register(data):
@@ -20,12 +31,25 @@ class AuthService:
         ).first()
 
         if existing_user:
-            return None, "An account with this email already exists."
+
+            if not existing_user.is_active:
+                return (
+                    existing_user,
+                    "This email is already registered but not verified."
+                )
+
+            return (
+                None,
+                "An account with this email already exists."
+            )
 
         user = User(
             name=data.name,
             email=data.email,
-            password_hash=generate_password_hash(data.password)
+            password_hash=generate_password_hash(
+                data.password
+            ),
+            is_active=False
         )
 
         db.session.add(user)
@@ -33,8 +57,15 @@ class AuthService:
 
         return user, None
 
+    # ==========================================================
+    # LOGIN
+    # ==========================================================
+
     @staticmethod
-    def authenticate(email, password):
+    def authenticate(
+        email,
+        password
+    ):
 
         email = email.strip().lower()
 
@@ -56,9 +87,9 @@ class AuthService:
 
         return user
 
-    # ======================================================
+    # ==========================================================
     # OTP
-    # ======================================================
+    # ==========================================================
 
     @staticmethod
     def generate_otp():
@@ -66,15 +97,18 @@ class AuthService:
         return f"{secrets.randbelow(1_000_000):06d}"
 
     @staticmethod
-    def _create_password_reset_otp(user):
+    def _create_otp(
+        user,
+        purpose
+    ):
 
-        # Invalidate all previous unused OTPs
-        PasswordResetOTP.query.filter_by(
+        EmailOTP.query.filter_by(
             user_id=user.id,
+            purpose=purpose,
             is_used=False
         ).update(
             {
-                PasswordResetOTP.is_used: True
+                EmailOTP.is_used: True
             },
             synchronize_session=False
         )
@@ -83,11 +117,14 @@ class AuthService:
 
         expires_at = (
             datetime.now(timezone.utc)
-            + timedelta(minutes=10)
+            + timedelta(
+                minutes=AuthService.OTP_EXPIRY_MINUTES
+            )
         )
 
-        otp_record = PasswordResetOTP(
+        otp_record = EmailOTP(
             user_id=user.id,
+            purpose=purpose,
             otp_hash=generate_password_hash(otp),
             expires_at=expires_at
         )
@@ -98,55 +135,37 @@ class AuthService:
         return otp_record, otp
 
     @staticmethod
-    def create_password_reset_otp(email):
+    def create_otp(
+        user,
+        purpose
+    ):
 
-        email = email.strip().lower()
+        if not user or not user.is_active and purpose == AuthService.PASSWORD_RESET_OTP:
+            return None
 
-        user = User.query.filter_by(
-            email=email
-        ).first()
-
-        if not user or not user.is_active:
-            return None, None
-
-        otp_record, otp = (
-            AuthService._create_password_reset_otp(
-                user
-            )
+        _, otp = AuthService._create_otp(
+            user,
+            purpose
         )
 
-        return user, otp
+        return otp
 
     @staticmethod
-    def resend_password_reset_otp(user_id):
-
-        user = db.session.get(
-            User,
-            user_id
-        )
-
-        if not user or not user.is_active:
-            return None, None
-
-        otp_record, otp = (
-            AuthService._create_password_reset_otp(
-                user
-            )
-        )
-
-        return user, otp
-
-    @staticmethod
-    def verify_password_reset_otp(user_id, otp):
+    def verify_otp(
+        user_id,
+        purpose,
+        otp
+    ):
 
         record = (
-            PasswordResetOTP.query
+            EmailOTP.query
             .filter_by(
                 user_id=user_id,
+                purpose=purpose,
                 is_used=False
             )
             .order_by(
-                PasswordResetOTP.created_at.desc()
+                EmailOTP.created_at.desc()
             )
             .first()
         )
@@ -159,7 +178,7 @@ class AuthService:
         if now >= record.expires_at:
             return False
 
-        if record.attempts >= 5:
+        if record.attempts >= AuthService.OTP_MAX_ATTEMPTS:
             return False
 
         record.attempts += 1
@@ -176,12 +195,86 @@ class AuthService:
 
         return valid
 
-    # ======================================================
-    # RESET PASSWORD
-    # ======================================================
+    @staticmethod
+    def resend_otp(
+        user_id,
+        purpose
+    ):
+
+        user = db.session.get(
+            User,
+            user_id
+        )
+
+        if not user:
+            return None, None
+
+        if (
+            purpose == AuthService.PASSWORD_RESET_OTP
+            and not user.is_active
+        ):
+            return None, None
+
+        _, otp = AuthService._create_otp(
+            user,
+            purpose
+        )
+
+        return user, otp
+
+
+    # ==========================================================
+    # PASSWORD RESET
+    # ==========================================================
 
     @staticmethod
-    def reset_password(user_id, password):
+    def create_password_reset_otp(
+        email
+    ):
+
+        email = email.strip().lower()
+
+        user = User.query.filter_by(
+            email=email
+        ).first()
+
+        if not user or not user.is_active:
+            return None, None
+
+        otp = AuthService.create_otp(
+            user,
+            AuthService.PASSWORD_RESET_OTP
+        )
+
+        return user, otp
+
+    @staticmethod
+    def verify_password_reset_otp(
+        user_id,
+        otp
+    ):
+
+        return AuthService.verify_otp(
+            user_id,
+            AuthService.PASSWORD_RESET_OTP,
+            otp
+        )
+
+    @staticmethod
+    def resend_password_reset_otp(
+        user_id
+    ):
+
+        return AuthService.resend_otp(
+            user_id,
+            AuthService.PASSWORD_RESET_OTP
+        )
+
+    @staticmethod
+    def reset_password(
+        user_id,
+        password
+    ):
 
         user = db.session.get(
             User,
@@ -198,3 +291,29 @@ class AuthService:
         db.session.commit()
 
         return True
+
+    @staticmethod
+    def activate_user(user_id):
+
+        user = db.session.get(
+            User,
+            user_id
+        )
+
+        if not user:
+            return None
+
+        user.is_active = True
+
+        db.session.commit()
+
+        return user
+
+
+    @staticmethod
+    def get_user(user_id):
+
+        return db.session.get(
+            User,
+            user_id
+        )

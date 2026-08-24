@@ -34,7 +34,7 @@ class User(UserMixin, db.Model):
     is_active = db.Column(
         db.Boolean,
         nullable=False,
-        default=True
+        default=False
     )
 
     created_at = db.Column(
@@ -51,9 +51,9 @@ class User(UserMixin, db.Model):
     )
 
 
-class PasswordResetOTP(db.Model):
+class EmailOTP(db.Model):
 
-    __tablename__ = "password_reset_otps"
+    __tablename__ = "email_otps"
 
     id = db.Column(
         db.Integer,
@@ -63,6 +63,12 @@ class PasswordResetOTP(db.Model):
     user_id = db.Column(
         db.Integer,
         db.ForeignKey("users.id"),
+        nullable=False,
+        index=True
+    )
+
+    purpose = db.Column(
+        db.String(30),
         nullable=False,
         index=True
     )
