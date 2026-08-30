@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ customer.name }}
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/customers.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+
+<header class="z-page-header">
+
+    <div class="z-brand">
+
+        <a class="z-brand-name">
+            {{ customer.name }}
+        </a>
+
+        <!-- <p class="z-brand-tagline">
+            Making accounting easy for startups.
+        </p> -->
+
+    </div>
+
+
+    <nav class="z-page-header-nav">
+
+        <a href="{{ url_for('customers.edit', customer_id=customer.id) }}" class="z-button z-customer-edit-button">
+            Edit
+        </a>
+
+    </nav>
+
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="z-alert z-alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="z-customer-details">
+
+    <div class="z-customer-detail-row">
+        <span class="z-customer-detail-label">Phone</span>
+        <span>{{ customer.phone or '—' }}</span>
+    </div>
+
+    <div class="z-customer-detail-row">
+        <span class="z-customer-detail-label">Email</span>
+        <span>{{ customer.email or '—' }}</span>
+    </div>
+
+    <div class="z-customer-detail-row">
+        <span class="z-customer-detail-label">GSTIN</span>
+        <span>{{ customer.gstin or '—' }}</span>
+    </div>
+
+    <div class="z-customer-detail-row">
+        <span class="z-customer-detail-label">Address</span>
+        <span class="z-customer-detail-value z-preserve-lines">{{ customer.address or '—' }}</span>
+    </div>
+
+    <div class="z-customer-detail-row">
+        <span class="z-customer-detail-label">Notes</span>
+        <span class="z-customer-detail-value z-preserve-lines">{{ customer.notes or '—' }}</span>
+    </div>
+
+</div>
+
+<div class="z-customer-detail-actions">
+    <a
+        href="{{ url_for('customers.index') }}"
+        class="z-customer-back"
+    >
+        Back to Customers
+    </a>
+
+    <form
+        method="POST"
+        action="{{ url_for('customers.delete', customer_id=customer.id) }}"
+        data-delete-customer
+    >
+        <button
+            type="submit"
+            class="z-customer-delete-button"
+        >
+            Delete Customer
+        </button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/customers.js') }}"></script>
+{% endblock %}

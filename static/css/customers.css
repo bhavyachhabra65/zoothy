@@ -1,0 +1,321 @@
+/* ==========================================================
+   CUSTOMERS
+========================================================== */
+
+.z-customers-heading,
+.z-customer-detail-heading {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--z-space-5);
+}
+
+
+/* ==========================================================
+   PAGE TITLE
+========================================================== */
+
+.z-customers-heading .z-page-heading-title {
+    font-size: var(--z-font-title-size);
+}
+
+
+/* ==========================================================
+   PRIMARY ACTION
+========================================================== */
+
+.z-customers-add-button {
+    min-width: 190px;
+    width: auto;
+    text-align: center;
+}
+
+.z-page-header-nav a.z-customers-add-button {
+    color: white;
+}
+
+.z-page-header-nav a.z-customers-add-button:hover {
+    color: white;
+}
+
+
+/* ==========================================================
+   SEARCH
+========================================================== */
+
+.z-customers-search {
+    display: flex;
+    align-items: center;
+    gap: var(--z-space-3);
+    margin-bottom: var(--z-space-5);
+}
+
+.z-customers-search .z-input {
+    /* max-width: var(--z-field-large); */
+}
+
+.z-customers-search-button {
+    /* min-width: 110px; */
+}
+
+
+/* ==========================================================
+   SECONDARY LINKS
+========================================================== */
+
+.z-customers-clear,
+.z-customer-cancel,
+.z-customer-back,
+.z-customer-view-link {
+    color: var(--z-text-secondary);
+    font-size: var(--z-font-body-size);
+    font-weight: 500;
+}
+
+.z-customers-clear:hover,
+.z-customer-cancel:hover,
+.z-customer-back:hover,
+.z-customer-view-link:hover {
+    color: var(--z-primary);
+}
+
+
+/* ==========================================================
+   CUSTOMER TABLE
+========================================================== */
+
+.z-customers-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+}
+
+.z-customers-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.z-customers-table th,
+.z-customers-table td {
+    padding: var(--z-space-3) var(--z-space-4);
+    text-align: left;
+    vertical-align: middle;
+}
+
+.z-customers-table th {
+    color: var(--z-text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--z-background);
+}
+
+.z-customers-table tbody tr {
+    border-top: var(--z-border-width) solid var(--z-border);
+    transition: background var(--z-transition);
+}
+
+.z-customers-table tbody tr:hover {
+    background: var(--z-background);
+}
+
+
+/* ==========================================================
+   CUSTOMER NAME
+========================================================== */
+
+.z-customer-name {
+    color: var(--z-text);
+    font-weight: 600;
+}
+
+.z-customer-name:hover {
+    color: var(--z-primary);
+}
+
+
+/* ==========================================================
+   TABLE ACTION
+========================================================== */
+
+.z-customer-action-cell {
+    width: 90px;
+    text-align: right !important;
+}
+
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.z-customers-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    padding: var(--z-space-6);
+    text-align: center;
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+    background: var(--z-surface);
+}
+
+.z-customers-empty h2 {
+    margin: 0 0 var(--z-space-2);
+    font-size: 20px;
+}
+
+.z-customers-empty p {
+    margin: 0;
+    color: var(--z-text-secondary);
+}
+
+.z-customers-empty-button {
+    margin-top: var(--z-space-3);
+    color: white;
+    text-decoration: none;
+}
+
+.z-customers-empty-button:hover {
+    color: white;
+}
+
+
+/* ==========================================================
+   CUSTOMER FORM
+========================================================== */
+
+.z-customer-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-field-gap);
+}
+
+.z-customer-form .z-row {
+    align-items: flex-end;
+}
+
+.z-gstin-input {
+    text-transform: uppercase;
+}
+
+
+/* ==========================================================
+   FORM ACTIONS
+========================================================== */
+
+.z-customer-form-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--z-space-4);
+}
+
+
+/* ==========================================================
+   CUSTOMER DETAILS
+========================================================== */
+
+.z-customer-details {
+    display: flex;
+    flex-direction: column;
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+}
+
+.z-customer-detail-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--z-space-4);
+    padding: var(--z-space-4);
+    border-bottom: var(--z-border-width) solid var(--z-border);
+}
+
+.z-customer-detail-row:last-child {
+    border-bottom: none;
+}
+
+.z-customer-detail-label {
+    color: var(--z-text-secondary);
+    font-weight: 500;
+}
+
+.z-customer-detail-value {
+    min-width: 0;
+}
+
+.z-preserve-lines {
+    white-space: pre-line;
+}
+
+
+/* ==========================================================
+   CUSTOMER DETAIL ACTIONS
+========================================================== */
+
+.z-customer-detail-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--z-space-4);
+    margin-top: var(--z-space-5);
+}
+
+.z-customer-delete-button {
+    color: var(--z-danger);
+    font-size: var(--z-font-body-size);
+    font-weight: 500;
+}
+
+.z-customer-delete-button:hover {
+    text-decoration: underline;
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 680px) {
+
+    .z-customers-heading,
+    .z-customer-detail-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .z-customers-add-button,
+    .z-customer-edit-button {
+        width: 100%;
+    }
+
+    .z-customers-search {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .z-customers-search .z-input {
+        max-width: none;
+    }
+
+    .z-customers-search-button {
+        width: 100%;
+    }
+
+    .z-customers-table th,
+    .z-customers-table td {
+        padding: var(--z-space-3);
+    }
+
+    .z-customer-detail-row {
+        grid-template-columns: 1fr;
+        gap: var(--z-space-1);
+    }
+
+    .z-customer-detail-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}

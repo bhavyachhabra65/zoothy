@@ -384,22 +384,30 @@
 ========================================================== */
 
 .z-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     min-width: 190px;
-
     height: var(--z-button-height);
-
     padding: 0 var(--z-space-5);
 
     background: var(--z-primary);
-
     color: white;
-
     border-radius: var(--z-radius-md);
 
+    text-decoration: none;
     transition: var(--z-transition);
-
 }
+
+.z-page-header-nav a.z-button {
+    color: white;
+}
+
+.z-page-header-nav a.z-button:hover {
+    color: white;
+}
+
 
 .z-button:hover {
 
