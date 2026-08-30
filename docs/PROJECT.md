@@ -30,6 +30,7 @@ Completed Modules
 ✔ Cheque Printing
 ✔ Invoice Printing
 ✔ Authorisation(Login, Register, Forgot-Password)
+✔ Settings(Current inputs: Business name, Phone, GSTIN, Business Address)
 
 All Modules
 ----------------
