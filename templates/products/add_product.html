@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Product
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/products.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<header class="z-page-heading">
+    <h1 class="z-page-heading-title">
+        Add Product
+    </h1>
+</header>
+
+{% if error %}
+    <div class="z-alert z-alert-error">
+        {{ error }}
+    </div>
+{% endif %}
+
+<form
+    method="POST"
+    class="z-product-form"
+>
+
+    <div class="z-row">
+        <div class="z-col-1">
+            <label for="name" class="z-label">Product Name</label>
+            <input
+                id="name"
+                name="name"
+                type="text"
+                value="{{ form_data.get('name', '') }}"
+                class="z-input"
+                maxlength="150"
+                required
+                autofocus
+            >
+        </div>
+    </div>
+
+    <div class="z-row">
+
+        <div class="z-col-1">
+            <label for="sku" class="z-label">SKU</label>
+            <input
+                id="sku"
+                name="sku"
+                type="text"
+                value="{{ form_data.get('sku', '') }}"
+                class="z-input z-product-sku-input"
+                maxlength="100"
+            >
+        </div>
+
+        <div class="z-col-1">
+            <label for="hsn_sac" class="z-label">HSN / SAC</label>
+            <input
+                id="hsn_sac"
+                name="hsn_sac"
+                type="text"
+                value="{{ form_data.get('hsn_sac', '') }}"
+                class="z-input z-product-hsn-input"
+                maxlength="20"
+            >
+        </div>
+
+    </div>
+
+    <div class="z-row">
+
+        <div class="z-col-1">
+            <label for="unit" class="z-label">Unit</label>
+            <input
+                id="unit"
+                name="unit"
+                type="text"
+                value="{{ form_data.get('unit', 'pcs') }}"
+                class="z-input"
+                maxlength="30"
+                required
+            >
+        </div>
+
+        <div class="z-col-1">
+            <label for="gst_rate" class="z-label">GST Rate (%)</label>
+            <select
+                id="gst_rate"
+                name="gst_rate"
+                class="z-input"
+            >
+                <option value="0" {% if form_data.get('gst_rate', product.gst_rate if product is defined else '0')|float == 0 %}selected{% endif %}>0%</option>
+                <option value="5" {% if form_data.get('gst_rate', product.gst_rate if product is defined else '0')|float == 5 %}selected{% endif %}>5%</option>
+                <option value="12" {% if form_data.get('gst_rate', product.gst_rate if product is defined else '0')|float == 12 %}selected{% endif %}>12%</option>
+                <option value="18" {% if form_data.get('gst_rate', product.gst_rate if product is defined else '0')|float == 18 %}selected{% endif %}>18%</option>
+                <option value="28" {% if form_data.get('gst_rate', product.gst_rate if product is defined else '0')|float == 28 %}selected{% endif %}>28%</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="z-row">
+
+        <div class="z-col-1">
+            <label for="purchase_price" class="z-label">Purchase Price</label>
+            <input
+                id="purchase_price"
+                name="purchase_price"
+                type="number"
+                value="{{ form_data.get('purchase_price', '0') }}"
+                class="z-input"
+                min="0"
+                step="0.01"
+            >
+        </div>
+
+        <div class="z-col-1">
+            <label for="selling_price" class="z-label">Selling Price</label>
+            <input
+                id="selling_price"
+                name="selling_price"
+                type="number"
+                value="{{ form_data.get('selling_price', '0') }}"
+                class="z-input"
+                min="0"
+                step="0.01"
+            >
+        </div>
+
+    </div>
+
+    <div class="z-row">
+        <div class="z-col-1">
+            <label for="description" class="z-label">Description</label>
+            <textarea
+                id="description"
+                name="description"
+                class="z-textarea"
+                rows="3"
+            >{{ form_data.get('description', '') }}</textarea>
+        </div>
+    </div>
+
+    <div class="z-actions z-product-form-actions">
+        <button type="submit" class="z-button">
+            Save Product
+        </button>
+
+        <a
+            href="{{ url_for('products.index') }}"
+            class="z-product-cancel"
+        >
+            Cancel
+        </a>
+    </div>
+
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/products.js') }}"></script>
+{% endblock %}

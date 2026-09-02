@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}
+Products
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/products.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<header class="z-page-header">
+
+    <div class="z-brand">
+
+        <a class="z-brand-name">
+            Products
+        </a>
+
+        <!-- <p class="z-brand-tagline">
+            Making accounting easy for startups.
+        </p> -->
+
+    </div>
+
+
+    <nav class="z-page-header-nav">
+
+        <a href="{{ url_for('dashboard.index') }}">
+            Back to Home
+        </a>
+
+        <a href="{{ url_for('products.add') }}" class="z-button">
+            Add Product
+        </a>
+
+    </nav>
+
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="z-alert z-alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<form
+    method="GET"
+    action="{{ url_for('products.index') }}"
+    class="z-products-search"
+>
+
+    <input
+        type="search"
+        name="search"
+        value="{{ search }}"
+        class="z-input"
+        placeholder="Search products"
+        autocomplete="off"
+    >
+
+    <button
+        type="submit"
+        class="z-button z-products-search-button"
+    >
+        Search
+    </button>
+
+    {% if search %}
+        <a
+            href="{{ url_for('products.index') }}"
+            class="z-products-clear"
+        >
+            Clear
+        </a>
+    {% endif %}
+
+</form>
+
+{% if products %}
+
+<div class="z-products-table-wrap">
+
+    <table class="z-products-table">
+
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Selling Price</th>
+                <th>GST</th>
+                <th class="z-product-action-cell"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>
+                        <a
+                            href="{{ url_for('products.view', product_id=product.id) }}"
+                            class="z-product-name"
+                        >
+                            {{ product.name }}
+                        </a>
+                    </td>
+                    <td>{{ product.sku or '—' }}</td>
+                    <td>₹{{ '%.2f'|format(product.selling_price or 0) }}</td>
+                    <td>{{ '%.2f'|format(product.gst_rate or 0) }}%</td>
+                    <td class="z-product-action-cell">
+                        <a
+                            href="{{ url_for('products.view', product_id=product.id) }}"
+                            class="z-product-view-link"
+                        >
+                            View
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+{% else %}
+
+<div class="z-products-empty">
+
+    <h2>No products yet</h2>
+
+    <p>Add your first product to get started.</p>
+
+    <a
+        href="{{ url_for('products.add') }}"
+        class="z-button z-products-empty-button"
+    >
+        Add Product
+    </a>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/products.js') }}"></script>
+{% endblock %}

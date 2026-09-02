@@ -17,6 +17,8 @@ from apps.auth.routes import auth_bp
 from apps.settings.routes import settings_bp
 from apps.customers.routes import customers_bp
 from apps.suppliers.routes import suppliers_bp
+from apps.products.routes import products_bp
+
 
 
 from core.routes.health import health_bp
@@ -95,6 +97,7 @@ def create_app():
     app.register_blueprint(settings_bp)
     app.register_blueprint(customers_bp)
     app.register_blueprint(suppliers_bp)
+    app.register_blueprint(products_bp)
 
     # ==========================================================
     # LOGIN MANAGER
