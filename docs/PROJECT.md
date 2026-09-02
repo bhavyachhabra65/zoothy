@@ -31,6 +31,9 @@ Completed Modules
 ✔ Invoice Printing
 ✔ Authorisation(Login, Register, Forgot-Password)
 ✔ Settings(Current inputs: Business name, Phone, GSTIN, Business Address)
+✔ Customers
+✔ Suppliers
+
 
 All Modules
 ----------------

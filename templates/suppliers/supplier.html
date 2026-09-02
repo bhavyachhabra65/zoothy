@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ supplier.name }}
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/suppliers.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<header class="z-page-header">
+
+    <div class="z-brand">
+
+        <a class="z-brand-name">
+            {{ supplier.name }}
+        </a>
+
+        <!-- <p class="z-brand-tagline">
+            Making accounting easy for startups.
+        </p> -->
+
+    </div>
+
+    <nav class="z-page-header-nav">
+
+        <a
+            href="{{ url_for('suppliers.edit', supplier_id=supplier.id) }}"
+            class="z-button z-supplier-edit-button"
+        >
+            Edit
+        </a>
+
+    </nav>
+
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="z-alert z-alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="z-supplier-details">
+
+    <div class="z-supplier-detail-row">
+        <span class="z-supplier-detail-label">Phone</span>
+        <span>{{ supplier.phone or '—' }}</span>
+    </div>
+
+    <div class="z-supplier-detail-row">
+        <span class="z-supplier-detail-label">Email</span>
+        <span>{{ supplier.email or '—' }}</span>
+    </div>
+
+    <div class="z-supplier-detail-row">
+        <span class="z-supplier-detail-label">GSTIN</span>
+        <span>{{ supplier.gstin or '—' }}</span>
+    </div>
+
+    <div class="z-supplier-detail-row">
+        <span class="z-supplier-detail-label">Address</span>
+        <span class="z-supplier-detail-value z-preserve-lines">{{ supplier.address or '—' }}</span>
+    </div>
+
+    <div class="z-supplier-detail-row">
+        <span class="z-supplier-detail-label">Notes</span>
+        <span class="z-supplier-detail-value z-preserve-lines">{{ supplier.notes or '—' }}</span>
+    </div>
+
+</div>
+
+<div class="z-supplier-detail-actions">
+
+    <a
+        href="{{ url_for('suppliers.index') }}"
+        class="z-supplier-back"
+    >
+        Back to Suppliers
+    </a>
+
+    <form
+        method="POST"
+        action="{{ url_for('suppliers.delete', supplier_id=supplier.id) }}"
+        data-delete-supplier
+    >
+        <button
+            type="submit"
+            class="z-supplier-delete-button"
+        >
+            Delete Supplier
+        </button>
+    </form>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/suppliers.js') }}"></script>
+{% endblock %}
