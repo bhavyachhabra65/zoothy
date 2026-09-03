@@ -20,7 +20,7 @@ from apps.customers.routes import customers_bp
 from apps.suppliers.routes import suppliers_bp
 from apps.products.routes import products_bp
 from apps.inventory.routes import inventory_bp
-
+from apps.sales.routes import sales_bp
 
 
 from core.routes.health import health_bp
@@ -103,6 +103,7 @@ def create_app():
     app.register_blueprint(suppliers_bp)
     app.register_blueprint(products_bp)
     app.register_blueprint(inventory_bp)
+    app.register_blueprint(sales_bp)
 
     # ==========================================================
     # LOGIN MANAGER

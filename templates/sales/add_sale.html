@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Record Sale{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sales.css') }}">
+{% endblock %}
+
+{% block content %}
+<header class="z-page-heading">
+    <h1 class="z-page-heading-title">Record Sale</h1>
+</header>
+
+{% if error %}
+<div class="z-alert z-alert-error">{{ error }}</div>
+{% endif %}
+
+<form method="POST" class="z-sale-form" id="saleForm">
+    <div class="z-row">
+        <div class="z-col-1">
+            <label for="customer_id" class="z-label">Customer</label>
+            <select id="customer_id" name="customer_id" class="z-input">
+                <option value="">Walk-in Customer</option>
+                {% for customer in customers %}
+                <option value="{{ customer.id }}" {% if selected_customer_id|string == customer.id|string %}selected{% endif %}>{{ customer.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="z-col-1">
+            <label for="sale_date" class="z-label">Sale Date</label>
+            <input id="sale_date" name="sale_date" type="date" value="{{ sale_date }}" class="z-input" required>
+        </div>
+    </div>
+
+    <section class="z-sale-items-section">
+        <div class="z-sale-section-heading">
+            <div>
+                <h2>Products</h2>
+                <p>Add the products sold in this transaction.</p>
+            </div>
+            <button type="button" class="z-sale-add-row" id="addSaleItem">Add Product</button>
+        </div>
+
+        <div class="z-sale-items-wrap">
+            <table class="z-sale-items-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Price</th>
+                        <th>GST</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="saleItemsBody">
+                    {% for item in form_items %}
+                    <tr class="z-sale-item-row">
+                        <td>
+                            <select name="product_id" class="z-input z-sale-product" required>
+                                <option value="">Select product</option>
+                                {% for product in products %}
+                                <option value="{{ product.id }}" data-price="{{ product.selling_price }}" data-gst="{{ product.gst_rate }}" data-unit="{{ product.unit }}" {% if item.product_id|string == product.id|string %}selected{% endif %}>{{ product.name }}{% if product.sku %} · {{ product.sku }}{% endif %}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td><input name="quantity" type="number" class="z-input z-sale-quantity" min="0.001" step="0.001" value="{{ item.quantity }}" required></td>
+                        <td class="z-sale-unit-cell"><span class="z-sale-unit">—</span></td>
+                        <td><input name="unit_price" type="number" class="z-input z-sale-price" min="0" step="0.01" value="{{ item.unit_price }}" required></td>
+                        <td><span class="z-sale-gst">0%</span></td>
+                        <td><strong class="z-sale-line-total">₹0.00</strong></td>
+                        <td><button type="button" class="z-sale-remove-row" aria-label="Remove product">Remove</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="z-sale-summary">
+        <div><span>Subtotal</span><strong id="saleSubtotal">₹0.00</strong></div>
+        <div><span>GST</span><strong id="saleTax">₹0.00</strong></div>
+        <div class="z-sale-total"><span>Total</span><strong id="saleTotal">₹0.00</strong></div>
+    </div>
+
+    <div class="z-row">
+        <div class="z-col-1">
+            <label for="notes" class="z-label">Notes</label>
+            <textarea id="notes" name="notes" class="z-textarea" rows="3" placeholder="Optional notes">{{ notes }}</textarea>
+        </div>
+    </div>
+
+    <div class="z-actions z-sale-form-actions">
+        <button type="submit" class="z-button">Record Sale</button>
+        <a href="{{ url_for('sales.index') }}" class="z-sale-cancel">Cancel</a>
+    </div>
+</form>
+
+<template id="saleItemTemplate">
+<tr class="z-sale-item-row">
+    <td>
+        <select name="product_id" class="z-input z-sale-product" required>
+            <option value="">Select product</option>
+            {% for product in products %}
+            <option value="{{ product.id }}" data-price="{{ product.selling_price }}" data-gst="{{ product.gst_rate }}" data-unit="{{ product.unit }}">{{ product.name }}{% if product.sku %} · {{ product.sku }}{% endif %}</option>
+            {% endfor %}
+        </select>
+    </td>
+    <td><input name="quantity" type="number" class="z-input z-sale-quantity" min="0.001" step="0.001" value="1" required></td>
+    <td class="z-sale-unit-cell"><span class="z-sale-unit">—</span></td>
+    <td><input name="unit_price" type="number" class="z-input z-sale-price" min="0" step="0.01" value="0" required></td>
+    <td><span class="z-sale-gst">0%</span></td>
+    <td><strong class="z-sale-line-total">₹0.00</strong></td>
+    <td><button type="button" class="z-sale-remove-row" aria-label="Remove product">Remove</button></td>
+</tr>
+</template>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/sales.js') }}"></script>
+{% endblock %}
