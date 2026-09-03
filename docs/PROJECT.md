@@ -34,6 +34,7 @@ Completed Modules
 ✔ Customers
 ✔ Suppliers
 ✔ Products
+✔ Inventory
 
 
 All Modules

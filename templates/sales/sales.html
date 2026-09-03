@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Sales{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sales.css') }}">
+{% endblock %}
+
+{% block content %}
+<header class="z-page-header z-sales-heading">
+    <div class="z-brand">
+        <a class="z-brand-name">Sales</a>
+    </div>
+    <nav class="z-page-header-nav">
+        <a href="{{ url_for('dashboard.index') }}">Back to Home</a>
+        <a href="{{ url_for('sales.add') }}" class="z-button">Record Sale</a>
+    </nav>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="z-alert z-alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<form method="GET" action="{{ url_for('sales.index') }}" class="z-sales-search">
+    <input type="search" name="search" value="{{ search }}" class="z-input" placeholder="Search sales" autocomplete="off">
+    <button type="submit" class="z-button">Search</button>
+    {% if search %}
+        <a href="{{ url_for('sales.index') }}" class="z-sales-clear">Clear</a>
+    {% endif %}
+</form>
+
+{% if sales %}
+<div class="z-sales-table-wrap">
+    <table class="z-sales-table">
+        <thead>
+            <tr>
+                <th>Sale</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+            <tr>
+                <td><a href="{{ url_for('sales.view', sale_id=sale.id) }}" class="z-sales-number">{{ sale.sale_number }}</a></td>
+                <td>{{ sale.sale_date.strftime('%d %b %Y') }}</td>
+                <td>{{ sale.customer.name if sale.customer else 'Walk-in Customer' }}</td>
+                <td>{{ sale.items|length }}</td>
+                <td>₹{{ '%.2f'|format(sale.total_amount|float) }}</td>
+                <td class="z-sales-action-cell"><a href="{{ url_for('sales.view', sale_id=sale.id) }}" class="z-sales-view-link">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="z-sales-empty">
+    {% if search %}
+        <h2>No sales found</h2>
+        <p>Try a different search.</p>
+    {% else %}
+        <h2>No sales yet</h2>
+        <p>Record your first sale to start tracking sales and stock movement.</p>
+        <a href="{{ url_for('sales.add') }}" class="z-button z-sales-empty-button">Record Sale</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/sales.js') }}"></script>
+{% endblock %}

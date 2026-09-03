@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}{{ sale.sale_number }}{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sales.css') }}">
+{% endblock %}
+
+{% block content %}
+<header class="z-page-header z-sales-heading">
+    <div class="z-brand">
+        <a class="z-brand-name">{{ sale.sale_number }}</a>
+    </div>
+    <nav class="z-page-header-nav">
+        <a href="{{ url_for('sales.index') }}">Back to Sales</a>
+    </nav>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="z-alert z-alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="z-sale-detail-meta">
+    <div><span>Date</span><strong>{{ sale.sale_date.strftime('%d %b %Y') }}</strong></div>
+    <div><span>Customer</span><strong>{{ customer.name if customer else 'Walk-in Customer' }}</strong></div>
+</div>
+
+<section class="z-sale-detail-section">
+    <div class="z-sale-section-heading">
+        <div>
+            <h2>Products</h2>
+        </div>
+    </div>
+    <div class="z-sale-items-wrap">
+        <table class="z-sale-items-table z-sale-detail-table">
+            <thead>
+                <tr><th>Product</th><th>Unit</th><th>Quantity</th><th>Price</th><th>GST</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+                {% for item in sale.items %}
+                <tr>
+                    <td><strong>{{ item.product_name }}</strong></td>
+                    <td>{{ item.unit }}</td>
+                    <td>{{ item.quantity|format_quantity }}</td>
+                    <td>₹{{ '%.2f'|format(item.unit_price|float) }}</td>
+                    <td>{{ '%.2f'|format(item.gst_rate|float) }}%</td>
+                    <td>₹{{ '%.2f'|format(item.line_total|float) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<div class="z-sale-summary z-sale-detail-summary">
+    <div><span>Subtotal</span><strong>₹{{ '%.2f'|format(sale.subtotal|float) }}</strong></div>
+    <div><span>GST</span><strong>₹{{ '%.2f'|format(sale.tax_amount|float) }}</strong></div>
+    <div class="z-sale-total"><span>Total</span><strong>₹{{ '%.2f'|format(sale.total_amount|float) }}</strong></div>
+</div>
+
+{% if sale.notes %}
+<section class="z-sale-notes">
+    <h2>Notes</h2>
+    <p>{{ sale.notes }}</p>
+</section>
+{% endif %}
+
+<div class="z-sale-detail-actions">
+    <a href="{{ url_for('sales.index') }}" class="z-sale-cancel">Back to Sales</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/sales.js') }}"></script>
+{% endblock %}

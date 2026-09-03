@@ -224,6 +224,27 @@ class InventoryService:
         return stock
 
     @staticmethod
+    def stock_out(user_id, product_id, quantity, reason):
+        """Remove stock inside the caller's transaction; never commit here."""
+        product = Product.query.filter_by(id=product_id, user_id=user_id).first()
+        if not product:
+            raise ValueError("Product not found.")
+        quantity = Decimal(quantity)
+        if quantity <= 0:
+            raise ValueError("Stock-out quantity must be greater than zero.")
+        stock = InventoryStock.query.filter_by(user_id=user_id, product_id=product_id).with_for_update().first()
+        if not stock:
+            raise ValueError(f"Only 0 {product.unit} is available for {product.name}.")
+        current_quantity = Decimal(stock.quantity or 0)
+        new_quantity = current_quantity - quantity
+        if new_quantity < 0:
+            raise ValueError(f"Only {current_quantity} {product.unit} is available for {product.name}.")
+        stock.quantity = new_quantity
+        db.session.add(InventoryMovement(user_id=user_id, product_id=product_id, movement_type="remove", quantity=quantity, resulting_quantity=new_quantity, reason=reason))
+        db.session.flush()
+        return stock
+
+    @staticmethod
     def update_low_stock_level(
         user_id,
         product_id,
