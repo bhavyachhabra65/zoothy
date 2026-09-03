@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from sqlalchemy import or_
 
 from apps.products.models import Product
@@ -49,8 +51,11 @@ class ProductService:
         purchase_price,
         selling_price,
         gst_rate,
-        description
+        description,
+        opening_stock="0"
     ):
+
+        opening_stock = Decimal(opening_stock or 0)
 
         product = Product(
             user_id=user_id,
@@ -61,10 +66,24 @@ class ProductService:
             purchase_price=purchase_price or 0,
             selling_price=selling_price or 0,
             gst_rate=gst_rate or 0,
+            opening_stock=opening_stock,
             description=description or None
         )
 
         db.session.add(product)
+        db.session.flush()
+
+        # Opening stock is recorded in Inventory at product creation time.
+        # The import is intentionally local to avoid a module-level circular import.
+        if opening_stock > 0:
+            from apps.inventory.services import InventoryService
+
+            InventoryService.initialize_opening_stock(
+                user_id=user_id,
+                product_id=product.id,
+                quantity=opening_stock
+            )
+
         db.session.commit()
 
         return product

@@ -33,6 +33,7 @@ Completed Modules
 ✔ Settings(Current inputs: Business name, Phone, GSTIN, Business Address)
 ✔ Customers
 ✔ Suppliers
+✔ Products
 
 
 All Modules

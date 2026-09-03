@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}
+Adjust Stock
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/inventory.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<header class="z-page-heading">
+    <h1 class="z-page-heading-title">
+        Adjust Stock
+    </h1>
+</header>
+
+{% if error %}
+    <div class="z-alert z-alert-error">
+        {{ error }}
+    </div>
+{% endif %}
+
+<form
+    method="POST"
+    action="{{ url_for('inventory.add_submit') }}"
+    class="z-inventory-form"
+>
+
+    <div class="z-row">
+
+        <div class="z-col-2">
+            <label
+                for="product_id"
+                class="z-label"
+            >
+                Product
+            </label>
+
+            <select
+                id="product_id"
+                name="product_id"
+                class="z-input"
+                required
+                autofocus
+            >
+                <option value="">Select Product</option>
+
+                {% for product in products %}
+                    <option
+                        value="{{ product.id }}"
+                        {% if selected_product_id|string == product.id|string %}selected{% endif %}
+                    >
+                        {{ product.name }}{% if product.sku %} — {{ product.sku }}{% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+    </div>
+
+    <div class="z-row">
+
+        <div class="z-col-1">
+            <label class="z-label">
+                Stock Action
+            </label>
+
+            <div class="z-stock-actions" role="radiogroup" aria-label="Stock Action">
+
+                <label class="z-stock-action-option">
+                    <input
+                        type="radio"
+                        name="movement_type"
+                        value="add"
+                        {% if form_data.get('movement_type', 'add') == 'add' %}checked{% endif %}
+                    >
+                    <span>Add Stock</span>
+                </label>
+
+                <label class="z-stock-action-option">
+                    <input
+                        type="radio"
+                        name="movement_type"
+                        value="remove"
+                        {% if form_data.get('movement_type') == 'remove' %}checked{% endif %}
+                    >
+                    <span>Remove Stock</span>
+                </label>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="z-row">
+
+        <div class="z-col-1">
+            <label
+                for="quantity"
+                class="z-label"
+            >
+                Quantity
+            </label>
+
+            <input
+                id="quantity"
+                name="quantity"
+                type="number"
+                value="{{ form_data.get('quantity', '') }}"
+                class="z-input"
+                min="0.001"
+                step="0.001"
+                inputmode="decimal"
+                required
+            >
+        </div>
+
+        <div class="z-col-1">
+            <label
+                for="low_stock_level"
+                class="z-label"
+            >
+                Low Stock Level
+            </label>
+
+            <input
+                id="low_stock_level"
+                name="low_stock_level"
+                type="number"
+                value="{{ form_data.get('low_stock_level', '0') }}"
+                class="z-input"
+                min="0"
+                step="0.001"
+                inputmode="decimal"
+            >
+        </div>
+
+    </div>
+
+    <div class="z-row">
+
+        <div class="z-field-full">
+            <label
+                for="reason"
+                class="z-label"
+            >
+                Reason
+            </label>
+
+            <input
+                id="reason"
+                name="reason"
+                type="text"
+                value="{{ form_data.get('reason', '') }}"
+                class="z-input"
+                maxlength="255"
+                placeholder="e.g. Physical count correction or damaged stock"
+                required
+            >
+        </div>
+
+    </div>
+
+    <div class="z-inventory-form-actions">
+
+        <a
+            href="{{ url_for('inventory.index') }}"
+            class="z-inventory-cancel"
+        >
+            Cancel
+        </a>
+
+        <button
+            type="submit"
+            class="z-button"
+        >
+            Save Adjustment
+        </button>
+
+    </div>
+
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/inventory.js') }}"></script>
+{% endblock %}

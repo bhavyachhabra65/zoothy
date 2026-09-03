@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}
+Inventory
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/inventory.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<header class="z-page-header z-inventory-heading">
+
+    <div class="z-brand">
+        <a class="z-brand-name">
+            Inventory
+        </a>
+    </div>
+
+    <nav class="z-page-header-nav">
+
+        <a href="{{ url_for('dashboard.index') }}">
+            Back to Home
+        </a>
+
+        <a
+            href="{{ url_for('inventory.add') }}"
+            class="z-button z-inventory-add-button"
+        >
+            Adjust Stock
+        </a>
+
+    </nav>
+
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="z-alert z-alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<form
+    method="GET"
+    action="{{ url_for('inventory.index') }}"
+    class="z-inventory-search"
+>
+
+    <input
+        type="search"
+        name="search"
+        value="{{ search }}"
+        class="z-input"
+        placeholder="Search inventory"
+        autocomplete="off"
+    >
+
+    <button
+        type="submit"
+        class="z-button z-inventory-search-button"
+    >
+        Search
+    </button>
+
+    {% if search %}
+        <a
+            href="{{ url_for('inventory.index') }}"
+            class="z-inventory-clear"
+        >
+            Clear
+        </a>
+    {% endif %}
+
+</form>
+
+{% if inventory %}
+
+<div class="z-inventory-table-wrap">
+
+    <table class="z-inventory-table">
+
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Stock</th>
+                <th>Unit</th>
+                <th>Status</th>
+                <th class="z-inventory-action-cell"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in inventory %}
+                {% set quantity = item.quantity %}
+                {% set low_stock_level = item.low_stock_level %}
+                <tr>
+                    <td>
+                        <a
+                            href="{{ url_for('inventory.view', product_id=item.product.id) }}"
+                            class="z-inventory-product-name"
+                        >
+                            {{ item.product.name }}
+                        </a>
+                    </td>
+                    <td>{{ item.product.sku or '—' }}</td>
+                    <td>{{ quantity|format_quantity }}</td>
+                    <td>{{ item.product.unit }}</td>
+                    <td>
+                        {% if quantity == 0 %}
+                            <span class="z-inventory-status z-inventory-status-out">
+                                Out of Stock
+                            </span>
+                        {% elif low_stock_level > 0 and quantity <= low_stock_level %}
+                            <span class="z-inventory-status z-inventory-status-low">
+                                Low Stock
+                            </span>
+                        {% else %}
+                            <span class="z-inventory-status z-inventory-status-in">
+                                In Stock
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td class="z-inventory-action-cell">
+                        <a
+                            href="{{ url_for('inventory.view', product_id=item.product.id) }}"
+                            class="z-inventory-view-link"
+                        >
+                            View
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+{% else %}
+
+<div class="z-inventory-empty">
+
+    <h2>No products yet</h2>
+
+    <p>Add a product first, then manage its stock here.</p>
+
+    <a
+        href="{{ url_for('products.add') }}"
+        class="z-button z-inventory-empty-button"
+    >
+        Add Product
+    </a>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/inventory.js') }}"></script>
+{% endblock %}
