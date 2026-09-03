@@ -1,0 +1,412 @@
+/* ==========================================================
+   INVENTORY
+========================================================== */
+
+.z-inventory-heading {
+    align-items: center;
+    margin-bottom: var(--z-space-5);
+}
+
+
+/* ==========================================================
+   PRIMARY ACTION
+========================================================== */
+
+.z-inventory-add-button {
+    min-width: 190px;
+    width: auto;
+    text-align: center;
+}
+
+.z-page-header-nav a.z-inventory-add-button {
+    color: white;
+}
+
+.z-page-header-nav a.z-inventory-add-button:hover {
+    color: white;
+}
+
+
+/* ==========================================================
+   SEARCH
+========================================================== */
+
+.z-inventory-search {
+    display: flex;
+    align-items: center;
+    gap: var(--z-space-3);
+    margin-bottom: var(--z-space-5);
+}
+
+.z-inventory-search .z-input {
+    flex: 1;
+}
+
+.z-inventory-search-button {
+    min-width: 190px;
+}
+
+.z-inventory-clear,
+.z-inventory-cancel,
+.z-inventory-back,
+.z-inventory-view-link {
+    color: var(--z-text-secondary);
+    font-size: var(--z-font-body-size);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.z-inventory-clear:hover,
+.z-inventory-cancel:hover,
+.z-inventory-back:hover,
+.z-inventory-view-link:hover {
+    color: var(--z-primary);
+}
+
+
+/* ==========================================================
+   TABLE
+========================================================== */
+
+.z-inventory-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+}
+
+.z-inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.z-inventory-table th,
+.z-inventory-table td {
+    padding: var(--z-space-3) var(--z-space-4);
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.z-inventory-table th {
+    color: var(--z-text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--z-background);
+}
+
+.z-inventory-table tbody tr {
+    border-top: var(--z-border-width) solid var(--z-border);
+    transition: background var(--z-transition);
+}
+
+.z-inventory-table tbody tr:hover {
+    background: var(--z-background);
+}
+
+.z-inventory-product-name {
+    color: var(--z-text);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.z-inventory-product-name:hover {
+    color: var(--z-primary);
+}
+
+.z-inventory-action-cell {
+    width: 90px;
+    text-align: right !important;
+}
+
+
+/* ==========================================================
+   STATUS
+========================================================== */
+
+.z-inventory-status {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.z-inventory-status-in {
+    color: var(--z-success);
+}
+
+.z-inventory-status-low {
+    color: var(--z-warning);
+}
+
+.z-inventory-status-out {
+    color: var(--z-danger);
+}
+
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.z-inventory-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    padding: var(--z-space-6);
+    text-align: center;
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+    background: var(--z-surface);
+}
+
+.z-inventory-empty h2 {
+    margin: 0 0 var(--z-space-2);
+    font-size: 20px;
+}
+
+.z-inventory-empty p {
+    margin: 0;
+    color: var(--z-text-secondary);
+}
+
+.z-inventory-empty-button {
+    margin-top: var(--z-space-3);
+    color: white;
+    text-decoration: none;
+}
+
+.z-inventory-empty-button:hover {
+    color: white;
+}
+
+
+/* ==========================================================
+   FORM
+========================================================== */
+
+.z-inventory-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-field-gap);
+}
+
+.z-inventory-form .z-row {
+    align-items: flex-end;
+}
+
+.z-stock-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--z-space-3);
+    min-height: var(--z-input-height);
+}
+
+.z-stock-action-option {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--z-space-2);
+    min-height: 44px;
+    padding: 0 var(--z-space-3);
+    color: var(--z-text);
+    font-size: var(--z-font-body-size);
+    font-weight: 500;
+    cursor: pointer;
+    border: var(--z-border-width) solid transparent;
+    border-radius: var(--z-radius-md);
+    transition:
+        background var(--z-transition),
+        border-color var(--z-transition);
+}
+
+.z-stock-action-option:hover {
+    background: var(--z-background);
+    border-color: var(--z-border);
+}
+
+.z-stock-action-option input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    flex: 0 0 auto;
+    width: 19px;
+    height: 19px;
+    margin: 0;
+    border: 2px solid var(--z-border);
+    border-radius: 50%;
+    background: var(--z-surface);
+    cursor: pointer;
+    transition:
+        border-color var(--z-transition),
+        background var(--z-transition),
+        box-shadow var(--z-transition);
+}
+
+.z-stock-action-option input[type="radio"]:checked {
+    border-color: var(--z-primary);
+    background: var(--z-primary);
+    box-shadow: inset 0 0 0 4px var(--z-surface);
+}
+
+.z-stock-action-option input[type="radio"]:focus-visible {
+    outline: 3px solid var(--z-focus-ring);
+    outline-offset: 2px;
+}
+
+.z-stock-action-option:has(input[type="radio"]:checked) {
+    background: var(--z-background);
+    border-color: var(--z-primary);
+}
+
+.z-inventory-form-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--z-space-4);
+    margin-top: var(--z-space-2);
+}
+
+
+/* ==========================================================
+   SUMMARY
+========================================================== */
+
+.z-inventory-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--z-space-4);
+    margin-bottom: var(--z-space-5);
+}
+
+.z-inventory-summary-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-space-2);
+    padding: var(--z-space-4);
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+}
+
+.z-inventory-summary-label {
+    color: var(--z-text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.z-inventory-summary-value {
+    color: var(--z-text);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   SECTIONS
+========================================================== */
+
+.z-inventory-section {
+    margin-top: var(--z-space-6);
+}
+
+.z-inventory-section-heading {
+    margin-bottom: var(--z-space-3);
+}
+
+.z-inventory-section-heading h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.z-inventory-low-stock-form {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--z-space-4);
+    padding: var(--z-space-4);
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+}
+
+.z-inventory-low-stock-field {
+    width: var(--z-field-medium);
+}
+
+.z-inventory-history-empty {
+    padding: var(--z-space-5);
+    text-align: center;
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+}
+
+.z-inventory-history-empty p {
+    margin: 0;
+    color: var(--z-text-secondary);
+}
+
+.z-inventory-detail-actions {
+    margin-top: var(--z-space-5);
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 680px) {
+
+    .z-inventory-heading {
+        align-items: flex-start;
+    }
+
+    .z-inventory-add-button {
+        width: 100%;
+    }
+
+    .z-inventory-search {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .z-inventory-search-button {
+        width: 100%;
+    }
+
+    .z-inventory-table th,
+    .z-inventory-table td {
+        padding: var(--z-space-3);
+    }
+
+    .z-stock-actions {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .z-inventory-form-actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .z-inventory-form-actions .z-button {
+        width: 100%;
+    }
+
+    .z-inventory-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .z-inventory-low-stock-form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .z-inventory-low-stock-field {
+        width: 100%;
+    }
+
+    .z-inventory-low-stock-form .z-button {
+        width: 100%;
+    }
+
+}

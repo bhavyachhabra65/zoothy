@@ -109,6 +109,25 @@ Add Product
     <div class="z-row">
 
         <div class="z-col-1">
+            <label for="opening_stock" class="z-label">Opening Stock</label>
+            <input
+                id="opening_stock"
+                name="opening_stock"
+                type="number"
+                value="{{ form_data.get('opening_stock', '0') }}"
+                class="z-input"
+                min="0"
+                step="0.001"
+            >
+        </div>
+
+        <div class="z-col-1"></div>
+
+    </div>
+
+    <div class="z-row">
+
+        <div class="z-col-1">
             <label for="purchase_price" class="z-label">Purchase Price</label>
             <input
                 id="purchase_price"

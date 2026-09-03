@@ -9,7 +9,8 @@ def validate_product(
     purchase_price,
     selling_price,
     gst_rate,
-    description
+    description,
+    opening_stock="0"
 ):
 
     name = (name or "").strip()
@@ -19,6 +20,7 @@ def validate_product(
     purchase_price = (purchase_price or "").strip()
     selling_price = (selling_price or "").strip()
     gst_rate = (gst_rate or "").strip()
+    opening_stock = (opening_stock or "0").strip()
 
     if not name:
         return "Product name is required."
@@ -56,8 +58,26 @@ def validate_product(
     except (InvalidOperation, ValueError):
         return "Enter a valid GST rate."
 
-    allowed_gst_rates = {Decimal("0"), Decimal("5"), Decimal("12"), Decimal("18"), Decimal("28")}
+    allowed_gst_rates = {
+        Decimal("0"),
+        Decimal("5"),
+        Decimal("12"),
+        Decimal("18"),
+        Decimal("28")
+    }
+
     if gst not in allowed_gst_rates:
         return "Select a valid GST rate: 0%, 5%, 12%, 18% or 28%."
+
+    try:
+        opening_stock_value = Decimal(opening_stock or "0")
+    except (InvalidOperation, ValueError):
+        return "Enter a valid opening stock quantity."
+
+    if opening_stock_value < 0:
+        return "Opening stock cannot be negative."
+
+    if opening_stock_value.as_tuple().exponent < -3:
+        return "Opening stock can have up to 3 decimal places."
 
     return None

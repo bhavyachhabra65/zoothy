@@ -6,6 +6,7 @@ from flask_login import current_user, logout_user
 
 from core.settings import Config
 from core.extensions import db, login_manager, migrate
+from core.template_filters import register_template_filters
 
 from apps.auth.models import User
 
@@ -18,6 +19,7 @@ from apps.settings.routes import settings_bp
 from apps.customers.routes import customers_bp
 from apps.suppliers.routes import suppliers_bp
 from apps.products.routes import products_bp
+from apps.inventory.routes import inventory_bp
 
 
 
@@ -36,6 +38,8 @@ def create_app():
     )
 
     app.config.from_object(Config)
+
+    register_template_filters(app)
 
     # ==========================================================
     # EXTENSIONS
@@ -98,6 +102,7 @@ def create_app():
     app.register_blueprint(customers_bp)
     app.register_blueprint(suppliers_bp)
     app.register_blueprint(products_bp)
+    app.register_blueprint(inventory_bp)
 
     # ==========================================================
     # LOGIN MANAGER

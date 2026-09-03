@@ -30,6 +30,7 @@ def _form_data():
         "purchase_price": request.form.get("purchase_price", "").strip(),
         "selling_price": request.form.get("selling_price", "").strip(),
         "gst_rate": request.form.get("gst_rate", "").strip(),
+        "opening_stock": request.form.get("opening_stock", "0").strip(),
         "description": request.form.get("description", "").strip()
     }
 
@@ -61,7 +62,9 @@ def add():
 
     return render_template(
         "products/add_product.html",
-        form_data={}
+        form_data={
+            "opening_stock": "0"
+        }
     )
 
 
@@ -159,7 +162,15 @@ def edit_submit(product_id):
     form_data = _form_data()
 
     error = validate_product(
-        **form_data
+        name=form_data["name"],
+        sku=form_data["sku"],
+        hsn_sac=form_data["hsn_sac"],
+        unit=form_data["unit"],
+        purchase_price=form_data["purchase_price"],
+        selling_price=form_data["selling_price"],
+        gst_rate=form_data["gst_rate"],
+        description=form_data["description"],
+        opening_stock="0"
     )
 
     if error:
@@ -173,7 +184,14 @@ def edit_submit(product_id):
 
     ProductService.update_product(
         product,
-        **form_data
+        name=form_data["name"],
+        sku=form_data["sku"],
+        hsn_sac=form_data["hsn_sac"],
+        unit=form_data["unit"],
+        purchase_price=form_data["purchase_price"],
+        selling_price=form_data["selling_price"],
+        gst_rate=form_data["gst_rate"],
+        description=form_data["description"]
     )
 
     flash(

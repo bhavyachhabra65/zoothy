@@ -57,6 +57,11 @@
     </div>
 
     <div class="z-product-detail-row">
+        <span class="z-product-detail-label">Opening Stock</span>
+        <span>{{ product.opening_stock or 0 }} {{ product.unit }}</span>
+    </div>
+
+    <div class="z-product-detail-row">
         <span class="z-product-detail-label">Purchase Price</span>
         <span>₹{{ '%.2f'|format(product.purchase_price or 0) }}</span>
     </div>

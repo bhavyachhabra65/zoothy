@@ -58,6 +58,12 @@ class Product(db.Model):
         default=0
     )
 
+    opening_stock = db.Column(
+        db.Numeric(14, 3),
+        nullable=False,
+        default=0
+    )
+
     description = db.Column(
         db.Text,
         nullable=True

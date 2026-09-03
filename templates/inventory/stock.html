@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ inventory.product.name }}
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/inventory.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<header class="z-page-header z-inventory-heading">
+
+    <div class="z-brand">
+        <a class="z-brand-name">
+            {{ inventory.product.name }}
+        </a>
+    </div>
+
+    <nav class="z-page-header-nav">
+        <a
+            href="{{ url_for('inventory.add', product_id=inventory.product.id) }}"
+            class="z-button"
+        >
+            Adjust Stock
+        </a>
+    </nav>
+
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="z-alert z-alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="z-inventory-summary">
+
+    <div class="z-inventory-summary-card">
+        <span class="z-inventory-summary-label">Current Stock</span>
+        <strong class="z-inventory-summary-value">
+            {{ inventory.quantity|format_quantity }} {{ inventory.product.unit }}
+        </strong>
+    </div>
+
+    <div class="z-inventory-summary-card">
+        <span class="z-inventory-summary-label">SKU</span>
+        <strong class="z-inventory-summary-value">
+            {{ inventory.product.sku or '—' }}
+        </strong>
+    </div>
+
+    <div class="z-inventory-summary-card">
+        <span class="z-inventory-summary-label">Status</span>
+        <strong class="z-inventory-summary-value">
+            {% if inventory.quantity == 0 %}
+                Out of Stock
+            {% elif inventory.low_stock_level > 0 and inventory.quantity <= inventory.low_stock_level %}
+                Low Stock
+            {% else %}
+                In Stock
+            {% endif %}
+        </strong>
+    </div>
+
+</div>
+
+<section class="z-inventory-section">
+
+    <div class="z-inventory-section-heading">
+        <h2>Stock Settings</h2>
+    </div>
+
+    <form
+        method="POST"
+        action="{{ url_for('inventory.update_low_stock', product_id=inventory.product.id) }}"
+        class="z-inventory-low-stock-form"
+    >
+        <div class="z-inventory-low-stock-field">
+            <label
+                for="low_stock_level"
+                class="z-label"
+            >
+                Low Stock Level
+            </label>
+
+            <input
+                id="low_stock_level"
+                name="low_stock_level"
+                type="number"
+                value="{{ inventory.low_stock_level }}"
+                class="z-input"
+                min="0"
+                step="0.001"
+                inputmode="decimal"
+                required
+            >
+        </div>
+
+        <button
+            type="submit"
+            class="z-button"
+        >
+            Save
+        </button>
+    </form>
+
+</section>
+
+<section class="z-inventory-section">
+
+    <div class="z-inventory-section-heading">
+        <h2>Stock History</h2>
+    </div>
+
+    {% if movements %}
+
+    <div class="z-inventory-table-wrap">
+
+        <table class="z-inventory-table">
+
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Change</th>
+                    <th>Stock After</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for movement in movements %}
+                    <tr>
+                        <td>
+                            {{ movement.created_at.strftime('%d %b %Y, %I:%M %p') }}
+                        </td>
+                        <td>
+                            {% if movement.movement_type in ('add', 'opening') %}
+                                +{{ movement.quantity|format_quantity }}
+                            {% else %}
+                                -{{ movement.quantity|format_quantity }}
+                            {% endif %}
+                            {{ inventory.product.unit }}
+                        </td>
+                        <td>
+                            {{ movement.resulting_quantity|format_quantity }}
+                            {{ inventory.product.unit }}
+                        </td>
+                        <td>{{ movement.reason }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="z-inventory-history-empty">
+        <p>No stock changes yet.</p>
+    </div>
+
+    {% endif %}
+
+</section>
+
+<div class="z-inventory-detail-actions">
+    <a
+        href="{{ url_for('inventory.index') }}"
+        class="z-inventory-back"
+    >
+        Back to Inventory
+    </a>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/inventory.js') }}"></script>
+{% endblock %}
