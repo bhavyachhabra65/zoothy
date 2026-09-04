@@ -1,0 +1,474 @@
+/* ==========================================================
+   AUTH MAIN
+   ========================================================== */
+
+.z-container.z-auth-main {
+    padding-bottom: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ==========================================================
+   AUTH
+   ========================================================== */
+
+.z-auth-page {
+    width: 100%;
+    padding-bottom: var(--z-space-4);
+    display: flex;
+    justify-content: center;
+}
+
+
+/* ==========================================================
+   AUTH CONTAINER
+   ========================================================== */
+
+.z-auth-container {
+    width: 100%;
+    max-width: 550px;
+}
+
+
+/* ==========================================================
+   AUTH FORM
+   ========================================================== */
+
+.z-auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-field-gap);
+}
+
+
+/* ==========================================================
+   FORM GROUP
+   ========================================================== */
+
+.z-auth-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-label-gap);
+}
+
+
+/* ==========================================================
+   LABEL
+   ========================================================== */
+
+.z-auth-label {
+    font-size: var(--z-font-label-size);
+    font-weight: var(--z-font-label-weight);
+    color: var(--z-text);
+}
+
+
+/* ==========================================================
+   INPUT
+   ========================================================== */
+
+.z-auth-input {
+    width: 100%;
+    height: var(--z-input-height);
+
+    padding: 0 var(--z-space-3);
+
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-md);
+
+    background: var(--z-surface);
+    color: var(--z-text);
+
+    transition:
+        border-color var(--z-transition),
+        box-shadow var(--z-transition);
+}
+
+.z-auth-input:hover {
+    border-color: #D1D5DB;
+}
+
+.z-auth-input:focus {
+    border-color: var(--z-primary);
+
+    outline: none;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+.z-auth-input::placeholder {
+    color: var(--z-text-secondary);
+}
+
+
+/* ==========================================================
+   PASSWORD INPUT
+   ========================================================== */
+
+.z-auth-password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.z-auth-password-wrapper .z-auth-input {
+    padding-right: 44px;
+}
+
+
+/* ==========================================================
+   PASSWORD TOGGLE
+   ========================================================== */
+
+.z-auth-password-toggle {
+    position: absolute;
+
+    top: 50%;
+    right: var(--z-space-3);
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform: translateY(-50%);
+
+    border: 0;
+    background: transparent;
+
+    color: var(--z-text-secondary);
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    border-radius: var(--z-radius-sm);
+
+    transition:
+        color var(--z-transition),
+        background var(--z-transition);
+}
+
+.z-auth-password-toggle:hover {
+    color: var(--z-text);
+}
+
+
+/* ==========================================================
+   REMEMBER ME
+   ========================================================== */
+
+.z-auth-remember {
+    margin-top: var(--z-space-2);
+}
+
+.z-auth-checkbox {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--z-text-secondary);
+
+    font-size: 14px;
+
+    cursor: pointer;
+    user-select: none;
+}
+
+
+/* Hide native checkbox */
+
+.z-auth-checkbox input {
+    position: absolute;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* Custom checkbox */
+
+.z-auth-checkbox-box {
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-sm);
+
+    background: var(--z-surface);
+
+    transition:
+        background var(--z-transition),
+        border-color var(--z-transition),
+        box-shadow var(--z-transition);
+}
+
+
+/* Checked */
+
+.z-auth-checkbox input:checked + .z-auth-checkbox-box {
+    border-color: var(--z-primary);
+
+    background: var(--z-primary);
+
+    box-shadow:
+        0 0 0 2px rgba(37, 99, 235, 0.08);
+}
+
+
+/* Check mark */
+
+.z-auth-checkbox input:checked + .z-auth-checkbox-box::after {
+    content: "";
+
+    display: block;
+
+    width: 5px;
+    height: 9px;
+
+    margin: 2px auto 0;
+
+    border-right: 2px solid var(--z-surface);
+    border-bottom: 2px solid var(--z-surface);
+
+    transform: rotate(45deg);
+}
+
+
+/* Hover */
+
+.z-auth-checkbox:hover .z-auth-checkbox-box {
+    border-color: var(--z-primary);
+}
+
+.z-auth-checkbox-label {
+    line-height: 17px;
+}
+
+
+/* ==========================================================
+   ERROR
+   ========================================================== */
+
+.z-auth-error {
+    padding: var(--z-space-2) var(--z-space-3);
+
+    border: var(--z-border-width) solid var(--z-danger);
+    border-radius: var(--z-radius-sm);
+
+    background: rgba(220, 38, 38, 0.05);
+    color: var(--z-danger);
+
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+   DESCRIPTION
+   ========================================================== */
+
+.z-auth-description {
+    margin: 0;
+
+    color: var(--z-text-secondary);
+
+    font-size: var(--z-font-body-size);
+    line-height: var(--z-line-height-body);
+}
+
+
+/* ==========================================================
+   SUBMIT BUTTON
+   ========================================================== */
+
+.z-auth-button {
+    width: 100%;
+    height: var(--z-button-height);
+
+    margin-top: var(--z-space-2);
+
+    padding: 0 var(--z-space-5);
+
+    background: var(--z-primary);
+    color: var(--z-surface);
+
+    border-radius: var(--z-radius-md);
+
+    font-size: var(--z-font-body-size);
+    font-weight: 600;
+
+    transition:
+        background var(--z-transition),
+        transform var(--z-transition),
+        box-shadow var(--z-transition);
+}
+
+.z-auth-button:hover {
+    background: var(--z-primary-hover);
+
+    box-shadow: var(--z-shadow-sm);
+}
+
+.z-auth-button:active {
+    transform: translateY(1px);
+}
+
+/* ==========================================================
+   RESEND
+   ========================================================== */
+
+.z-auth-resend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    margin-top: var(--z-space-5);
+
+    color: var(--z-text-secondary);
+    font-size: 14px;
+}
+
+.z-auth-resend-form {
+    display: inline;
+}
+
+.z-auth-link-button {
+    padding: 0;
+
+    border: 0;
+    background: transparent;
+
+    color: var(--z-primary);
+
+    font: inherit;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.z-auth-link-button:hover {
+    color: var(--z-primary-hover);
+}
+
+.z-auth-link-button:disabled {
+    color: var(--z-text-secondary);
+
+    cursor: not-allowed;
+
+    opacity: 0.6;
+}
+
+/* ==========================================================
+   OTP STATUS
+   ========================================================== */
+
+.z-auth-otp-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: calc(
+        var(--z-field-gap) * -0.25
+    );
+
+    color: var(--z-text-secondary);
+
+    font-size: 14px;
+}
+
+.z-auth-otp-status strong {
+    color: var(--z-text);
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   OTP TIMER
+   ========================================================== */
+
+.z-auth-otp-timer {
+    margin-top: var(--z-space-2);
+
+    text-align: center;
+
+    color: var(--z-text-secondary);
+
+    font-size: 13px;
+}
+
+.z-auth-otp-timer strong {
+    color: var(--z-text);
+
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   SUCCESS
+   ========================================================== */
+
+.z-auth-success {
+    padding: var(--z-space-2) var(--z-space-3);
+
+    border: var(--z-border-width) solid #16A34A;
+    border-radius: var(--z-radius-sm);
+
+    background: rgba(22, 163, 74, 0.05);
+    color: #15803D;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+   AUTH FOOTER
+   ========================================================== */
+
+.z-auth-footer {
+    margin-top: var(--z-space-5);
+
+    text-align: center;
+
+    font-size: 14px;
+    color: var(--z-text-secondary);
+}
+
+.z-auth-footer a {
+    color: var(--z-primary);
+    font-weight: 500;
+}
+
+.z-auth-footer a:hover {
+    color: var(--z-primary-hover);
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 480px) {
+
+    .z-auth-main {
+        min-height: auto;
+        align-items: flex-start;
+    }
+
+    .z-auth-page {
+        padding-top: var(--z-space-5);
+        padding-bottom: var(--z-space-5);
+    }
+
+    .z-auth-container {
+        max-width: 100%;
+    }
+}

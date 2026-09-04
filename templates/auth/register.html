@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Account
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/auth.css') }}"
+>
+{% endblock %}
+
+{% block main_class %}
+z-auth-main
+{% endblock %}
+
+{% block content %}
+
+<div class="z-auth-page">
+
+    <div class="z-auth-container">
+
+        <div class="z-page-heading">
+
+            <h1 class="z-page-heading-title">
+                Create your account
+            </h1>
+
+        </div>
+
+        <form
+            class="z-auth-form"
+            method="POST"
+            action="{{ url_for('auth.register_submit') }}"
+        >
+
+            {% if error %}
+
+                <div class="z-auth-error">
+                    {{ error }}
+                </div>
+
+            {% endif %}
+
+            <div class="z-auth-form-group">
+
+                <label
+                    class="z-auth-label"
+                    for="name"
+                >
+                    Name
+                </label>
+
+                <input
+                    class="z-auth-input"
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="{{ name or '' }}"
+                    required
+                    autocomplete="name"
+                    placeholder="Your name"
+                >
+
+            </div>
+
+            <div class="z-auth-form-group">
+
+                <label
+                    class="z-auth-label"
+                    for="email"
+                >
+                    Email
+                </label>
+
+                <input
+                    class="z-auth-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ email or '' }}"
+                    required
+                    autocomplete="email"
+                    placeholder="you@example.com"
+                >
+
+            </div>
+
+            <div class="z-auth-form-group">
+
+                <label
+                    class="z-auth-label"
+                    for="password"
+                >
+                    Password
+                </label>
+
+                <div class="z-auth-password-wrapper">
+
+                    <input
+                        class="z-auth-input"
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        minlength="8"
+                        autocomplete="new-password"
+                        placeholder="Create a password"
+                    >
+
+                    <button
+                        class="z-auth-password-toggle"
+                        type="button"
+                        aria-label="Show password"
+                        onclick="togglePassword('password', this)"
+                    >
+                        👁
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="z-auth-form-group">
+
+                <label
+                    class="z-auth-label"
+                    for="confirm_password"
+                >
+                    Confirm password
+                </label>
+
+                <div class="z-auth-password-wrapper">
+
+                    <input
+                        class="z-auth-input"
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        required
+                        minlength="8"
+                        autocomplete="new-password"
+                        placeholder="Enter your password again"
+                    >
+
+                    <button
+                        class="z-auth-password-toggle"
+                        type="button"
+                        aria-label="Show password"
+                        onclick="togglePassword('confirm_password', this)"
+                    >
+                        👁
+                    </button>
+
+                </div>
+
+            </div>
+
+            <button
+                class="z-auth-button"
+                type="submit"
+            >
+                Create account
+            </button>
+
+        </form>
+
+        <div class="z-auth-footer">
+
+            Already have an account?
+
+            <a href="{{ url_for('auth.login') }}">
+                Log in
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% endblock %}

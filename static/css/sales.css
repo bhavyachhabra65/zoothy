@@ -1,0 +1,808 @@
+/* ==========================================================
+   SALES
+   Sales-specific styles. Shared controls/layout come from
+   Zoothy's global design system.
+========================================================== */
+
+
+/* ==========================================================
+   SEARCH
+========================================================== */
+
+.z-sales-search {
+    display: flex;
+    align-items: center;
+    gap: var(--z-space-3);
+    margin-bottom: var(--z-space-5);
+    width: 100%;
+}
+
+.z-sales-search .z-input {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+}
+
+.z-sales-search-button {
+    flex: 0 0 190px;
+    width: 190px;
+    text-align: center;
+}
+
+
+/* ==========================================================
+   SECONDARY LINKS
+========================================================== */
+
+.z-sales-clear,
+.z-sales-cancel,
+.z-sale-cancel,
+.z-sale-remove-row {
+    color: var(--z-text-secondary);
+    font-size: var(--z-font-body-size);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.z-sales-clear:hover,
+.z-sales-cancel:hover,
+.z-sale-cancel:hover {
+    color: var(--z-primary);
+}
+
+
+/* ==========================================================
+   SALES LIST TABLE
+========================================================== */
+
+.z-sales-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+}
+
+.z-sales-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.z-sales-table th,
+.z-sales-table td {
+    padding: var(--z-space-3) var(--z-space-4);
+    text-align: left;
+    vertical-align: middle;
+}
+
+.z-sales-table th {
+    color: var(--z-text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--z-background);
+    white-space: nowrap;
+}
+
+.z-sales-table tbody tr {
+    border-top: var(--z-border-width) solid var(--z-border);
+    transition: background var(--z-transition);
+}
+
+.z-sales-table tbody tr:hover {
+    background: var(--z-background);
+}
+
+.z-sales-col-sale {
+    width: 22%;
+}
+
+.z-sales-col-date {
+    width: 15%;
+}
+
+.z-sales-col-customer {
+    width: 25%;
+}
+
+.z-sales-col-items {
+    width: 10%;
+}
+
+.z-sales-col-total {
+    width: 18%;
+}
+
+.z-sales-col-action {
+    width: 10%;
+}
+
+.z-sales-number {
+    color: var(--z-text);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.z-sales-number:hover {
+    color: var(--z-primary);
+}
+
+.z-sales-action-cell {
+    text-align: right !important;
+    white-space: nowrap;
+}
+
+.z-sales-view-link {
+    color: var(--z-text-secondary);
+    font-size: var(--z-font-body-size);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.z-sales-view-link:hover {
+    color: var(--z-primary);
+}
+
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.z-sales-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    padding: var(--z-space-6);
+    text-align: center;
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+    background: var(--z-surface);
+}
+
+.z-sales-empty h2 {
+    margin: 0 0 var(--z-space-2);
+    font-size: 20px;
+}
+
+.z-sales-empty p {
+    margin: 0;
+    color: var(--z-text-secondary);
+}
+
+.z-sales-empty-button {
+    margin-top: var(--z-space-3);
+    color: white;
+    text-decoration: none;
+}
+
+.z-sales-empty-button:hover {
+    color: white;
+}
+
+
+/* ==========================================================
+   SALE DETAIL OVERVIEW
+========================================================== */
+
+/*
+   View Sale uses the same simple two-column structure as
+   the Sale form.
+
+   Example:
+
+   Date                         Customer
+   03 Sep 2026                  Walk-in Customer
+*/
+
+.z-sale-detail-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--z-space-4);
+    width: 100%;
+    margin-bottom: var(--z-space-6);
+}
+
+.z-sale-detail-meta > div {
+    min-width: 0;
+    min-height: 44px;
+    padding: var(--z-space-3) var(--z-space-4);
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-md);
+}
+
+.z-sale-detail-meta span {
+    display: block;
+    margin-bottom: var(--z-space-1);
+    color: var(--z-text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.z-sale-detail-meta strong {
+    display: block;
+    min-width: 0;
+    color: var(--z-text);
+    font-size: var(--z-font-body-size);
+    font-weight: 600;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.z-sale-detail-section {
+    width: 100%;
+    margin-top: 0;
+}
+
+.z-sale-detail-summary {
+    margin-top: var(--z-space-5);
+}
+
+
+/* ==========================================================
+   SALE FORM
+========================================================== */
+
+.z-sale-form {
+    width: 100%;
+    max-width: 100%;
+}
+
+.z-sale-form-section,
+.z-sale-items-section,
+.z-sale-notes-section {
+    margin-top: var(--z-space-7);
+}
+
+.z-sale-transaction-section {
+    margin-top: var(--z-space-2);
+}
+
+.z-sale-form .z-row {
+    align-items: flex-end;
+}
+
+.z-sale-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--z-space-4);
+    margin-bottom: var(--z-space-4);
+}
+
+.z-sale-section-heading > div {
+    min-width: 0;
+}
+
+.z-sale-section-heading h2 {
+    margin: 0 0 var(--z-space-1);
+    color: var(--z-text);
+    font-size: var(--z-font-size-lg);
+}
+
+.z-sale-section-heading p {
+    margin: 0;
+    color: var(--z-text-secondary);
+    font-size: var(--z-font-body-size);
+}
+
+
+/* ==========================================================
+   ADD PRODUCT
+========================================================== */
+
+/*
+   Add Product is intentionally a quiet secondary action.
+   The page already has one primary action at the bottom.
+*/
+
+.z-sale-add-row {
+    flex: 0 0 auto;
+    padding: 9px 16px;
+    color: var(--z-primary);
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-primary);
+    border-radius: var(--z-radius-md);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+    transition:
+        background var(--z-transition),
+        color var(--z-transition);
+}
+
+.z-sale-add-row:hover {
+    color: white;
+    background: var(--z-primary);
+}
+
+
+/* ==========================================================
+   PRODUCT LINE ITEMS
+   Editable transaction grid — intentionally horizontally
+   scrollable so every field remains comfortable.
+========================================================== */
+
+.z-sale-items-wrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+
+.z-sale-items-table {
+    width: 1040px;
+    min-width: 1040px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.z-sale-items-table th,
+.z-sale-items-table td {
+    padding: 14px 16px;
+    text-align: left;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.z-sale-items-table th {
+    height: 54px;
+    color: var(--z-text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--z-background);
+    white-space: nowrap;
+}
+
+.z-sale-items-table tbody tr {
+    border-top: var(--z-border-width) solid var(--z-border);
+}
+
+.z-sale-items-table tbody td {
+    height: 76px;
+}
+
+
+/* ==========================================================
+   PRODUCT COLUMN WIDTHS
+========================================================== */
+
+.z-sale-items-table th:nth-child(1),
+.z-sale-items-table td:nth-child(1) {
+    width: 330px;
+}
+
+.z-sale-items-table th:nth-child(2),
+.z-sale-items-table td:nth-child(2) {
+    width: 90px;
+}
+
+.z-sale-items-table th:nth-child(3),
+.z-sale-items-table td:nth-child(3) {
+    width: 120px;
+}
+
+.z-sale-items-table th:nth-child(4),
+.z-sale-items-table td:nth-child(4) {
+    width: 130px;
+}
+
+.z-sale-items-table th:nth-child(5),
+.z-sale-items-table td:nth-child(5) {
+    width: 90px;
+}
+
+.z-sale-items-table th:nth-child(6),
+.z-sale-items-table td:nth-child(6) {
+    width: 160px;
+}
+
+.z-sale-items-table th:nth-child(7),
+.z-sale-items-table td:nth-child(7) {
+    width: 120px;
+}
+
+
+/* ==========================================================
+   PRODUCT INPUTS
+========================================================== */
+
+.z-sale-items-table .z-input,
+.z-sale-items-table select {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    margin: 0;
+}
+
+.z-sale-items-table .z-sale-quantity {
+    max-width: 100px;
+}
+
+.z-sale-items-table .z-sale-price {
+    max-width: 115px;
+}
+
+.z-sale-items-table .z-sale-product {
+    max-width: 100%;
+}
+
+
+/* ==========================================================
+   PRODUCT VALUES
+========================================================== */
+
+.z-sale-unit-cell,
+.z-sale-gst,
+.z-sale-line-total {
+    white-space: nowrap;
+}
+
+.z-sale-unit-cell {
+    color: var(--z-text-secondary);
+}
+
+.z-sale-gst {
+    color: var(--z-text);
+}
+
+.z-sale-line-total {
+    color: var(--z-text);
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   REMOVE PRODUCT
+========================================================== */
+
+.z-sale-remove-row {
+    padding: 0;
+    color: var(--z-text-secondary);
+    background: transparent;
+    border: 0;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.z-sale-remove-row:hover {
+    color: var(--z-danger);
+}
+
+
+/* ==========================================================
+   PRODUCT TABLE SCROLLBAR
+========================================================== */
+
+.z-sale-items-wrap::-webkit-scrollbar {
+    height: 10px;
+}
+
+.z-sale-items-wrap::-webkit-scrollbar-track {
+    background: var(--z-background);
+    border-radius: 999px;
+}
+
+.z-sale-items-wrap::-webkit-scrollbar-thumb {
+    background: var(--z-border);
+    border-radius: 999px;
+}
+
+.z-sale-items-wrap::-webkit-scrollbar-thumb:hover {
+    background: var(--z-text-secondary);
+}
+
+
+/* ==========================================================
+   TABLE CELL ALIGNMENT
+========================================================== */
+
+.z-sale-items-table th:nth-child(3),
+.z-sale-items-table th:nth-child(4),
+.z-sale-items-table th:nth-child(5),
+.z-sale-items-table th:nth-child(6),
+.z-sale-items-table th:nth-child(7),
+.z-sale-items-table td:nth-child(3),
+.z-sale-items-table td:nth-child(4),
+.z-sale-items-table td:nth-child(5),
+.z-sale-items-table td:nth-child(6),
+.z-sale-items-table td:nth-child(7) {
+    white-space: nowrap;
+}
+
+.z-sale-items-table td:nth-child(3),
+.z-sale-items-table td:nth-child(4) {
+    text-align: left;
+}
+
+.z-sale-items-table td:nth-child(5),
+.z-sale-items-table td:nth-child(6) {
+    text-align: left;
+}
+
+
+/* ==========================================================
+   TOTALS
+========================================================== */
+
+.z-sale-summary {
+    width: 360px;
+    max-width: 100%;
+    margin-top: var(--z-space-5);
+    margin-left: auto;
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+    overflow: hidden;
+}
+
+.z-sale-summary > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--z-space-4);
+    padding: var(--z-space-3) var(--z-space-4);
+    border-bottom: var(--z-border-width) solid var(--z-border);
+}
+
+.z-sale-summary > div:last-child {
+    border-bottom: 0;
+}
+
+.z-sale-summary span {
+    color: var(--z-text-secondary);
+}
+
+.z-sale-summary strong {
+    color: var(--z-text);
+    font-weight: 600;
+}
+
+.z-sale-summary .z-sale-total {
+    padding-top: var(--z-space-4);
+    padding-bottom: var(--z-space-4);
+    background: var(--z-background);
+}
+
+.z-sale-summary .z-sale-total span,
+.z-sale-summary .z-sale-total strong {
+    color: var(--z-text);
+    font-weight: 700;
+}
+
+.z-sale-summary .z-sale-total strong {
+    font-size: var(--z-font-size-lg);
+}
+
+
+/* ==========================================================
+   NOTES
+========================================================== */
+
+.z-sale-notes-section {
+    margin-top: var(--z-space-7);
+}
+
+
+/* ==========================================================
+   FORM ACTIONS
+========================================================== */
+
+.z-sale-form-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--z-space-4);
+    margin-top: var(--z-space-7);
+}
+
+
+/* ==========================================================
+   EDIT SALE
+========================================================== */
+
+.z-sale-edit-header {
+    margin-bottom: var(--z-space-5);
+}
+
+.z-sale-edit-reference {
+    display: flex;
+    align-items: center;
+    gap: var(--z-space-3);
+    margin-bottom: var(--z-space-6);
+    padding-bottom: var(--z-space-4);
+    border-bottom: var(--z-border-width) solid var(--z-border);
+}
+
+.z-sale-edit-reference span {
+    color: var(--z-text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.z-sale-edit-reference strong {
+    color: var(--z-text);
+    font-size: var(--z-font-body-size);
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   READ-ONLY SALE DETAILS
+========================================================== */
+
+.z-sale-readonly-field {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    width: 100%;
+    padding: 0 var(--z-space-3);
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-md);
+    color: var(--z-text);
+    font-size: var(--z-font-body-size);
+    line-height: 1.4;
+}
+
+.z-sale-readonly-total {
+    font-weight: 700;
+}
+
+
+/* ==========================================================
+   SALE DETAILS
+========================================================== */
+
+.z-sale-details {
+    display: flex;
+    flex-direction: column;
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+}
+
+.z-sale-detail-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--z-space-4);
+    padding: var(--z-space-4);
+    border-bottom: var(--z-border-width) solid var(--z-border);
+}
+
+.z-sale-detail-row:last-child {
+    border-bottom: 0;
+}
+
+.z-sale-detail-label {
+    color: var(--z-text-secondary);
+    font-weight: 500;
+}
+
+.z-sale-detail-value {
+    min-width: 0;
+}
+
+.z-sale-preserve-lines {
+    white-space: pre-line;
+}
+
+
+/* ==========================================================
+   DETAIL ACTIONS
+========================================================== */
+
+.z-sale-detail-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--z-space-4);
+    margin-top: var(--z-space-5);
+}
+
+.z-sale-delete-button {
+    color: var(--z-danger);
+    font-size: var(--z-font-body-size);
+    font-weight: 500;
+}
+
+.z-sale-delete-button:hover {
+    text-decoration: underline;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 900px) {
+
+    .z-sale-detail-meta {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .z-sale-items-table {
+        width: 1040px;
+        min-width: 1040px;
+    }
+
+    .z-sale-items-table .z-sale-quantity {
+        max-width: 100px;
+    }
+
+    .z-sale-items-table .z-sale-price {
+        max-width: 115px;
+    }
+}
+
+
+@media (max-width: 680px) {
+
+    .z-sales-search {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .z-sales-search .z-input,
+    .z-sales-search-button {
+        width: 100%;
+        min-width: 0;
+        flex-basis: auto;
+    }
+
+    .z-sale-detail-meta {
+        grid-template-columns: 1fr;
+        gap: var(--z-space-3);
+    }
+
+    .z-sale-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .z-sale-add-row {
+        width: 100%;
+        text-align: center;
+    }
+
+    .z-sale-summary {
+        width: 100%;
+    }
+
+    .z-sale-form-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .z-sale-form-actions .z-button {
+        width: 100%;
+    }
+
+    .z-sale-detail-row {
+        grid-template-columns: 1fr;
+        gap: var(--z-space-1);
+    }
+
+    .z-sale-detail-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .z-sale-edit-reference {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: var(--z-space-1);
+    }
+}

@@ -2,7 +2,7 @@
 
 we are the complete accounting software for the startup founders, when they have the small team size.
 
-| Traditional         | Zoothy                |
+<!-- | Traditional         | Zoothy                |
 | ------------------- | --------------------- |
 | Accounts Receivable | **Money to Collect**  |
 | Accounts Payable    | **Bills to Pay**      |
@@ -14,7 +14,7 @@ we are the complete accounting software for the startup founders, when they have
 | Invoices            | **Invoices**          |
 | Receipts            | **Payment Receipts**  |
 | Bank Reconciliation | **Match Payments**    |
-| Reports             | **Business Reports**  |
+| Reports             | **Business Reports**  | -->
 
 
 
@@ -29,6 +29,12 @@ Completed Modules
 ✔ Dashboard
 ✔ Cheque Printing
 ✔ Invoice Printing
+✔ Authorisation(Login, Register, Forgot-Password)
+✔ Settings(Current inputs: Business name, Phone, GSTIN, Business Address)
+✔ Customers
+✔ Suppliers
+✔ Products
+✔ Inventory
 
 
 All Modules

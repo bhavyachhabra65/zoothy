@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}
+Customers
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/customers.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<header class="z-page-header">
+
+    <div class="z-brand">
+
+        <a class="z-brand-name">
+            Customers
+        </a>
+
+        <!-- <p class="z-brand-tagline">
+            Making accounting easy for startups.
+        </p> -->
+
+    </div>
+
+
+    <nav class="z-page-header-nav">
+
+        <a href="{{ url_for('dashboard.index') }}">
+            Back to Home
+        </a>
+
+        <a href="{{ url_for('customers.add') }}" class="z-button">
+            Add Customer
+        </a>
+
+    </nav>
+
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="z-alert z-alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<form
+    method="GET"
+    action="{{ url_for('customers.index') }}"
+    class="z-customers-search"
+>
+
+    <input
+        type="search"
+        name="search"
+        value="{{ search }}"
+        class="z-input"
+        placeholder="Search customers"
+        autocomplete="off"
+    >
+
+    <button
+        type="submit"
+        class="z-button z-customers-search-button"
+    >
+        Search
+    </button>
+
+    {% if search %}
+        <a
+            href="{{ url_for('customers.index') }}"
+            class="z-customers-clear"
+        >
+            Clear
+        </a>
+    {% endif %}
+
+</form>
+
+{% if customers %}
+
+<div class="z-customers-table-wrap">
+
+    <table class="z-customers-table">
+
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>GSTIN</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for customer in customers %}
+                <tr>
+                    <td>
+                        <a
+                            href="{{ url_for('customers.view', customer_id=customer.id) }}"
+                            class="z-customer-name"
+                        >
+                            {{ customer.name }}
+                        </a>
+                    </td>
+                    <td>{{ customer.phone or '—' }}</td>
+                    <td>{{ customer.gstin or '—' }}</td>
+                    <td class="z-customer-action-cell">
+                        <a
+                            href="{{ url_for('customers.view', customer_id=customer.id) }}"
+                            class="z-customer-view-link"
+                        >
+                            View
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+{% else %}
+
+<div class="z-customers-empty">
+
+    {% if search %}
+        <h2>No customers found</h2>
+        <p>Try a different search.</p>
+    {% else %}
+        <h2>No customers yet</h2>
+        <p>Add your first customer to get started.</p>
+        <a
+            href="{{ url_for('customers.add') }}" class="z-button z-customers-empty-button">
+            Add Customer
+        </a>
+    {% endif %}
+
+</div>
+
+{% endif %}
+
+{% endblock %}

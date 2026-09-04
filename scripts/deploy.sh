@@ -11,20 +11,28 @@ if [ -z "$ENVIRONMENT" ]; then
     exit 1
 fi
 
+
 echo ""
 echo "======================================"
 echo "Deploying Zoothy ($ENVIRONMENT)"
 echo "======================================"
 
+
+# ==========================================================
+# ENVIRONMENT CONFIGURATION
+# ==========================================================
+
 if [ "$ENVIRONMENT" = "production" ]; then
 
     PROJECT_NAME="zoothy-prod"
     COMPOSE_FILE="docker/compose/docker-compose.prod.yml"
+    ENV_FILE=".env"
 
 elif [ "$ENVIRONMENT" = "development" ]; then
 
     PROJECT_NAME="zoothy-dev"
     COMPOSE_FILE="docker/compose/docker-compose.dev.yml"
+    ENV_FILE=".env"
 
 else
 
@@ -33,33 +41,167 @@ else
 
 fi
 
+
+# ==========================================================
+# CHECK REQUIRED FILES
+# ==========================================================
+
+if [ ! -f "$COMPOSE_FILE" ]; then
+
+    echo ""
+    echo "ERROR: Compose file not found:"
+    echo "$COMPOSE_FILE"
+    exit 1
+
+fi
+
+
+if [ ! -f "$ENV_FILE" ]; then
+
+    echo ""
+    echo "ERROR: Environment file not found:"
+    echo "$ENV_FILE"
+    exit 1
+
+fi
+
+
+# ==========================================================
+# UPDATE CODE
+# ==========================================================
+
 echo ""
+
 CURRENT_BRANCH=$(git branch --show-current)
 
 echo "Current branch: $CURRENT_BRANCH"
 
 git fetch origin
 
-git reset --hard origin/$CURRENT_BRANCH
+git reset --hard "origin/$CURRENT_BRANCH"
+
+
+# ==========================================================
+# VALIDATE DOCKER COMPOSE
+# ==========================================================
+
+echo ""
+echo "Validating Docker Compose configuration..."
+
+docker compose \
+    --project-name "$PROJECT_NAME" \
+    --env-file "$ENV_FILE" \
+    -f "$COMPOSE_FILE" \
+    config >/dev/null
+
+echo "Docker Compose configuration is valid."
+
+
+# ==========================================================
+# BUILD
+# ==========================================================
 
 echo ""
 echo "Building Docker Images..."
 
 docker compose \
     --project-name "$PROJECT_NAME" \
+    --env-file "$ENV_FILE" \
     -f "$COMPOSE_FILE" \
     build
 
+
+# ==========================================================
+# REMOVE OLD CONTAINERS
+# ==========================================================
+
 echo ""
-echo "Restarting Containers..."
+echo "Removing old containers..."
 
 docker compose \
     --project-name "$PROJECT_NAME" \
+    --env-file "$ENV_FILE" \
+    -f "$COMPOSE_FILE" \
+    down --remove-orphans
+
+
+# ==========================================================
+# REMOVE CONFLICTING CONTAINERS
+# ==========================================================
+
+echo ""
+echo "Removing conflicting containers..."
+
+for CONTAINER in \
+    "zoothy-dev-postgres" \
+    "zoothy-dev-web" \
+    "zoothy-dev-nginx"
+do
+
+    if docker ps -a --format '{{.Names}}' | grep -qx "$CONTAINER"; then
+
+        echo "Removing $CONTAINER..."
+
+        docker rm -f "$CONTAINER"
+
+    fi
+
+done
+
+
+# ==========================================================
+# START
+# ==========================================================
+
+echo ""
+echo "Starting Containers..."
+
+docker compose \
+    --project-name "$PROJECT_NAME" \
+    --env-file "$ENV_FILE" \
     -f "$COMPOSE_FILE" \
     up -d
 
+# ==========================================================
+# DATABASE MIGRATIONS
+# ==========================================================
+
+echo ""
+echo "Waiting for PostgreSQL..."
+
+until docker compose \
+    --project-name "$PROJECT_NAME" \
+    --env-file "$ENV_FILE" \
+    -f "$COMPOSE_FILE" \
+    exec -T postgres pg_isready -U postgres >/dev/null 2>&1
+do
+
+    echo "Waiting for PostgreSQL..."
+    sleep 2
+
+done
+
+echo "PostgreSQL is ready."
+
+echo ""
+echo "Running database migrations..."
+
+docker compose \
+    --project-name "$PROJECT_NAME" \
+    --env-file "$ENV_FILE" \
+    -f "$COMPOSE_FILE" \
+    exec -T web flask --app run.py db upgrade
+
+echo "Database migrations completed."s
+
+
+# ==========================================================
+# WAIT FOR APPLICATION
+# ==========================================================
+
 echo ""
 echo "Waiting for application to become healthy..."
+
 
 if [ "$ENVIRONMENT" = "production" ]; then
 
@@ -73,8 +215,10 @@ else
 
 fi
 
+
 MAX_RETRIES=30
 RETRY=1
+
 
 until curl $CURL_OPTIONS -fs "$HEALTH_URL" >/dev/null; do
 
@@ -86,8 +230,18 @@ until curl $CURL_OPTIONS -fs "$HEALTH_URL" >/dev/null; do
 
         docker compose \
             --project-name "$PROJECT_NAME" \
+            --env-file "$ENV_FILE" \
             -f "$COMPOSE_FILE" \
             ps
+
+        echo ""
+        echo "Recent application logs:"
+
+        docker compose \
+            --project-name "$PROJECT_NAME" \
+            --env-file "$ENV_FILE" \
+            -f "$COMPOSE_FILE" \
+            logs --tail=100 web
 
         exit 1
 
@@ -101,20 +255,36 @@ until curl $CURL_OPTIONS -fs "$HEALTH_URL" >/dev/null; do
 
 done
 
+
+echo ""
 echo "Application is healthy."
+
+
+# ==========================================================
+# RUNNING CONTAINERS
+# ==========================================================
 
 echo ""
 echo "Running Containers..."
 
 docker compose \
     --project-name "$PROJECT_NAME" \
+    --env-file "$ENV_FILE" \
     -f "$COMPOSE_FILE" \
     ps
+
+
+# ==========================================================
+# CLEANUP
+# ==========================================================
 
 echo ""
 echo "Cleaning unused images..."
 
 docker image prune -f
 
+
 echo ""
+echo "======================================"
 echo "Deployment completed successfully."
+echo "======================================"

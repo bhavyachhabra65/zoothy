@@ -1,0 +1,321 @@
+/* ==========================================================
+   SUPPLIERS
+========================================================== */
+
+.z-suppliers-heading,
+.z-supplier-detail-heading {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--z-space-5);
+}
+
+
+/* ==========================================================
+   PAGE TITLE
+========================================================== */
+
+.z-suppliers-heading .z-page-heading-title {
+    font-size: var(--z-font-title-size);
+}
+
+
+/* ==========================================================
+   PRIMARY ACTION
+========================================================== */
+
+.z-suppliers-add-button {
+    min-width: 190px;
+    width: auto;
+    text-align: center;
+}
+
+.z-page-header-nav a.z-suppliers-add-button {
+    color: white;
+}
+
+.z-page-header-nav a.z-suppliers-add-button:hover {
+    color: white;
+}
+
+
+/* ==========================================================
+   SEARCH
+========================================================== */
+
+.z-suppliers-search {
+    display: flex;
+    align-items: center;
+    gap: var(--z-space-3);
+    margin-bottom: var(--z-space-5);
+}
+
+.z-suppliers-search .z-input {
+    /* max-width: var(--z-field-large); */
+}
+
+.z-suppliers-search-button {
+    /* min-width: 110px; */
+}
+
+
+/* ==========================================================
+   SECONDARY LINKS
+========================================================== */
+
+.z-suppliers-clear,
+.z-supplier-cancel,
+.z-supplier-back,
+.z-supplier-view-link {
+    color: var(--z-text-secondary);
+    font-size: var(--z-font-body-size);
+    font-weight: 500;
+}
+
+.z-suppliers-clear:hover,
+.z-supplier-cancel:hover,
+.z-supplier-back:hover,
+.z-supplier-view-link:hover {
+    color: var(--z-primary);
+}
+
+
+/* ==========================================================
+   SUPPLIER TABLE
+========================================================== */
+
+.z-suppliers-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+}
+
+.z-suppliers-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.z-suppliers-table th,
+.z-suppliers-table td {
+    padding: var(--z-space-3) var(--z-space-4);
+    text-align: left;
+    vertical-align: middle;
+}
+
+.z-suppliers-table th {
+    color: var(--z-text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--z-background);
+}
+
+.z-suppliers-table tbody tr {
+    border-top: var(--z-border-width) solid var(--z-border);
+    transition: background var(--z-transition);
+}
+
+.z-suppliers-table tbody tr:hover {
+    background: var(--z-background);
+}
+
+
+/* ==========================================================
+   SUPPLIER NAME
+========================================================== */
+
+.z-supplier-name {
+    color: var(--z-text);
+    font-weight: 600;
+}
+
+.z-supplier-name:hover {
+    color: var(--z-primary);
+}
+
+
+/* ==========================================================
+   TABLE ACTION
+========================================================== */
+
+.z-supplier-action-cell {
+    width: 90px;
+    text-align: right !important;
+}
+
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.z-suppliers-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    padding: var(--z-space-6);
+    text-align: center;
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+    background: var(--z-surface);
+}
+
+.z-suppliers-empty h2 {
+    margin: 0 0 var(--z-space-2);
+    font-size: 20px;
+}
+
+.z-suppliers-empty p {
+    margin: 0;
+    color: var(--z-text-secondary);
+}
+
+.z-suppliers-empty-button {
+    margin-top: var(--z-space-3);
+    color: white;
+    text-decoration: none;
+}
+
+.z-suppliers-empty-button:hover {
+    color: white;
+}
+
+
+/* ==========================================================
+   SUPPLIER FORM
+========================================================== */
+
+.z-supplier-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--z-field-gap);
+}
+
+.z-supplier-form .z-row {
+    align-items: flex-end;
+}
+
+.z-gstin-input {
+    text-transform: uppercase;
+}
+
+
+/* ==========================================================
+   FORM ACTIONS
+========================================================== */
+
+.z-supplier-form-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--z-space-4);
+}
+
+
+/* ==========================================================
+   SUPPLIER DETAILS
+========================================================== */
+
+.z-supplier-details {
+    display: flex;
+    flex-direction: column;
+    background: var(--z-surface);
+    border: var(--z-border-width) solid var(--z-border);
+    border-radius: var(--z-radius-lg);
+}
+
+.z-supplier-detail-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--z-space-4);
+    padding: var(--z-space-4);
+    border-bottom: var(--z-border-width) solid var(--z-border);
+}
+
+.z-supplier-detail-row:last-child {
+    border-bottom: none;
+}
+
+.z-supplier-detail-label {
+    color: var(--z-text-secondary);
+    font-weight: 500;
+}
+
+.z-supplier-detail-value {
+    min-width: 0;
+}
+
+.z-preserve-lines {
+    white-space: pre-line;
+}
+
+
+/* ==========================================================
+   SUPPLIER DETAIL ACTIONS
+========================================================== */
+
+.z-supplier-detail-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--z-space-4);
+    margin-top: var(--z-space-5);
+}
+
+.z-supplier-delete-button {
+    color: var(--z-danger);
+    font-size: var(--z-font-body-size);
+    font-weight: 500;
+}
+
+.z-supplier-delete-button:hover {
+    text-decoration: underline;
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 680px) {
+
+    .z-suppliers-heading,
+    .z-supplier-detail-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .z-suppliers-add-button,
+    .z-supplier-edit-button {
+        width: 100%;
+    }
+
+    .z-suppliers-search {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .z-suppliers-search .z-input {
+        max-width: none;
+    }
+
+    .z-suppliers-search-button {
+        width: 100%;
+    }
+
+    .z-suppliers-table th,
+    .z-suppliers-table td {
+        padding: var(--z-space-3);
+    }
+
+    .z-supplier-detail-row {
+        grid-template-columns: 1fr;
+        gap: var(--z-space-1);
+    }
+
+    .z-supplier-detail-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}

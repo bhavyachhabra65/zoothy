@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ product.name }}
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/products.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<header class="z-page-header">
+
+    <div class="z-brand">
+        <a class="z-brand-name">
+            {{ product.name }}
+        </a>
+    </div>
+
+    <nav class="z-page-header-nav">
+        <a href="{{ url_for('products.edit', product_id=product.id) }}" class="z-button z-product-edit-button">
+            Edit Product
+        </a>
+    </nav>
+
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="z-alert z-alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="z-product-details">
+
+    <div class="z-product-detail-row">
+        <span class="z-product-detail-label">SKU</span>
+        <span>{{ product.sku or '—' }}</span>
+    </div>
+
+    <div class="z-product-detail-row">
+        <span class="z-product-detail-label">HSN / SAC</span>
+        <span>{{ product.hsn_sac or '—' }}</span>
+    </div>
+
+    <div class="z-product-detail-row">
+        <span class="z-product-detail-label">Unit</span>
+        <span>{{ product.unit or '—' }}</span>
+    </div>
+
+    <div class="z-product-detail-row">
+        <span class="z-product-detail-label">Opening Stock</span>
+        <span>{{ product.opening_stock or 0 }} {{ product.unit }}</span>
+    </div>
+
+    <div class="z-product-detail-row">
+        <span class="z-product-detail-label">Purchase Price</span>
+        <span>₹{{ '%.2f'|format(product.purchase_price or 0) }}</span>
+    </div>
+
+    <div class="z-product-detail-row">
+        <span class="z-product-detail-label">Selling Price</span>
+        <span>₹{{ '%.2f'|format(product.selling_price or 0) }}</span>
+    </div>
+
+    <div class="z-product-detail-row">
+        <span class="z-product-detail-label">GST Rate</span>
+        <span>{{ '%.2f'|format(product.gst_rate or 0) }}%</span>
+    </div>
+
+    <div class="z-product-detail-row">
+        <span class="z-product-detail-label">Description</span>
+        <span class="z-product-detail-value z-preserve-lines">{{ product.description or '—' }}</span>
+    </div>
+
+</div>
+
+<div class="z-product-detail-actions">
+    <a
+        href="{{ url_for('products.index') }}"
+        class="z-product-back"
+    >
+        Back to Products
+    </a>
+
+    <form
+        method="POST"
+        action="{{ url_for('products.delete', product_id=product.id) }}"
+        data-delete-product
+    >
+        <button
+            type="submit"
+            class="z-product-delete-button"
+        >
+            Delete Product
+        </button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/products.js') }}"></script>
+{% endblock %}

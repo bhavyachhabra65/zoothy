@@ -339,28 +339,75 @@
 
 }
 
+/* ==========================================================
+   TEXTAREA
+========================================================== */
+
+.z-textarea {
+
+    width: 100%;
+
+    min-height: 110px;
+
+    padding: var(--z-space-3);
+
+    border: var(--z-border-width) solid var(--z-border);
+
+    border-radius: var(--z-radius-md);
+
+    background: var(--z-surface);
+
+    font-size: var(--z-font-body-size);
+
+    line-height: var(--z-line-height-body);
+
+    resize: vertical;
+
+    transition: var(--z-transition);
+}
+
+.z-textarea:hover {
+
+    border-color: #D1D5DB;
+
+}
+
+.z-textarea:focus {
+
+    border-color: var(--z-primary);
+
+}
+
 
 /* ==========================================================
    BUTTON
 ========================================================== */
 
 .z-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     min-width: 190px;
-
     height: var(--z-button-height);
-
     padding: 0 var(--z-space-5);
 
     background: var(--z-primary);
-
     color: white;
-
     border-radius: var(--z-radius-md);
 
+    text-decoration: none;
     transition: var(--z-transition);
-
 }
+
+.z-page-header-nav a.z-button {
+    color: white;
+}
+
+.z-page-header-nav a.z-button:hover {
+    color: white;
+}
+
 
 .z-button:hover {
 
@@ -376,6 +423,89 @@
 .z-actions {
 
     margin-top: var(--z-space-4);
+
+}
+
+/* ==========================================================
+   ALERT
+========================================================== */
+
+.z-alert {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: var(--z-space-2);
+
+    width: 100%;
+
+    margin-bottom: var(--z-space-5);
+
+    padding: 12px 16px;
+
+    border: var(--z-border-width) solid;
+
+    border-radius: var(--z-radius-md);
+
+    font-size: var(--z-font-body-size);
+
+    line-height: 1.4;
+
+}
+
+
+/* ==========================================================
+   SUCCESS ALERT
+========================================================== */
+
+.z-alert-success {
+
+    color: #166534;
+
+    background: #F0FDF4;
+
+    border-color: #BBF7D0;
+
+}
+
+
+/* ==========================================================
+   ERROR ALERT
+========================================================== */
+
+.z-alert-error {
+
+    color: #991B1B;
+
+    background: #FEF2F2;
+
+    border-color: #FECACA;
+
+}
+
+
+/* ==========================================================
+   ALERT ICON
+========================================================== */
+
+.z-alert-icon {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+}
+
+.z-alert-icon svg {
+
+    width: 18px;
+
+    height: 18px;
 
 }
 

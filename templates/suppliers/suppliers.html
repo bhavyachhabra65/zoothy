@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}
+Suppliers
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/suppliers.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<header class="z-page-header">
+
+    <div class="z-brand">
+
+        <a class="z-brand-name">
+            Suppliers
+        </a>
+
+        <!-- <p class="z-brand-tagline">
+            Making accounting easy for startups.
+        </p> -->
+
+    </div>
+
+    <nav class="z-page-header-nav">
+
+        <a href="{{ url_for('dashboard.index') }}">
+            Back to Home
+        </a>
+
+        <a href="{{ url_for('suppliers.add') }}" class="z-button">
+            Add Supplier
+        </a>
+
+    </nav>
+
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="z-alert z-alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<form
+    method="GET"
+    action="{{ url_for('suppliers.index') }}"
+    class="z-suppliers-search"
+>
+
+    <input
+        type="search"
+        name="search"
+        value="{{ search }}"
+        class="z-input"
+        placeholder="Search suppliers"
+        autocomplete="off"
+    >
+
+    <button
+        type="submit"
+        class="z-button z-suppliers-search-button"
+    >
+        Search
+    </button>
+
+    {% if search %}
+        <a
+            href="{{ url_for('suppliers.index') }}"
+            class="z-suppliers-clear"
+        >
+            Clear
+        </a>
+    {% endif %}
+
+</form>
+
+{% if suppliers %}
+
+<div class="z-suppliers-table-wrap">
+
+    <table class="z-suppliers-table">
+
+        <thead>
+            <tr>
+                <th>Supplier</th>
+                <th>Phone</th>
+                <th>GSTIN</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for supplier in suppliers %}
+                <tr>
+                    <td>
+                        <a
+                            href="{{ url_for('suppliers.view', supplier_id=supplier.id) }}"
+                            class="z-supplier-name"
+                        >
+                            {{ supplier.name }}
+                        </a>
+                    </td>
+
+                    <td>{{ supplier.phone or '—' }}</td>
+                    <td>{{ supplier.gstin or '—' }}</td>
+
+                    <td class="z-supplier-action-cell">
+                        <a
+                            href="{{ url_for('suppliers.view', supplier_id=supplier.id) }}"
+                            class="z-supplier-view-link"
+                        >
+                            View
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+{% else %}
+
+<div class="z-suppliers-empty">
+
+    {% if search %}
+        <h2>No suppliers found</h2>
+        <p>Try a different search.</p>
+    {% else %}
+        <h2>No suppliers yet</h2>
+        <p>Add your first supplier to get started.</p>
+
+        <a
+            href="{{ url_for('suppliers.add') }}"
+            class="z-button z-suppliers-empty-button"
+        >
+            Add Supplier
+        </a>
+    {% endif %}
+
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/suppliers.js') }}"></script>
+{% endblock %}

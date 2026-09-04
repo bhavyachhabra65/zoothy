@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Customer
+{% endblock %}
+
+{% block styles %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/customers.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<div class="z-page-heading">
+    <h1 class="z-page-heading-title">
+        Edit Customer
+    </h1>
+</div>
+
+{% if error %}
+    <div class="z-alert z-alert-error">
+        {{ error }}
+    </div>
+{% endif %}
+
+<form
+    method="POST"
+    action="{{ url_for('customers.edit_submit', customer_id=customer.id) }}"
+    class="z-customer-form"
+>
+
+    <div class="z-form-group">
+        <label for="name" class="z-label">Customer Name</label>
+        <input
+            type="text"
+            id="name"
+            name="name"
+            class="z-input"
+            value="{{ form_data.name if form_data else customer.name }}"
+            maxlength="150"
+            autocomplete="organization"
+            required
+        >
+    </div>
+
+    <div class="z-row">
+        <div class="z-form-group z-col-1">
+            <label for="phone" class="z-label">Phone</label>
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="z-input"
+                value="{{ form_data.phone if form_data else (customer.phone or '') }}"
+                maxlength="10"
+                inputmode="numeric"
+                autocomplete="tel"
+            >
+        </div>
+
+        <div class="z-form-group z-col-1">
+            <label for="email" class="z-label">Email</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                class="z-input"
+                value="{{ form_data.email if form_data else (customer.email or '') }}"
+                maxlength="255"
+                autocomplete="email"
+            >
+        </div>
+    </div>
+
+    <div class="z-form-group">
+        <label for="gstin" class="z-label">GSTIN</label>
+        <input
+            type="text"
+            id="gstin"
+            name="gstin"
+            class="z-input z-gstin-input"
+            value="{{ form_data.gstin if form_data else (customer.gstin or '') }}"
+            maxlength="15"
+            autocomplete="off"
+        >
+    </div>
+
+    <div class="z-form-group">
+        <label for="address" class="z-label">Address</label>
+        <textarea
+            id="address"
+            name="address"
+            class="z-textarea"
+            rows="4"
+        >{{ form_data.address if form_data else (customer.address or '') }}</textarea>
+    </div>
+
+    <div class="z-form-group">
+        <label for="notes" class="z-label">Notes</label>
+        <textarea
+            id="notes"
+            name="notes"
+            class="z-textarea"
+            rows="3"
+        >{{ form_data.notes if form_data else (customer.notes or '') }}</textarea>
+    </div>
+
+    <div class="z-actions z-customer-form-actions">
+        <button type="submit" class="z-button">
+            Save Changes
+        </button>
+        <a
+            href="{{ url_for('customers.view', customer_id=customer.id) }}"
+            class="z-customer-cancel"
+        >
+            Cancel
+        </a>
+    </div>
+
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/customers.js') }}"></script>
+{% endblock %}

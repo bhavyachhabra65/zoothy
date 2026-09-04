@@ -46,17 +46,11 @@ z-dashboard-main-container
 
             <nav class="z-page-header-nav">
 
-                <a href="/#">
-                    Blog
-                </a>
-
-                <a href="/#">
-                    Login
-                </a>
-
-                <a href="/#">
-                    Register
-                </a>
+                <form method="POST" action="{{ url_for('auth.logout') }}">
+                    <button type="submit">
+                        Logout
+                    </button>
+                </form>
 
             </nav>
 
@@ -88,8 +82,8 @@ z-dashboard-main-container
                     <!-- Sales -->
 
                     <a
-                        href="#"
-                        class="z-module-card z-module-card-disabled"
+                        href="{{ url_for('sales.index') }}"
+                        class="z-module-card"
                         data-module="Sales"
                     >
 
@@ -184,8 +178,8 @@ z-dashboard-main-container
                     <!-- Customers -->
 
                     <a
-                        href="#"
-                        class="z-module-card z-module-card-disabled"
+                        href="{{ url_for('customers.index') }}"
+                        class="z-module-card"
                         data-module="Customers"
                     >
 
@@ -203,8 +197,8 @@ z-dashboard-main-container
                     <!-- Suppliers -->
 
                     <a
-                        href="#"
-                        class="z-module-card z-module-card-disabled"
+                        href="{{ url_for('suppliers.index') }}"
+                        class="z-module-card"
                         data-module="Suppliers"
                     >
 
@@ -222,8 +216,8 @@ z-dashboard-main-container
                     <!-- Products -->
 
                     <a
-                        href="#"
-                        class="z-module-card z-module-card-disabled"
+                        href="{{ url_for('products.index') }}"
+                        class="z-module-card"
                         data-module="Products"
                     >
 
@@ -241,8 +235,8 @@ z-dashboard-main-container
                     <!-- Inventory -->
 
                     <a
-                        href="#"
-                        class="z-module-card z-module-card-disabled"
+                        href="{{ url_for('inventory.index') }}"
+                        class="z-module-card"
                         data-module="Inventory"
                     >
 
@@ -597,8 +591,8 @@ z-dashboard-main-container
 
 
                     <a
-                        href="#"
-                        class="z-module-card z-module-card-disabled"
+                        href="{{ url_for('settings.index') }}"
+                        class="z-module-card"
                         data-module="Settings"
                     >
 
