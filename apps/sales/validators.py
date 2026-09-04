@@ -11,6 +11,8 @@ def validate_sale_items(items):
     if not items:
         return "Add at least one product."
 
+    valid_rows = 0
+
     for item in items:
         if not item.get("product_id"):
             return "Select a product for every row."
@@ -30,5 +32,10 @@ def validate_sale_items(items):
 
         if price < 0:
             return "Selling price cannot be negative."
+
+        valid_rows += 1
+
+    if valid_rows == 0:
+        return "Add at least one product."
 
     return None
