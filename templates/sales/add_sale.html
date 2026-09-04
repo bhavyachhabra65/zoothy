@@ -3,20 +3,24 @@
 {% block title %}Record Sale{% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/sales.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sales.css') }}?v=20260904-5">
 {% endblock %}
 
 {% block content %}
-<header class="z-page-heading">
-    <h1 class="z-page-heading-title">Record Sale</h1>
-</header>
+<div class="z-page-heading">
+    <h1 class="z-page-heading-title">
+        Record Sale
+    </h1>
+</div>
 
 {% if error %}
 <div class="z-alert z-alert-error">{{ error }}</div>
 {% endif %}
 
 <form method="POST" class="z-sale-form" id="saleForm">
-    <div class="z-row">
+
+    <section class="z-sale-form-section z-sale-transaction-section">
+        <div class="z-row">
         <div class="z-col-1">
             <label for="customer_id" class="z-label">Customer</label>
             <select id="customer_id" name="customer_id" class="z-input">
@@ -30,7 +34,8 @@
             <label for="sale_date" class="z-label">Sale Date</label>
             <input id="sale_date" name="sale_date" type="date" value="{{ sale_date }}" class="z-input" required>
         </div>
-    </div>
+        </div>
+    </section>
 
     <section class="z-sale-items-section">
         <div class="z-sale-section-heading">
@@ -46,8 +51,8 @@
                 <thead>
                     <tr>
                         <th>Product</th>
-                        <th>Quantity</th>
                         <th>Unit</th>
+                        <th>Quantity</th>
                         <th>Price</th>
                         <th>GST</th>
                         <th>Total</th>
@@ -65,8 +70,8 @@
                                 {% endfor %}
                             </select>
                         </td>
-                        <td><input name="quantity" type="number" class="z-input z-sale-quantity" min="0.001" step="0.001" value="{{ item.quantity }}" required></td>
                         <td class="z-sale-unit-cell"><span class="z-sale-unit">—</span></td>
+                        <td><input name="quantity" type="number" class="z-input z-sale-quantity" min="0.001" step="0.001" value="{{ item.quantity }}" required></td>
                         <td><input name="unit_price" type="number" class="z-input z-sale-price" min="0" step="0.01" value="{{ item.unit_price }}" required></td>
                         <td><span class="z-sale-gst">0%</span></td>
                         <td><strong class="z-sale-line-total">₹0.00</strong></td>
@@ -84,12 +89,12 @@
         <div class="z-sale-total"><span>Total</span><strong id="saleTotal">₹0.00</strong></div>
     </div>
 
-    <div class="z-row">
-        <div class="z-col-1">
+    <section class="z-sale-form-section z-sale-notes-section">
+        <div class="z-form-group">
             <label for="notes" class="z-label">Notes</label>
             <textarea id="notes" name="notes" class="z-textarea" rows="3" placeholder="Optional notes">{{ notes }}</textarea>
         </div>
-    </div>
+    </section>
 
     <div class="z-actions z-sale-form-actions">
         <button type="submit" class="z-button">Record Sale</button>
@@ -107,8 +112,8 @@
             {% endfor %}
         </select>
     </td>
-    <td><input name="quantity" type="number" class="z-input z-sale-quantity" min="0.001" step="0.001" value="1" required></td>
     <td class="z-sale-unit-cell"><span class="z-sale-unit">—</span></td>
+    <td><input name="quantity" type="number" class="z-input z-sale-quantity" min="0.001" step="0.001" value="1" required></td>
     <td><input name="unit_price" type="number" class="z-input z-sale-price" min="0" step="0.01" value="0" required></td>
     <td><span class="z-sale-gst">0%</span></td>
     <td><strong class="z-sale-line-total">₹0.00</strong></td>

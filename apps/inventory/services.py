@@ -245,6 +245,47 @@ class InventoryService:
         return stock
 
     @staticmethod
+    def stock_in(user_id, product_id, quantity, reason=None):
+        quantity = Decimal(str(quantity))
+
+        if quantity <= 0:
+            raise ValueError("Stock-in quantity must be greater than zero.")
+
+        stock = (
+            InventoryStock.query
+            .filter_by(
+                user_id=user_id,
+                product_id=product_id
+            )
+            .with_for_update()
+            .first()
+        )
+
+        if not stock:
+            stock = InventoryStock(
+                user_id=user_id,
+                product_id=product_id,
+                quantity=Decimal("0")
+            )
+            db.session.add(stock)
+            db.session.flush()
+
+        stock.quantity = stock.quantity + quantity
+
+        movement = InventoryMovement(
+            user_id=user_id,
+            product_id=product_id,
+            movement_type="add",
+            quantity=quantity,
+            resulting_quantity=stock.quantity,
+            reason=reason
+        )
+
+        db.session.add(movement)
+
+        return stock
+
+    @staticmethod
     def update_low_stock_level(
         user_id,
         product_id,
